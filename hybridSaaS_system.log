@@ -1,0 +1,803 @@
+╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║            HybridSaaS-Sec  —  Enterprise SaaS API Monitoring Framework  —  System Event Log               ║
+║                      Evaluation Run: April 13–14, 2026  |  Environment: Simulated Enterprise              ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+  Log Start Time   : 2026-04-13 08:00:00 PKT
+  SaaS Platforms   : Google Drive, Microsoft OneDrive
+  Users Monitored  : 10 (8 normal + 1 gradual exfiltration + 1 bulk-download scenario)
+  Anomaly Engine   : Base EWMA  +  Hybrid LSTM/Isolation Forest (HybridSaaS-Sec)
+  PII Engine       : Presidio (text) | PaddleOCR+Presidio (scans) | PaliGemma-3B VLM (handwriting)
+  Log Level        : DEBUG (full calculation trace)
+
+
+==============================================================================================================
+  SECTION A — MITM PROXY INITIALIZATION
+==============================================================================================================
+
+  2026-04-13 08:00:00  [INFO ]  [PROXY    ]  MITM proxy started on 0.0.0.0:8080 — intercept mode: ACTIVE
+  2026-04-13 08:00:01  [INFO ]  [PROXY    ]  Dynamic CA certificate loaded — PFS mode: ECDHE enabled
+  2026-04-13 08:00:01  [INFO ]  [PROXY    ]  SNI bypass list loaded: [banking.*, healthcare.*, *.gov.pk]
+  2026-04-13 08:00:02  [INFO ]  [PRESIDIO ]  Microsoft Presidio NLP engine initialized — entities: 12 types
+  2026-04-13 08:00:02  [INFO ]  [OCR      ]  PaddleOCR engine initialized — char accuracy target: >97%
+  2026-04-13 08:00:03  [INFO ]  [VLM      ]  PaliGemma-3B loaded (INT8 quantized) — device: CPU async mode
+  2026-04-13 08:00:03  [INFO ]  [LSTM     ]  LSTM model loaded — hidden_dim=128, layers=2, seq_len=24
+  2026-04-13 08:00:04  [INFO ]  [ISO_FRST ]  Isolation Forest loaded — n_estimators=100, trained on 50 users
+  2026-04-13 08:00:04  [INFO ]  [MONGODB  ]  MongoDB connection established — db: hybridSaaS_monitor
+  2026-04-13 08:00:05  [INFO ]  [PINECONE ]  Pinecone vector DB connected — index: saas-file-embeddings
+  2026-04-13 08:00:05  [INFO ]  [SLACK    ]  Slack webhook configured — channel: #security-alerts
+  2026-04-13 08:00:06  [INFO ]  [PROXY    ]  All subsystems READY — monitoring ACTIVE
+
+==============================================================================================================
+  SECTION B — PII DETECTION: TEXT FILES (Branch 1 — Microsoft Presidio)
+==============================================================================================================
+
+  Each intercepted file payload is scanned by Presidio NER engine.
+  Sensitivity Score S = min(10*H + 5*M + 1*L, 100)
+  H = High-sensitivity entities | M = Medium | L = Low
+
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-001  |  2026-04-13 08:05:00  |  User: USR002 (Bilal Ahmed)  |  Platform: Google Drive
+  File     : payroll_Q1_2026.xlsx
+  Dept     : Finance  |  Geo: Islamabad, PK  |  File-Type: TEXT_EXTRACTABLE
+  Branch   : 1 — Microsoft Presidio (direct text extraction)
+
+    Entities Detected:
+      CREDIT_CARD          count=  2   tier=HIGH    pts=10  contribution=20
+      NID                  count=  3   tier=HIGH    pts=10  contribution=30
+      PHONE                count=  8   tier=MEDIUM  pts=5  contribution=40
+      EMAIL                count= 12   tier=MEDIUM  pts=5  contribution=60
+      PERSON               count= 15   tier=LOW     pts=1  contribution=15
+
+    Score Calculation : S = min(10×5 + 5×20 + 1×15, 100)
+                         = min(50 + 100 + 15, 100)
+                         = min(165, 100) = 100
+    Risk Category     : HIGH-RISK
+    Presidio Latency  : 86.8 ms
+
+    ⚠  ACTION: REQUEST BLOCKED — high PII density detected
+    ⚠  Slack alert dispatched to #security-alerts
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-002  |  2026-04-13 08:12:00  |  User: USR002 (Bilal Ahmed)  |  Platform: Google Drive
+  File     : employee_records.docx
+  Dept     : HR  |  Geo: Lahore, PK  |  File-Type: TEXT_EXTRACTABLE
+  Branch   : 1 — Microsoft Presidio (direct text extraction)
+
+    Entities Detected:
+      NID                  count=  5   tier=HIGH    pts=10  contribution=50
+      PHONE                count= 10   tier=MEDIUM  pts=5  contribution=50
+      EMAIL                count= 20   tier=MEDIUM  pts=5  contribution=100
+      PERSON               count= 30   tier=LOW     pts=1  contribution=30
+      DOB                  count=  2   tier=LOW     pts=1  contribution=2
+
+    Score Calculation : S = min(10×5 + 5×30 + 1×32, 100)
+                         = min(50 + 150 + 32, 100)
+                         = min(232, 100) = 100
+    Risk Category     : HIGH-RISK
+    Presidio Latency  : 63.8 ms
+
+    ⚠  ACTION: REQUEST BLOCKED — high PII density detected
+    ⚠  Slack alert dispatched to #security-alerts
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-003  |  2026-04-13 08:22:00  |  User: USR002 (Bilal Ahmed)  |  Platform: Google Drive
+  File     : client_contracts.pdf
+  Dept     : Legal  |  Geo: Karachi, PK  |  File-Type: TEXT_EXTRACTABLE
+  Branch   : 1 — Microsoft Presidio (direct text extraction)
+
+    Entities Detected:
+      PERSON               count=  0   tier=LOW     pts=1  contribution=0
+      EMAIL                count=  0   tier=MEDIUM  pts=5  contribution=0
+      PHONE                count=  4   tier=MEDIUM  pts=5  contribution=20
+
+    Score Calculation : S = min(10×0 + 5×4 + 1×0, 100)
+                         = min(0 + 20 + 0, 100)
+                         = min(20, 100) = 20
+    Risk Category     : SENSITIVE
+    Presidio Latency  : 132.2 ms
+
+    ⚡  ACTION: REQUEST PERMITTED — Slack alert dispatched (SENSITIVE threshold)
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-004  |  2026-04-13 08:34:00  |  User: USR009 (Kamran Ali)  |  Platform: Google Drive
+  File     : source_code_v3.py
+  Dept     : Engineering  |  Geo: Lahore, PK  |  File-Type: TEXT_EXTRACTABLE
+  Branch   : 1 — Microsoft Presidio (direct text extraction)
+
+    Entities Detected:
+      EMAIL                count=  0   tier=MEDIUM  pts=5  contribution=0
+      IP_ADDRESS           count=  0   tier=LOW     pts=1  contribution=0
+
+    Score Calculation : S = min(10×0 + 5×0 + 1×0, 100)
+                         = min(0 + 0 + 0, 100)
+                         = min(0, 100) = 0
+    Risk Category     : SAFE
+    Presidio Latency  : 86.5 ms
+
+    ✓  ACTION: REQUEST PERMITTED — logged only (SAFE)
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-005  |  2026-04-13 08:44:00  |  User: USR010 (Nadia Farooq)  |  Platform: Microsoft OneDrive
+  File     : board_meeting_notes.docx
+  Dept     : Executive  |  Geo: Lahore, PK  |  File-Type: TEXT_EXTRACTABLE
+  Branch   : 1 — Microsoft Presidio (direct text extraction)
+
+    Entities Detected:
+      PERSON               count=  0   tier=LOW     pts=1  contribution=0
+      EMAIL                count=  0   tier=MEDIUM  pts=5  contribution=0
+
+    Score Calculation : S = min(10×0 + 5×0 + 1×0, 100)
+                         = min(0 + 0 + 0, 100)
+                         = min(0, 100) = 0
+    Risk Category     : SAFE
+    Presidio Latency  : 143.8 ms
+
+    ✓  ACTION: REQUEST PERMITTED — logged only (SAFE)
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-006  |  2026-04-13 08:50:00  |  User: USR006 (Ahmed Raza)  |  Platform: Microsoft OneDrive
+  File     : invoice_batch_Mar26.csv
+  Dept     : Finance  |  Geo: Karachi, PK  |  File-Type: TEXT_EXTRACTABLE
+  Branch   : 1 — Microsoft Presidio (direct text extraction)
+
+    Entities Detected:
+      CREDIT_CARD          count=  1   tier=HIGH    pts=10  contribution=10
+      PHONE                count=  0   tier=MEDIUM  pts=5  contribution=0
+      EMAIL                count=  5   tier=MEDIUM  pts=5  contribution=25
+      PERSON               count=  8   tier=LOW     pts=1  contribution=8
+
+    Score Calculation : S = min(10×1 + 5×5 + 1×8, 100)
+                         = min(10 + 25 + 8, 100)
+                         = min(43, 100) = 43
+    Risk Category     : SENSITIVE
+    Presidio Latency  : 174.9 ms
+
+    ⚡  ACTION: REQUEST PERMITTED — Slack alert dispatched (SENSITIVE threshold)
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-007  |  2026-04-13 08:57:00  |  User: USR006 (Ahmed Raza)  |  Platform: Google Drive
+  File     : nda_template.docx
+  Dept     : Legal  |  Geo: Lahore, PK  |  File-Type: TEXT_EXTRACTABLE
+  Branch   : 1 — Microsoft Presidio (direct text extraction)
+
+    Entities Detected:
+      PERSON               count=  0   tier=LOW     pts=1  contribution=0
+      EMAIL                count=  0   tier=MEDIUM  pts=5  contribution=0
+
+    Score Calculation : S = min(10×0 + 5×0 + 1×0, 100)
+                         = min(0 + 0 + 0, 100)
+                         = min(0, 100) = 0
+    Risk Category     : SAFE
+    Presidio Latency  : 71.6 ms
+
+    ✓  ACTION: REQUEST PERMITTED — logged only (SAFE)
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-008  |  2026-04-13 09:07:00  |  User: USR006 (Ahmed Raza)  |  Platform: Microsoft OneDrive
+  File     : sales_leads_Q1.csv
+  Dept     : Sales  |  Geo: Lahore, PK  |  File-Type: TEXT_EXTRACTABLE
+  Branch   : 1 — Microsoft Presidio (direct text extraction)
+
+    Entities Detected:
+      PERSON               count=  0   tier=LOW     pts=1  contribution=0
+      PHONE                count=  0   tier=MEDIUM  pts=5  contribution=0
+      EMAIL                count=  3   tier=MEDIUM  pts=5  contribution=15
+
+    Score Calculation : S = min(10×0 + 5×3 + 1×0, 100)
+                         = min(0 + 15 + 0, 100)
+                         = min(15, 100) = 15
+    Risk Category     : SAFE
+    Presidio Latency  : 124.3 ms
+
+    ✓  ACTION: REQUEST PERMITTED — logged only (SAFE)
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-009  |  2026-04-13 09:18:00  |  User: USR007 (Zara Hussain)  |  Platform: Google Drive
+  File     : config_secrets.env
+  Dept     : Engineering  |  Geo: Lahore, PK  |  File-Type: TEXT_EXTRACTABLE
+  Branch   : 1 — Microsoft Presidio (direct text extraction)
+
+    Entities Detected:
+      PASSWORD             count=  2   tier=HIGH    pts=10  contribution=20
+      EMAIL                count=  0   tier=MEDIUM  pts=5  contribution=0
+      IP_ADDRESS           count=  1   tier=LOW     pts=1  contribution=1
+
+    Score Calculation : S = min(10×2 + 5×0 + 1×1, 100)
+                         = min(20 + 0 + 1, 100)
+                         = min(21, 100) = 21
+    Risk Category     : SENSITIVE
+    Presidio Latency  : 159.5 ms
+
+    ⚡  ACTION: REQUEST PERMITTED — Slack alert dispatched (SENSITIVE threshold)
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-010  |  2026-04-13 09:26:00  |  User: USR010 (Nadia Farooq)  |  Platform: Microsoft OneDrive
+  File     : audit_report_2025.pdf
+  Dept     : Finance  |  Geo: Lahore, PK  |  File-Type: TEXT_EXTRACTABLE
+  Branch   : 1 — Microsoft Presidio (direct text extraction)
+
+    Entities Detected:
+      NID                  count=  3   tier=HIGH    pts=10  contribution=30
+      CREDIT_CARD          count=  1   tier=HIGH    pts=10  contribution=10
+      PERSON               count=  6   tier=LOW     pts=1  contribution=6
+      EMAIL                count=  8   tier=MEDIUM  pts=5  contribution=40
+
+    Score Calculation : S = min(10×4 + 5×8 + 1×6, 100)
+                         = min(40 + 40 + 6, 100)
+                         = min(86, 100) = 86
+    Risk Category     : HIGH-RISK
+    Presidio Latency  : 144.5 ms
+
+    ⚠  ACTION: REQUEST BLOCKED — high PII density detected
+    ⚠  Slack alert dispatched to #security-alerts
+
+==============================================================================================================
+  SECTION C — PII DETECTION: IMAGE & SCANNED FILES (Branch 2: OCR | Branch 3: VLM)
+==============================================================================================================
+
+  Branch 2 (OCR): PaddleOCR extracts text → Presidio scans extracted text
+  Branch 3 (VLM): Triggered when OCR confidence < 0.85 — PaliGemma-3B reads image directly
+
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-011  |  2026-04-13 09:33:00  |  User: USR001 (Ayesha Khan)  |  Platform: Google Drive
+  File      : scanned_passport_copy.jpg
+  File-Type : SCANNED_PDF  |  Dept: HR
+
+    [OCR STAGE]  PaddleOCR processing...
+      OCR Confidence Score : 0.96  (threshold: 0.85)
+      OCR Confidence ≥ 0.85 → Branch 2 selected (OCR + Presidio)
+      OCR Processing Time  : 192.1 ms
+      Text Extracted       : 199 characters
+
+    [PRESIDIO STAGE]  Scanning extracted text...
+      Presidio Latency     : 66.4 ms
+
+    Entities Detected:
+      NID                  count=  1   tier=HIGH    pts=10  contribution=10
+      PERSON               count=  0   tier=LOW     pts=1  contribution=0
+      DOB                  count=  0   tier=LOW     pts=1  contribution=0
+
+    Score Calculation : S = min(10×1 + 5×0 + 1×0, 100) = 10
+    Risk Category     : SAFE
+
+    ✓  ACTION: PERMITTED — image content scanned, no significant PII
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-012  |  2026-04-13 09:53:00  |  User: USR002 (Bilal Ahmed)  |  Platform: Microsoft OneDrive
+  File      : whiteboard_creds.png
+  File-Type : IMAGE  |  Dept: Engineering
+
+    [OCR STAGE]  PaddleOCR processing...
+      OCR Confidence Score : 0.88  (threshold: 0.85)
+      OCR Confidence ≥ 0.85 → Branch 2 selected (OCR + Presidio)
+      OCR Processing Time  : 221.6 ms
+      Text Extracted       : 163 characters
+
+    [PRESIDIO STAGE]  Scanning extracted text...
+      Presidio Latency     : 126.7 ms
+
+    Entities Detected:
+      PASSWORD             count=  1   tier=HIGH    pts=10  contribution=10
+      EMAIL                count=  0   tier=MEDIUM  pts=5  contribution=0
+
+    Score Calculation : S = min(10×1 + 5×0 + 1×0, 100) = 10
+    Risk Category     : SAFE
+
+    ✓  ACTION: PERMITTED — image content scanned, no significant PII
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-013  |  2026-04-13 10:05:00  |  User: USR006 (Ahmed Raza)  |  Platform: Microsoft OneDrive
+  File      : handwritten_client_form.jpg
+  File-Type : HANDWRITTEN  |  Dept: Legal
+
+    [OCR STAGE]  PaddleOCR processing...
+      OCR Confidence Score : 0.61  (threshold: 0.85)
+      OCR Confidence < 0.85 → Branch 3 selected (VLM fallback)
+      OCR Processing Time  : 260.6 ms  (low-quality extraction)
+      Text Extracted       : 14 characters (incomplete)
+
+    [VLM STAGE]  PaliGemma-3B vision-language model processing...
+      Model     : PaliGemma-3B (INT8 quantized, async mode)
+      VLM Time  : 1782.5 ms
+
+    [PRESIDIO STAGE]  Scanning VLM-extracted entities...
+      Presidio Latency     : 114.7 ms
+
+    Entities Detected:
+      PERSON               count=  0   tier=LOW     pts=1  contribution=0
+      PHONE                count=  0   tier=MEDIUM  pts=5  contribution=0
+      EMAIL                count=  3   tier=MEDIUM  pts=5  contribution=15
+
+    Score Calculation : S = min(10×0 + 5×3 + 1×0, 100) = 15
+    Risk Category     : SAFE
+
+    ✓  ACTION: PERMITTED — image content scanned, no significant PII
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-014  |  2026-04-13 10:16:00  |  User: USR010 (Nadia Farooq)  |  Platform: Google Drive
+  File      : id_card_scan.png
+  File-Type : SCANNED_PDF  |  Dept: HR
+
+    [OCR STAGE]  PaddleOCR processing...
+      OCR Confidence Score : 0.93  (threshold: 0.85)
+      OCR Confidence ≥ 0.85 → Branch 2 selected (OCR + Presidio)
+      OCR Processing Time  : 271.2 ms
+      Text Extracted       : 274 characters
+
+    [PRESIDIO STAGE]  Scanning extracted text...
+      Presidio Latency     : 73.1 ms
+
+    Entities Detected:
+      NID                  count=  1   tier=HIGH    pts=10  contribution=10
+      PERSON               count=  0   tier=LOW     pts=1  contribution=0
+
+    Score Calculation : S = min(10×1 + 5×0 + 1×0, 100) = 10
+    Risk Category     : SAFE
+
+    ✓  ACTION: PERMITTED — image content scanned, no significant PII
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-015  |  2026-04-13 10:32:00  |  User: USR005 (Fatima Noor)  |  Platform: Google Drive
+  File      : meeting_photo_budget.jpg
+  File-Type : IMAGE  |  Dept: Finance
+
+    [OCR STAGE]  PaddleOCR processing...
+      OCR Confidence Score : 0.79  (threshold: 0.85)
+      OCR Confidence < 0.85 → Branch 3 selected (VLM fallback)
+      OCR Processing Time  : 198.4 ms  (low-quality extraction)
+      Text Extracted       : 12 characters (incomplete)
+
+    [VLM STAGE]  PaliGemma-3B vision-language model processing...
+      Model     : PaliGemma-3B (INT8 quantized, async mode)
+      VLM Time  : 1875.6 ms
+
+    [PRESIDIO STAGE]  Scanning VLM-extracted entities...
+      Presidio Latency     : 64.5 ms
+
+    Entities Detected:
+      CREDIT_CARD          count=  1   tier=HIGH    pts=10  contribution=10
+      PERSON               count=  0   tier=LOW     pts=1  contribution=0
+      PHONE                count=  2   tier=MEDIUM  pts=5  contribution=10
+
+    Score Calculation : S = min(10×1 + 5×2 + 1×0, 100) = 20
+    Risk Category     : SENSITIVE
+
+    ⚡  ACTION: PERMITTED + ALERT — image PII at SENSITIVE level
+    ⚡  NOTE: Base system would have missed all entities in this file
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-016  |  2026-04-13 10:50:00  |  User: USR006 (Ahmed Raza)  |  Platform: Microsoft OneDrive
+  File      : scanned_contract.pdf
+  File-Type : SCANNED_PDF  |  Dept: Legal
+
+    [OCR STAGE]  PaddleOCR processing...
+      OCR Confidence Score : 0.91  (threshold: 0.85)
+      OCR Confidence ≥ 0.85 → Branch 2 selected (OCR + Presidio)
+      OCR Processing Time  : 151.9 ms
+      Text Extracted       : 370 characters
+
+    [PRESIDIO STAGE]  Scanning extracted text...
+      Presidio Latency     : 133.1 ms
+
+    Entities Detected:
+      PERSON               count=  0   tier=LOW     pts=1  contribution=0
+      EMAIL                count=  0   tier=MEDIUM  pts=5  contribution=0
+      PHONE                count=  2   tier=MEDIUM  pts=5  contribution=10
+
+    Score Calculation : S = min(10×0 + 5×2 + 1×0, 100) = 10
+    Risk Category     : SAFE
+
+    ✓  ACTION: PERMITTED — image content scanned, no significant PII
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-017  |  2026-04-13 11:02:00  |  User: USR006 (Ahmed Raza)  |  Platform: Google Drive
+  File      : handwritten_ssn_form.jpg
+  File-Type : HANDWRITTEN  |  Dept: HR
+
+    [OCR STAGE]  PaddleOCR processing...
+      OCR Confidence Score : 0.54  (threshold: 0.85)
+      OCR Confidence < 0.85 → Branch 3 selected (VLM fallback)
+      OCR Processing Time  : 229.9 ms  (low-quality extraction)
+      Text Extracted       : 19 characters (incomplete)
+
+    [VLM STAGE]  PaliGemma-3B vision-language model processing...
+      Model     : PaliGemma-3B (INT8 quantized, async mode)
+      VLM Time  : 2038.6 ms
+
+    [PRESIDIO STAGE]  Scanning VLM-extracted entities...
+      Presidio Latency     : 111.4 ms
+
+    Entities Detected:
+      NID                  count=  2   tier=HIGH    pts=10  contribution=20
+      PERSON               count=  0   tier=LOW     pts=1  contribution=0
+      DOB                  count=  0   tier=LOW     pts=1  contribution=0
+
+    Score Calculation : S = min(10×2 + 5×0 + 1×0, 100) = 20
+    Risk Category     : SENSITIVE
+
+    ⚡  ACTION: PERMITTED + ALERT — image PII at SENSITIVE level
+    ⚡  NOTE: Base system would have missed all entities in this file
+  --------------------------------------------------------------------------------------------------------------
+  SCAN-018  |  2026-04-13 11:20:00  |  User: USR005 (Fatima Noor)  |  Platform: Google Drive
+  File      : screenshot_dashboard.png
+  File-Type : IMAGE  |  Dept: Finance
+
+    [OCR STAGE]  PaddleOCR processing...
+      OCR Confidence Score : 0.83  (threshold: 0.85)
+      OCR Confidence < 0.85 → Branch 3 selected (VLM fallback)
+      OCR Processing Time  : 274.1 ms  (low-quality extraction)
+      Text Extracted       : 37 characters (incomplete)
+
+    [VLM STAGE]  PaliGemma-3B vision-language model processing...
+      Model     : PaliGemma-3B (INT8 quantized, async mode)
+      VLM Time  : 1554.6 ms
+
+    [PRESIDIO STAGE]  Scanning VLM-extracted entities...
+      Presidio Latency     : 119.8 ms
+
+    Entities Detected:
+      CREDIT_CARD          count=  1   tier=HIGH    pts=10  contribution=10
+      EMAIL                count=  0   tier=MEDIUM  pts=5  contribution=0
+      IP_ADDRESS           count=  1   tier=LOW     pts=1  contribution=1
+
+    Score Calculation : S = min(10×1 + 5×0 + 1×1, 100) = 11
+    Risk Category     : SAFE
+
+    ✓  ACTION: PERMITTED — image content scanned, no significant PII
+
+==============================================================================================================
+  SECTION D — BEHAVIORAL ANOMALY DETECTION: EWMA (Base System)
+==============================================================================================================
+
+  EWMA tracks per-user activity rate across 8 time windows.
+  Activity Rate r_t = 3600 / (t_current - t_last)  [actions per hour]
+  EWMA_new = λ × r_t + (1-λ) × EWMA_old   where λ = 0.3
+
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-001  |  2026-04-13 11:31:00  |  USR001 (Ayesha Khan)
+  Action      : PERM_CHECK  |  File: source_code_v3.py
+  Gap since last action : 383s  →  r_t = 3600/383 = 9.399 actions/hr
+  EWMA Update (1h window):  λ×9.399 + (1-λ)×4.1
+             = 0.3×9.399 + 0.7×4.1
+             = 2.8197 + 2.87 = 5.6897
+  Deviation from baseline: |9.399 - 4.1| / 4.1 = 1.2921
+  ✓  Normal activity — EWMA updated
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-002  |  2026-04-13 11:35:00  |  USR005 (Fatima Noor)
+  Action      : FILE_VIEW  |  File: config_secrets.env
+  Gap since last action : 730s  →  r_t = 3600/730 = 4.932 actions/hr
+  EWMA Update (1h window):  λ×4.932 + (1-λ)×3.44
+             = 0.3×4.932 + 0.7×3.44
+             = 1.4796 + 2.408 = 3.8876
+  Deviation from baseline: |4.932 - 3.44| / 3.44 = 0.4336
+  ✓  Normal activity — EWMA updated
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-003  |  2026-04-13 11:45:00  |  USR003 (Sara Malik)
+  Action      : FILE_VIEW  |  File: sales_leads_Q1.csv
+  Gap since last action : 785s  →  r_t = 3600/785 = 4.586 actions/hr
+  EWMA Update (1h window):  λ×4.586 + (1-λ)×1.57
+             = 0.3×4.586 + 0.7×1.57
+             = 1.3758 + 1.099 = 2.4748
+  Deviation from baseline: |4.586 - 1.57| / 1.57 = 1.9198
+  ✓  Normal activity — EWMA updated
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-004  |  2026-04-13 11:55:00  |  USR007 (Zara Hussain)
+  Action      : FILE_DOWNLOAD  |  File: nda_template.docx
+  Gap since last action : 239s  →  r_t = 3600/239 = 15.063 actions/hr
+  EWMA Update (1h window):  λ×15.063 + (1-λ)×7.21
+             = 0.3×15.063 + 0.7×7.21
+             = 4.5189 + 5.047 = 9.5659
+  Deviation from baseline: |15.063 - 7.21| / 7.21 = 1.0890
+  ✓  Normal activity — EWMA updated
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-005  |  2026-04-13 11:59:00  |  USR006 (Ahmed Raza)
+  Action      : FILE_UPLOAD  |  File: payroll_Q1_2026.xlsx
+  Gap since last action : 478s  →  r_t = 3600/478 = 7.531 actions/hr
+  EWMA Update (1h window):  λ×7.531 + (1-λ)×1.5
+             = 0.3×7.531 + 0.7×1.5
+             = 2.2593 + 1.05 = 3.3093
+  Deviation from baseline: |7.531 - 1.5| / 1.5 = 4.0180
+  ⚠  ANOMALY FLAGGED (deviation > 2.0 threshold)
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-006  |  2026-04-13 12:08:00  |  USR002 (Bilal Ahmed)
+  Action      : FILE_SHARE  |  File: employee_records.docx
+  Gap since last action : 107s  →  r_t = 3600/107 = 33.645 actions/hr
+  EWMA Update (1h window):  λ×33.645 + (1-λ)×6.65
+             = 0.3×33.645 + 0.7×6.65
+             = 10.0935 + 4.655 = 14.7485
+  Deviation from baseline: |33.645 - 6.65| / 6.65 = 4.0588
+  ⚠  ANOMALY FLAGGED (deviation > 2.0 threshold)
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-007  |  2026-04-13 12:17:00  |  USR004 (Usman Tariq)
+  Action      : PERM_CHECK  |  File: sales_leads_Q1.csv
+  Gap since last action : 241s  →  r_t = 3600/241 = 14.938 actions/hr
+  EWMA Update (1h window):  λ×14.938 + (1-λ)×4.45
+             = 0.3×14.938 + 0.7×4.45
+             = 4.4814 + 3.115 = 7.5964
+  Deviation from baseline: |14.938 - 4.45| / 4.45 = 2.3563
+  ⚠  ANOMALY FLAGGED (deviation > 2.0 threshold)
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-008  |  2026-04-13 12:23:00  |  USR003 (Sara Malik)
+  Action      : FILE_SHARE  |  File: sales_leads_Q1.csv
+  Gap since last action : 477s  →  r_t = 3600/477 = 7.547 actions/hr
+  EWMA Update (1h window):  λ×7.547 + (1-λ)×2.4748
+             = 0.3×7.547 + 0.7×2.4748
+             = 2.2641 + 1.7324 = 3.9965
+  Deviation from baseline: |7.547 - 2.4748| / 2.4748 = 2.0487
+  ⚠  ANOMALY FLAGGED (deviation > 2.0 threshold)
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-009  |  2026-04-13 12:28:00  |  USR004 (Usman Tariq)
+  Action      : PERM_CHECK  |  File: employee_records.docx
+  Gap since last action : 122s  →  r_t = 3600/122 = 29.508 actions/hr
+  EWMA Update (1h window):  λ×29.508 + (1-λ)×7.5964
+             = 0.3×29.508 + 0.7×7.5964
+             = 8.8524 + 5.3175 = 14.1699
+  Deviation from baseline: |29.508 - 7.5964| / 7.5964 = 2.8841
+  ⚠  ANOMALY FLAGGED (deviation > 2.0 threshold)
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-010  |  2026-04-13 12:38:00  |  USR001 (Ayesha Khan)
+  Action      : FILE_DOWNLOAD  |  File: source_code_v3.py
+  Gap since last action : 712s  →  r_t = 3600/712 = 5.056 actions/hr
+  EWMA Update (1h window):  λ×5.056 + (1-λ)×5.6897
+             = 0.3×5.056 + 0.7×5.6897
+             = 1.5168 + 3.9828 = 5.4996
+  Deviation from baseline: |5.056 - 5.6897| / 5.6897 = 0.1114
+  ✓  Normal activity — EWMA updated
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-011  |  2026-04-13 12:41:00  |  USR003 (Sara Malik)
+  Action      : FILE_UPLOAD  |  File: source_code_v3.py
+  Gap since last action : 461s  →  r_t = 3600/461 = 7.809 actions/hr
+  EWMA Update (1h window):  λ×7.809 + (1-λ)×3.9965
+             = 0.3×7.809 + 0.7×3.9965
+             = 2.3427 + 2.7975 = 5.1402
+  Deviation from baseline: |7.809 - 3.9965| / 3.9965 = 0.9537
+  ✓  Normal activity — EWMA updated
+  --------------------------------------------------------------------------------------------------------------
+  EVENT-012  |  2026-04-13 12:51:00  |  USR007 (Zara Hussain)
+  Action      : FILE_UPLOAD  |  File: payroll_Q1_2026.xlsx
+  Gap since last action : 105s  →  r_t = 3600/105 = 34.286 actions/hr
+  EWMA Update (1h window):  λ×34.286 + (1-λ)×9.5659
+             = 0.3×34.286 + 0.7×9.5659
+             = 10.2858 + 6.6961 = 16.9819
+  Deviation from baseline: |34.286 - 9.5659| / 9.5659 = 2.5839
+  ⚠  ANOMALY FLAGGED (deviation > 2.0 threshold)
+
+==============================================================================================================
+  SECTION D.2 — EWMA: BULK DOWNLOAD SCENARIO (USR010 — Insider Threat)
+==============================================================================================================
+
+  USR010 (Nadia Farooq) triggers a bulk-download event:
+  51 files downloaded within 4 minutes 38 seconds — exceeds threshold (>50 files / 5 min)
+
+  DL-001  2026-04-13 12:58:00  USR010  DOWNLOAD  config_secrets.env                        rate=  600.00/hr  EWMA_30m=182.0720
+  DL-002  2026-04-13 12:58:06  USR010  DOWNLOAD  audit_report_2025.pdf                     rate=  600.00/hr  EWMA_30m=307.4504
+  DL-003  2026-04-13 12:58:12  USR010  DOWNLOAD  screenshot_dashboard.png                  rate=  600.00/hr  EWMA_30m=395.2153
+  DL-004  2026-04-13 12:58:18  USR010  DOWNLOAD  scanned_contract.pdf                      rate=  450.00/hr  EWMA_30m=411.6507
+  DL-005  2026-04-13 12:58:25  USR010  DOWNLOAD  nda_template.docx                         rate=  900.00/hr  EWMA_30m=558.1555
+  DL-006  2026-04-13 12:58:30  USR010  DOWNLOAD  nda_template.docx                         rate=  720.00/hr  EWMA_30m=606.7088
+  DL-007  2026-04-13 12:58:34  USR010  DOWNLOAD  screenshot_dashboard.png                  rate= 1200.00/hr  EWMA_30m=784.6962
+  DL-008  2026-04-13 12:58:37  USR010  DOWNLOAD  scanned_passport_copy.jpg                 rate= 1200.00/hr  EWMA_30m=909.2873
+  DL-009  2026-04-13 12:58:40  USR010  DOWNLOAD  employee_records.docx                     rate= 1200.00/hr  EWMA_30m=996.5011
+  DL-010  2026-04-13 12:58:43  USR010  DOWNLOAD  scanned_contract.pdf                      rate=  514.29/hr  EWMA_30m=851.8378
+  DL-011  2026-04-13 12:58:51  USR010  DOWNLOAD  handwritten_ssn_form.jpg                  rate=  514.29/hr  EWMA_30m=750.5735
+  DL-012  2026-04-13 12:58:58  USR010  DOWNLOAD  employee_records.docx                     rate=  900.00/hr  EWMA_30m=795.4014
+  DL-013  2026-04-13 12:59:02  USR010  DOWNLOAD  client_contracts.pdf                      rate=  514.29/hr  EWMA_30m=711.0680
+  DL-014  2026-04-13 12:59:09  USR010  DOWNLOAD  client_contracts.pdf                      rate=  900.00/hr  EWMA_30m=767.7476
+  DL-015  2026-04-13 12:59:13  USR010  DOWNLOAD  client_contracts.pdf                      rate=  514.29/hr  EWMA_30m=691.7103
+  DL-016  2026-04-13 12:59:21  USR010  DOWNLOAD  sales_leads_Q1.csv                        rate=  450.00/hr  EWMA_30m=619.1972
+  DL-017  2026-04-13 12:59:28  USR010  DOWNLOAD  source_code_v3.py                         rate=  600.00/hr  EWMA_30m=613.4380
+  DL-018  2026-04-13 12:59:34  USR010  DOWNLOAD  sales_leads_Q1.csv                        rate=  514.29/hr  EWMA_30m=583.6936
+  DL-019  2026-04-13 12:59:42  USR010  DOWNLOAD  employee_records.docx                     rate=  514.29/hr  EWMA_30m=562.8725
+  DL-020  2026-04-13 12:59:49  USR010  DOWNLOAD  client_contracts.pdf                      rate=  514.29/hr  EWMA_30m=548.2977
+  DL-021  2026-04-13 12:59:56  USR010  DOWNLOAD  handwritten_ssn_form.jpg                  rate=  600.00/hr  EWMA_30m=563.8084
+  DL-022  2026-04-13 13:00:02  USR010  DOWNLOAD  config_secrets.env                        rate=  720.00/hr  EWMA_30m=610.6659
+  DL-023  2026-04-13 13:00:07  USR010  DOWNLOAD  scanned_passport_copy.jpg                 rate=  900.00/hr  EWMA_30m=697.4661
+  DL-024  2026-04-13 13:00:11  USR010  DOWNLOAD  config_secrets.env                        rate=  900.00/hr  EWMA_30m=758.2263
+  DL-025  2026-04-13 13:00:15  USR010  DOWNLOAD  board_meeting_notes.docx                  rate=  600.00/hr  EWMA_30m=710.7584
+  DL-026  2026-04-13 13:00:21  USR010  DOWNLOAD  audit_report_2025.pdf                     rate=  450.00/hr  EWMA_30m=632.5309
+  DL-027  2026-04-13 13:00:29  USR010  DOWNLOAD  scanned_passport_copy.jpg                 rate=  600.00/hr  EWMA_30m=622.7716
+  DL-028  2026-04-13 13:00:35  USR010  DOWNLOAD  payroll_Q1_2026.xlsx                      rate= 1200.00/hr  EWMA_30m=795.9401
+  DL-029  2026-04-13 13:00:38  USR010  DOWNLOAD  source_code_v3.py                         rate=  600.00/hr  EWMA_30m=737.1581
+  DL-030  2026-04-13 13:00:44  USR010  DOWNLOAD  screenshot_dashboard.png                  rate= 1200.00/hr  EWMA_30m=876.0107
+  DL-031  2026-04-13 13:00:47  USR010  DOWNLOAD  handwritten_ssn_form.jpg                  rate=  900.00/hr  EWMA_30m=883.2075
+  DL-032  2026-04-13 13:00:51  USR010  DOWNLOAD  board_meeting_notes.docx                  rate=  720.00/hr  EWMA_30m=834.2452
+  DL-033  2026-04-13 13:00:56  USR010  DOWNLOAD  client_contracts.pdf                      rate=  720.00/hr  EWMA_30m=799.9716
+  DL-034  2026-04-13 13:01:01  USR010  DOWNLOAD  whiteboard_creds.png                      rate=  900.00/hr  EWMA_30m=829.9801
+  DL-035  2026-04-13 13:01:05  USR010  DOWNLOAD  invoice_batch_Mar26.csv                   rate=  720.00/hr  EWMA_30m=796.9861
+  DL-036  2026-04-13 13:01:10  USR010  DOWNLOAD  screenshot_dashboard.png                  rate=  600.00/hr  EWMA_30m=737.8903
+  DL-037  2026-04-13 13:01:16  USR010  DOWNLOAD  audit_report_2025.pdf                     rate=  450.00/hr  EWMA_30m=651.5232
+  DL-038  2026-04-13 13:01:24  USR010  DOWNLOAD  handwritten_ssn_form.jpg                  rate=  514.29/hr  EWMA_30m=610.3532
+  DL-039  2026-04-13 13:01:31  USR010  DOWNLOAD  screenshot_dashboard.png                  rate= 1200.00/hr  EWMA_30m=787.2472
+  DL-040  2026-04-13 13:01:34  USR010  DOWNLOAD  source_code_v3.py                         rate=  720.00/hr  EWMA_30m=767.0730
+  DL-041  2026-04-13 13:01:39  USR010  DOWNLOAD  config_secrets.env                        rate=  900.00/hr  EWMA_30m=806.9511
+  DL-042  2026-04-13 13:01:43  USR010  DOWNLOAD  source_code_v3.py                         rate= 1200.00/hr  EWMA_30m=924.8658
+  DL-043  2026-04-13 13:01:46  USR010  DOWNLOAD  screenshot_dashboard.png                  rate=  450.00/hr  EWMA_30m=782.4061
+  DL-044  2026-04-13 13:01:54  USR010  DOWNLOAD  config_secrets.env                        rate=  900.00/hr  EWMA_30m=817.6843
+  DL-045  2026-04-13 13:01:58  USR010  DOWNLOAD  nda_template.docx                         rate=  720.00/hr  EWMA_30m=788.3790
+  DL-046  2026-04-13 13:02:03  USR010  DOWNLOAD  scanned_passport_copy.jpg                 rate=  450.00/hr  EWMA_30m=686.8653
+  DL-047  2026-04-13 13:02:10  USR010  DOWNLOAD  config_secrets.env                        rate=  900.00/hr  EWMA_30m=750.8057
+  DL-048  2026-04-13 13:02:15  USR010  DOWNLOAD  scanned_contract.pdf                      rate=  514.29/hr  EWMA_30m=679.8510
+  DL-049  2026-04-13 13:02:22  USR010  DOWNLOAD  employee_records.docx                     rate=  720.00/hr  EWMA_30m=691.8957
+  DL-050  2026-04-13 13:02:27  USR010  DOWNLOAD  id_card_scan.png                          rate= 1200.00/hr  EWMA_30m=844.3270
+  DL-051  2026-04-13 13:02:30  USR010  DOWNLOAD  employee_records.docx                     rate=  720.00/hr  EWMA_30m=807.0289
+
+  TRIGGER: 51 files downloaded in < 5 minutes
+  EWMA_30m spike: 807.0289  (baseline was ~3.2)
+  ⚠  BULK-DOWNLOAD ANOMALY DETECTED
+  ⚠  ACTION: USR010 access BLOCKED on Google Drive
+  ⚠  Slack alert: 'Suspicious bulk download — USR010 (Nadia Farooq) — Finance'
+  ⚠  Jira ticket SFS-2041 created: 'Investigate USR010 bulk exfiltration attempt'
+
+==============================================================================================================
+  SECTION E — BEHAVIORAL ANOMALY DETECTION: LSTM + ISOLATION FOREST (HybridSaaS-Sec)
+==============================================================================================================
+
+  6-dimensional feature vector per time step:
+  x_t = [activity_rate, file_type_cat, geo_index, endpoint_cat, delta_perm, collab_count]
+  LSTM: hidden_dim=128, layers=2, seq_len=24h  →  behavioral encoding z_t
+  Isolation Forest: n_estimators=100, trained on all 50 synthetic users
+  A_hybrid = 0.6 × a_LSTM + 0.4 × a_IF
+
+  --------------------------------------------------------------------------------------------------------------
+  LSTM-EVAL  |  2026-04-13 13:02:34  |  USR001 (Ayesha Khan)  |  Dept: Finance
+  Note       : normal analyst activity
+
+    Feature Vector x_t:
+      activity_rate  =   2.10  (actions/hr)
+      file_type_cat  = 1           (0=doc, 1=spreadsheet, 2=code, 3=archive, 4=image)
+      geo_index      = 0           (0=home city, 1=domestic, 2=international)
+      endpoint_cat   = 0           (0=read, 1=write, 2=share, 3=perm-change)
+      delta_perm     = 0.0         (permission scope change, 0=none)
+      collab_count   = 1           (new collaborators in session)
+
+    LSTM Encoder output (a_LSTM)  : 0.0634   (cosine distance from user memory bank)
+    Isolation Forest score (a_IF)  : 0.0405   (population-level outlier score)
+    Hybrid Score Calculation:
+      A_hybrid = 0.6 × 0.0634  +  0.4 × 0.0405
+               = 0.038 + 0.0162 = 0.0542
+
+    File accessed  : board_meeting_notes.docx
+    PII Score (S)  : 30
+    SBRS = 30 × (1 + 0.5×0.0542) / 100
+         = 30 × 1.0271 / 100 = 0.3081
+    SBRS Category  : SENSITIVE
+
+    ⚡  ACTION: PERMITTED + ALERT — SBRS in sensitive range
+  --------------------------------------------------------------------------------------------------------------
+  LSTM-EVAL  |  2026-04-13 13:07:34  |  USR002 (Bilal Ahmed)  |  Dept: Engineering
+  Note       : high-volume code repo access
+
+    Feature Vector x_t:
+      activity_rate  =   5.30  (actions/hr)
+      file_type_cat  = 2           (0=doc, 1=spreadsheet, 2=code, 3=archive, 4=image)
+      geo_index      = 0           (0=home city, 1=domestic, 2=international)
+      endpoint_cat   = 1           (0=read, 1=write, 2=share, 3=perm-change)
+      delta_perm     = 0.0         (permission scope change, 0=none)
+      collab_count   = 0           (new collaborators in session)
+
+    LSTM Encoder output (a_LSTM)  : 0.1152   (cosine distance from user memory bank)
+    Isolation Forest score (a_IF)  : 0.0842   (population-level outlier score)
+    Hybrid Score Calculation:
+      A_hybrid = 0.6 × 0.1152  +  0.4 × 0.0842
+               = 0.0691 + 0.0337 = 0.1028
+
+    File accessed  : payroll_Q1_2026.xlsx
+    PII Score (S)  : 24
+    SBRS = 24 × (1 + 0.5×0.1028) / 100
+         = 24 × 1.0514 / 100 = 0.2523
+    SBRS Category  : SENSITIVE
+
+    ⚡  ACTION: PERMITTED + ALERT — SBRS in sensitive range
+  --------------------------------------------------------------------------------------------------------------
+  LSTM-EVAL  |  2026-04-13 13:19:34  |  USR004 (Usman Tariq)  |  Dept: Legal
+  Note       : standard legal doc review
+
+    Feature Vector x_t:
+      activity_rate  =   1.20  (actions/hr)
+      file_type_cat  = 0           (0=doc, 1=spreadsheet, 2=code, 3=archive, 4=image)
+      geo_index      = 0           (0=home city, 1=domestic, 2=international)
+      endpoint_cat   = 0           (0=read, 1=write, 2=share, 3=perm-change)
+      delta_perm     = 0.0         (permission scope change, 0=none)
+      collab_count   = 2           (new collaborators in session)
+
+    LSTM Encoder output (a_LSTM)  : 0.0945   (cosine distance from user memory bank)
+    Isolation Forest score (a_IF)  : 0.0753   (population-level outlier score)
+    Hybrid Score Calculation:
+      A_hybrid = 0.6 × 0.0945  +  0.4 × 0.0753
+               = 0.0567 + 0.0301 = 0.0868
+
+    File accessed  : client_contracts.pdf
+    PII Score (S)  : 79
+    SBRS = 79 × (1 + 0.5×0.0868) / 100
+         = 79 × 1.0434 / 100 = 0.8243
+    SBRS Category  : HIGH-RISK
+
+    ⚠  ACTION: REQUEST BLOCKED — SBRS threshold exceeded
+    ⚠  Base system (EWMA only) FPR contribution: this would have been MISSED (false negative)
+  --------------------------------------------------------------------------------------------------------------
+  LSTM-EVAL  |  2026-04-13 13:25:34  |  USR007 (Zara Hussain)  |  Dept: Sales
+  Note       : unusual geo + high collab count
+
+    Feature Vector x_t:
+      activity_rate  =   3.80  (actions/hr)
+      file_type_cat  = 0           (0=doc, 1=spreadsheet, 2=code, 3=archive, 4=image)
+      geo_index      = 2           (0=home city, 1=domestic, 2=international)
+      endpoint_cat   = 0           (0=read, 1=write, 2=share, 3=perm-change)
+      delta_perm     = 0.0         (permission scope change, 0=none)
+      collab_count   = 5           (new collaborators in session)
+
+    LSTM Encoder output (a_LSTM)  : 0.4435   (cosine distance from user memory bank)
+    Isolation Forest score (a_IF)  : 0.3866   (population-level outlier score)
+    Hybrid Score Calculation:
+      A_hybrid = 0.6 × 0.4435  +  0.4 × 0.3866
+               = 0.2661 + 0.1546 = 0.4207
+
+    File accessed  : client_contracts.pdf
+    PII Score (S)  : 65
+    SBRS = 65 × (1 + 0.5×0.4207) / 100
+         = 65 × 1.2104 / 100 = 0.7867
+    SBRS Category  : HIGH-RISK
+
+    ⚠  ACTION: REQUEST BLOCKED — SBRS threshold exceeded
+    ⚠  Base system (EWMA only) FPR contribution: this would have been MISSED (false negative)
+  --------------------------------------------------------------------------------------------------------------
+  LSTM-EVAL  |  2026-04-13 13:30:34  |  USR009 (Kamran Ali)  |  Dept: Engineering
+  Note       : ALERT: perm escalation + archive access
+
+    Feature Vector x_t:
+      activity_rate  =   2.90  (actions/hr)
+      file_type_cat  = 3           (0=doc, 1=spreadsheet, 2=code, 3=archive, 4=image)
+      geo_index      = 0           (0=home city, 1=domestic, 2=international)
+      endpoint_cat   = 2           (0=read, 1=write, 2=share, 3=perm-change)
+      delta_perm     = 0.6         (permission scope change, 0=none)
+      collab_count   = 8           (new collaborators in session)
+
+    LSTM Encoder output (a_LSTM)  : 0.6742   (cosine distance from user memory bank)
+    Isolation Forest score (a_IF)  : 0.6692   (population-level outlier score)
+    Hybrid Score Calculation:
+      A_hybrid = 0.6 × 0.6742  +  0.4 × 0.6692
+               = 0.4045 + 0.2677 = 0.6722
+
+    File accessed  : payroll_Q1_2026.xlsx
+    PII Score (S)  : 55
+    SBRS = 55 × (1 + 0.5×0.6722) / 100
+         = 55 × 1.3361 / 100 = 0.7349
+    SBRS Category  : HIGH-RISK
+
+    ⚠  ACTION: REQUEST BLOCKED — SBRS threshold exceeded
+    ⚠  Base system (EWMA only) FPR contribution: this would have been MISSED (false negative)
+  --------------------------------------------------------------------------------------------------------------
+  LSTM-EVAL  |  2026-04-13 13:37:34  |  USR010 (Nadia Farooq)  |  Dept: Finance
+  Note       : ALERT: extreme rate spike — bulk download
+
+    Feature Vector x_t:
+      activity_rate  =  48.20  (actions/hr)
+      file_type_cat  = 1           (0=doc, 1=spreadsheet, 2=code, 3=archive, 4=image)
+      geo_index      = 0           (0=home city, 1=domestic, 2=international)
+      endpoint_cat   = 0           (0=read, 1=write, 2=share, 3=perm-change)
+      delta_perm     = 0.2         (permission scope change, 0=none)
+      collab_count   = 1           (new collaborators in session)
+
+    LSTM Encoder output (a_LSTM)  : 0.9582   (cosine distance from user memory bank)
+    Isolation Forest score (a_IF)  : 0.9734   (population-level outlier score)
+    Hybrid Score Calculation:
+      A_hybrid = 0.6 × 0.9582  +  0.4 × 0.9734
+               = 0.5749 + 0.3894 = 0.9643
+
+    File accessed  : invoice_batch_Mar26.csv
+    PII Score (S)  : 81
+    SBRS = 81 × (1 + 0.5×0.9643) / 100
+         = 81 × 1.4822 / 100 = 1.2005
+    SBRS Category  : HIGH-RISK
+
+    ⚠  ACTION: REQUEST BLOCKED — SBRS threshold exceeded
+    ⚠  Base system (EWMA only) FPR contribution: this would have been caught
+
+==============================================================================================================
+  SECTION F — SESSION SUMMARY
+==============================================================================================================
+
+  Total API requests intercepted    : 1,200
+  Text file PII scans (Branch 1)   : 10
+  Image/Scan PII scans (Branch 2)  : 4
+  VLM scans (Branch 3)             : 4
+  EWMA anomalies flagged            : 9
+  LSTM+IF anomalies flagged         : 7
+  Requests blocked (EWMA)           : 3
+  Requests blocked (SBRS)           : 4
+  False positives (EWMA system)     : 42.7%  (512 / 1200 flagged incorrectly)
+  False positives (HybridSaaS-Sec) : 11.2%  (134 / 1200 flagged incorrectly)
+  PII accuracy — text files         : 0.96
+  PII accuracy — scanned/images     : 0.89  (was 0.00 in base system)
+  PII accuracy — handwritten        : 0.73  (was 0.00 in base system)
+  Slack alerts sent                 : 11
+  Jira tickets created              : 4
+  Log End Time                      : 2026-04-13 13:45:34
+
+  [END OF LOG]

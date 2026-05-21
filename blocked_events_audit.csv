@@ -1,0 +1,6 @@
+event_id,timestamp,user_id,user_name,dept,file,score,sbrs,reason,platform,jira,duration_min
+BLK-001,2026-04-13 08:45:00,USR001,Ayesha Khan,Finance,payroll_Q1_2026.xlsx,75,0.82,HIGH-RISK PII — credit cards + NIDs,Google Drive,SFS-2038,60
+BLK-002,2026-04-13 09:52:00,USR003,Sara Malik,HR,scanned_passport_copy.jpg,65,0.71,Image PII — NID detected via OCR,OneDrive,SFS-2039,30
+BLK-003,2026-04-13 11:09:00,USR009,Kamran Ali,Engineering,config_secrets.env,62,0.91,HIGH-RISK: password + perm escalation + IF outlier,Google Drive,SFS-2040,120
+BLK-004,2026-04-13 12:38:00,USR010,Nadia Farooq,Finance,BULK (51 files),55,0.95,Bulk download >50 files/5min — EWMA + LSTM spike,Google Drive,SFS-2041,240
+BLK-005,2026-04-13 13:40:00,USR008,Omar Sheikh,Legal,handwritten_ssn_form.jpg,70,0.74,VLM detected NID in handwritten scan,OneDrive,SFS-2042,45

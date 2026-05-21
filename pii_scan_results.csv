@@ -1,0 +1,19 @@
+scan_id,timestamp,user_id,user_name,department,platform,file_name,file_type,branch_used,ocr_confidence,high_entities,medium_entities,low_entities,sensitivity_score,risk_category,base_system_score,base_system_label,processing_ms,action_taken,slack_alert_sent,jira_ticket_created
+PII-0001,2026-04-13 08:05:00,USR004,Usman Tariq,Legal,Microsoft OneDrive,payroll_Q1_2026.xlsx,text_extractable,Branch1_Presidio,N/A,5,20,15,100,HIGH-RISK,100,HIGH-RISK,87.3,BLOCK,True,True
+PII-0002,2026-04-13 08:11:00,USR005,Fatima Noor,Finance,Google Drive,employee_records.docx,text_extractable,Branch1_Presidio,N/A,5,30,32,100,HIGH-RISK,100,HIGH-RISK,145.0,BLOCK,True,True
+PII-0003,2026-04-13 08:17:00,USR005,Fatima Noor,Finance,Google Drive,client_contracts.pdf,text_extractable,Branch1_Presidio,N/A,0,4,0,20,SENSITIVE,20,SENSITIVE,176.9,ALERT,True,False
+PII-0004,2026-04-13 08:29:00,USR005,Fatima Noor,Finance,Google Drive,source_code_v3.py,text_extractable,Branch1_Presidio,N/A,0,0,0,0,SAFE,0,SAFE,136.5,PERMIT,False,False
+PII-0005,2026-04-13 08:40:00,USR002,Bilal Ahmed,Engineering,Google Drive,board_meeting_notes.docx,text_extractable,Branch1_Presidio,N/A,0,0,0,0,SAFE,0,SAFE,128.9,PERMIT,False,False
+PII-0006,2026-04-13 08:51:00,USR008,Omar Sheikh,Legal,Microsoft OneDrive,invoice_batch_Mar26.csv,text_extractable,Branch1_Presidio,N/A,1,5,8,43,SENSITIVE,43,SENSITIVE,100.9,ALERT,True,False
+PII-0007,2026-04-13 08:55:00,USR005,Fatima Noor,Finance,Microsoft OneDrive,nda_template.docx,text_extractable,Branch1_Presidio,N/A,0,0,0,0,SAFE,0,SAFE,73.7,PERMIT,False,False
+PII-0008,2026-04-13 09:00:00,USR007,Zara Hussain,Sales,Microsoft OneDrive,sales_leads_Q1.csv,text_extractable,Branch1_Presidio,N/A,0,3,0,15,SAFE,15,SAFE,68.9,PERMIT,False,False
+PII-0009,2026-04-13 09:14:00,USR001,Ayesha Khan,Finance,Google Drive,config_secrets.env,text_extractable,Branch1_Presidio,N/A,2,0,1,21,SENSITIVE,21,SENSITIVE,77.9,ALERT,True,False
+PII-0010,2026-04-13 09:27:00,USR005,Fatima Noor,Finance,Google Drive,audit_report_2025.pdf,text_extractable,Branch1_Presidio,N/A,4,8,6,86,HIGH-RISK,86,HIGH-RISK,179.3,BLOCK,True,True
+PII-0011,2026-04-13 09:32:00,USR009,Kamran Ali,Engineering,Microsoft OneDrive,scanned_passport_copy.jpg,scanned_pdf,Branch2_OCR+Presidio,0.96,1,0,0,10,SAFE,0,SAFE (blind to image),1594.5,PERMIT,False,False
+PII-0012,2026-04-13 09:52:00,USR010,Nadia Farooq,Finance,Google Drive,whiteboard_creds.png,image,Branch2_OCR+Presidio,0.88,1,0,0,10,SAFE,0,SAFE (blind to image),1984.1,PERMIT,False,False
+PII-0013,2026-04-13 10:06:00,USR008,Omar Sheikh,Legal,Microsoft OneDrive,handwritten_client_form.jpg,handwritten,Branch3_VLM+Presidio,0.61,0,3,0,15,SAFE,0,SAFE (blind to image),883.9,PERMIT,False,False
+PII-0014,2026-04-13 10:23:00,USR007,Zara Hussain,Sales,Microsoft OneDrive,id_card_scan.png,scanned_pdf,Branch2_OCR+Presidio,0.93,1,0,0,10,SAFE,0,SAFE (blind to image),1507.8,PERMIT,False,False
+PII-0015,2026-04-13 10:31:00,USR010,Nadia Farooq,Finance,Google Drive,meeting_photo_budget.jpg,image,Branch3_VLM+Presidio,0.79,1,2,0,20,SENSITIVE,0,SAFE (blind to image),2379.5,ALERT,True,False
+PII-0016,2026-04-13 10:42:00,USR004,Usman Tariq,Legal,Microsoft OneDrive,scanned_contract.pdf,scanned_pdf,Branch2_OCR+Presidio,0.91,0,2,0,10,SAFE,0,SAFE (blind to image),1719.0,PERMIT,False,False
+PII-0017,2026-04-13 10:52:00,USR004,Usman Tariq,Legal,Google Drive,handwritten_ssn_form.jpg,handwritten,Branch3_VLM+Presidio,0.54,2,0,0,20,SENSITIVE,0,SAFE (blind to image),1469.6,ALERT,True,False
+PII-0018,2026-04-13 11:02:00,USR001,Ayesha Khan,Finance,Microsoft OneDrive,screenshot_dashboard.png,image,Branch3_VLM+Presidio,0.83,1,0,1,11,SAFE,0,SAFE (blind to image),1236.2,PERMIT,False,False

@@ -1,0 +1,2132 @@
+{
+  "log_metadata": {
+    "system": "HybridSaaS-Sec v1.0",
+    "run_id": "EVAL-2026-04-13-001",
+    "start_time": "2026-04-13 08:00:00",
+    "end_time": "2026-04-13 13:44:00",
+    "total_events": 38,
+    "saas_platforms": [
+      "Google Drive",
+      "Microsoft OneDrive"
+    ],
+    "users_monitored": 10,
+    "pii_branches": {
+      "Branch1": "Presidio (text)",
+      "Branch2": "OCR+Presidio (scans)",
+      "Branch3": "VLM (handwriting)"
+    },
+    "anomaly_engines": {
+      "base": "EWMA (8 windows, \u03bb=0.3)",
+      "enhanced": "LSTM(128d,2L,24h) + IsolationForest(100)"
+    }
+  },
+  "events": [
+    {
+      "event_id": "EVT-00001",
+      "timestamp": "2026-04-13 08:05:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch1_Presidio",
+      "request": {
+        "user_id": "USR007",
+        "user_name": "Zara Hussain",
+        "department": "Sales",
+        "platform": "Google Drive",
+        "geo_location": "Karachi, PK",
+        "file_name": "payroll_Q1_2026.xlsx",
+        "file_department": "Finance",
+        "file_type": "text_extractable",
+        "api_action": "DOWNLOAD"
+      },
+      "pii_detection": {
+        "engine": "Microsoft Presidio v2.2",
+        "entities_detected": [
+          {
+            "type": "CREDIT_CARD",
+            "count": 2,
+            "sensitivity_tier": "HIGH",
+            "weight": 10,
+            "contribution": 20
+          },
+          {
+            "type": "NID",
+            "count": 3,
+            "sensitivity_tier": "HIGH",
+            "weight": 10,
+            "contribution": 30
+          },
+          {
+            "type": "PHONE",
+            "count": 8,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 40
+          },
+          {
+            "type": "EMAIL",
+            "count": 12,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 60
+          },
+          {
+            "type": "PERSON",
+            "count": 15,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 15
+          }
+        ],
+        "high_count": 5,
+        "medium_count": 20,
+        "low_count": 15,
+        "formula": "min(10\u00d75 + 5\u00d720 + 1\u00d715, 100)",
+        "sensitivity_score": 100,
+        "risk_category": "HIGH-RISK",
+        "processing_ms": 171.1
+      },
+      "enforcement": {
+        "action": "BLOCK",
+        "slack_alert": true,
+        "jira_ticket": true,
+        "reason": "PII sensitivity score 100 \u2192 HIGH-RISK"
+      }
+    },
+    {
+      "event_id": "EVT-00002",
+      "timestamp": "2026-04-13 08:11:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch1_Presidio",
+      "request": {
+        "user_id": "USR007",
+        "user_name": "Zara Hussain",
+        "department": "Sales",
+        "platform": "Google Drive",
+        "geo_location": "Islamabad, PK",
+        "file_name": "employee_records.docx",
+        "file_department": "HR",
+        "file_type": "text_extractable",
+        "api_action": "VIEW"
+      },
+      "pii_detection": {
+        "engine": "Microsoft Presidio v2.2",
+        "entities_detected": [
+          {
+            "type": "NID",
+            "count": 5,
+            "sensitivity_tier": "HIGH",
+            "weight": 10,
+            "contribution": 50
+          },
+          {
+            "type": "PHONE",
+            "count": 10,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 50
+          },
+          {
+            "type": "EMAIL",
+            "count": 20,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 100
+          },
+          {
+            "type": "PERSON",
+            "count": 30,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 30
+          },
+          {
+            "type": "DOB",
+            "count": 2,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 2
+          }
+        ],
+        "high_count": 5,
+        "medium_count": 30,
+        "low_count": 32,
+        "formula": "min(10\u00d75 + 5\u00d730 + 1\u00d732, 100)",
+        "sensitivity_score": 100,
+        "risk_category": "HIGH-RISK",
+        "processing_ms": 81.5
+      },
+      "enforcement": {
+        "action": "BLOCK",
+        "slack_alert": true,
+        "jira_ticket": true,
+        "reason": "PII sensitivity score 100 \u2192 HIGH-RISK"
+      }
+    },
+    {
+      "event_id": "EVT-00003",
+      "timestamp": "2026-04-13 08:25:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch1_Presidio",
+      "request": {
+        "user_id": "USR004",
+        "user_name": "Usman Tariq",
+        "department": "Legal",
+        "platform": "Microsoft OneDrive",
+        "geo_location": "Lahore, PK",
+        "file_name": "client_contracts.pdf",
+        "file_department": "Legal",
+        "file_type": "text_extractable",
+        "api_action": "VIEW"
+      },
+      "pii_detection": {
+        "engine": "Microsoft Presidio v2.2",
+        "entities_detected": [
+          {
+            "type": "PERSON",
+            "count": 0,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 0
+          },
+          {
+            "type": "EMAIL",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 0
+          },
+          {
+            "type": "PHONE",
+            "count": 4,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 20
+          }
+        ],
+        "high_count": 0,
+        "medium_count": 4,
+        "low_count": 0,
+        "formula": "min(10\u00d70 + 5\u00d74 + 1\u00d70, 100)",
+        "sensitivity_score": 20,
+        "risk_category": "SENSITIVE",
+        "processing_ms": 79.1
+      },
+      "enforcement": {
+        "action": "ALERT",
+        "slack_alert": true,
+        "jira_ticket": false,
+        "reason": "PII sensitivity score 20 \u2192 SENSITIVE"
+      }
+    },
+    {
+      "event_id": "EVT-00004",
+      "timestamp": "2026-04-13 08:29:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch1_Presidio",
+      "request": {
+        "user_id": "USR008",
+        "user_name": "Omar Sheikh",
+        "department": "Legal",
+        "platform": "Google Drive",
+        "geo_location": "Lahore, PK",
+        "file_name": "source_code_v3.py",
+        "file_department": "Engineering",
+        "file_type": "text_extractable",
+        "api_action": "VIEW"
+      },
+      "pii_detection": {
+        "engine": "Microsoft Presidio v2.2",
+        "entities_detected": [
+          {
+            "type": "EMAIL",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 0
+          },
+          {
+            "type": "IP_ADDRESS",
+            "count": 0,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 0
+          }
+        ],
+        "high_count": 0,
+        "medium_count": 0,
+        "low_count": 0,
+        "formula": "min(10\u00d70 + 5\u00d70 + 1\u00d70, 100)",
+        "sensitivity_score": 0,
+        "risk_category": "SAFE",
+        "processing_ms": 83.9
+      },
+      "enforcement": {
+        "action": "PERMIT",
+        "slack_alert": false,
+        "jira_ticket": false,
+        "reason": "PII sensitivity score 0 \u2192 SAFE"
+      }
+    },
+    {
+      "event_id": "EVT-00005",
+      "timestamp": "2026-04-13 08:37:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch1_Presidio",
+      "request": {
+        "user_id": "USR004",
+        "user_name": "Usman Tariq",
+        "department": "Legal",
+        "platform": "Google Drive",
+        "geo_location": "Karachi, PK",
+        "file_name": "board_meeting_notes.docx",
+        "file_department": "Executive",
+        "file_type": "text_extractable",
+        "api_action": "VIEW"
+      },
+      "pii_detection": {
+        "engine": "Microsoft Presidio v2.2",
+        "entities_detected": [
+          {
+            "type": "PERSON",
+            "count": 0,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 0
+          },
+          {
+            "type": "EMAIL",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 0
+          }
+        ],
+        "high_count": 0,
+        "medium_count": 0,
+        "low_count": 0,
+        "formula": "min(10\u00d70 + 5\u00d70 + 1\u00d70, 100)",
+        "sensitivity_score": 0,
+        "risk_category": "SAFE",
+        "processing_ms": 62.8
+      },
+      "enforcement": {
+        "action": "PERMIT",
+        "slack_alert": false,
+        "jira_ticket": false,
+        "reason": "PII sensitivity score 0 \u2192 SAFE"
+      }
+    },
+    {
+      "event_id": "EVT-00006",
+      "timestamp": "2026-04-13 08:46:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch1_Presidio",
+      "request": {
+        "user_id": "USR005",
+        "user_name": "Fatima Noor",
+        "department": "Finance",
+        "platform": "Google Drive",
+        "geo_location": "Islamabad, PK",
+        "file_name": "invoice_batch_Mar26.csv",
+        "file_department": "Finance",
+        "file_type": "text_extractable",
+        "api_action": "VIEW"
+      },
+      "pii_detection": {
+        "engine": "Microsoft Presidio v2.2",
+        "entities_detected": [
+          {
+            "type": "CREDIT_CARD",
+            "count": 1,
+            "sensitivity_tier": "HIGH",
+            "weight": 10,
+            "contribution": 10
+          },
+          {
+            "type": "PHONE",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 0
+          },
+          {
+            "type": "EMAIL",
+            "count": 5,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 25
+          },
+          {
+            "type": "PERSON",
+            "count": 8,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 8
+          }
+        ],
+        "high_count": 1,
+        "medium_count": 5,
+        "low_count": 8,
+        "formula": "min(10\u00d71 + 5\u00d75 + 1\u00d78, 100)",
+        "sensitivity_score": 43,
+        "risk_category": "SENSITIVE",
+        "processing_ms": 176.0
+      },
+      "enforcement": {
+        "action": "ALERT",
+        "slack_alert": true,
+        "jira_ticket": false,
+        "reason": "PII sensitivity score 43 \u2192 SENSITIVE"
+      }
+    },
+    {
+      "event_id": "EVT-00007",
+      "timestamp": "2026-04-13 09:00:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch1_Presidio",
+      "request": {
+        "user_id": "USR009",
+        "user_name": "Kamran Ali",
+        "department": "Engineering",
+        "platform": "Microsoft OneDrive",
+        "geo_location": "Lahore, PK",
+        "file_name": "nda_template.docx",
+        "file_department": "Legal",
+        "file_type": "text_extractable",
+        "api_action": "VIEW"
+      },
+      "pii_detection": {
+        "engine": "Microsoft Presidio v2.2",
+        "entities_detected": [
+          {
+            "type": "PERSON",
+            "count": 0,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 0
+          },
+          {
+            "type": "EMAIL",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 0
+          }
+        ],
+        "high_count": 0,
+        "medium_count": 0,
+        "low_count": 0,
+        "formula": "min(10\u00d70 + 5\u00d70 + 1\u00d70, 100)",
+        "sensitivity_score": 0,
+        "risk_category": "SAFE",
+        "processing_ms": 141.5
+      },
+      "enforcement": {
+        "action": "PERMIT",
+        "slack_alert": false,
+        "jira_ticket": false,
+        "reason": "PII sensitivity score 0 \u2192 SAFE"
+      }
+    },
+    {
+      "event_id": "EVT-00008",
+      "timestamp": "2026-04-13 09:04:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch1_Presidio",
+      "request": {
+        "user_id": "USR002",
+        "user_name": "Bilal Ahmed",
+        "department": "Engineering",
+        "platform": "Microsoft OneDrive",
+        "geo_location": "Islamabad, PK",
+        "file_name": "sales_leads_Q1.csv",
+        "file_department": "Sales",
+        "file_type": "text_extractable",
+        "api_action": "DOWNLOAD"
+      },
+      "pii_detection": {
+        "engine": "Microsoft Presidio v2.2",
+        "entities_detected": [
+          {
+            "type": "PERSON",
+            "count": 0,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 0
+          },
+          {
+            "type": "PHONE",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 0
+          },
+          {
+            "type": "EMAIL",
+            "count": 3,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 15
+          }
+        ],
+        "high_count": 0,
+        "medium_count": 3,
+        "low_count": 0,
+        "formula": "min(10\u00d70 + 5\u00d73 + 1\u00d70, 100)",
+        "sensitivity_score": 15,
+        "risk_category": "SAFE",
+        "processing_ms": 81.4
+      },
+      "enforcement": {
+        "action": "PERMIT",
+        "slack_alert": false,
+        "jira_ticket": false,
+        "reason": "PII sensitivity score 15 \u2192 SAFE"
+      }
+    },
+    {
+      "event_id": "EVT-00009",
+      "timestamp": "2026-04-13 09:09:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch1_Presidio",
+      "request": {
+        "user_id": "USR010",
+        "user_name": "Nadia Farooq",
+        "department": "Finance",
+        "platform": "Microsoft OneDrive",
+        "geo_location": "Islamabad, PK",
+        "file_name": "config_secrets.env",
+        "file_department": "Engineering",
+        "file_type": "text_extractable",
+        "api_action": "VIEW"
+      },
+      "pii_detection": {
+        "engine": "Microsoft Presidio v2.2",
+        "entities_detected": [
+          {
+            "type": "PASSWORD",
+            "count": 2,
+            "sensitivity_tier": "HIGH",
+            "weight": 10,
+            "contribution": 20
+          },
+          {
+            "type": "EMAIL",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 0
+          },
+          {
+            "type": "IP_ADDRESS",
+            "count": 1,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 1
+          }
+        ],
+        "high_count": 2,
+        "medium_count": 0,
+        "low_count": 1,
+        "formula": "min(10\u00d72 + 5\u00d70 + 1\u00d71, 100)",
+        "sensitivity_score": 21,
+        "risk_category": "SENSITIVE",
+        "processing_ms": 101.5
+      },
+      "enforcement": {
+        "action": "ALERT",
+        "slack_alert": true,
+        "jira_ticket": false,
+        "reason": "PII sensitivity score 21 \u2192 SENSITIVE"
+      }
+    },
+    {
+      "event_id": "EVT-00010",
+      "timestamp": "2026-04-13 09:22:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch1_Presidio",
+      "request": {
+        "user_id": "USR009",
+        "user_name": "Kamran Ali",
+        "department": "Engineering",
+        "platform": "Google Drive",
+        "geo_location": "Lahore, PK",
+        "file_name": "audit_report_2025.pdf",
+        "file_department": "Finance",
+        "file_type": "text_extractable",
+        "api_action": "DOWNLOAD"
+      },
+      "pii_detection": {
+        "engine": "Microsoft Presidio v2.2",
+        "entities_detected": [
+          {
+            "type": "NID",
+            "count": 3,
+            "sensitivity_tier": "HIGH",
+            "weight": 10,
+            "contribution": 30
+          },
+          {
+            "type": "CREDIT_CARD",
+            "count": 1,
+            "sensitivity_tier": "HIGH",
+            "weight": 10,
+            "contribution": 10
+          },
+          {
+            "type": "PERSON",
+            "count": 6,
+            "sensitivity_tier": "LOW",
+            "weight": 1,
+            "contribution": 6
+          },
+          {
+            "type": "EMAIL",
+            "count": 8,
+            "sensitivity_tier": "MEDIUM",
+            "weight": 5,
+            "contribution": 40
+          }
+        ],
+        "high_count": 4,
+        "medium_count": 8,
+        "low_count": 6,
+        "formula": "min(10\u00d74 + 5\u00d78 + 1\u00d76, 100)",
+        "sensitivity_score": 86,
+        "risk_category": "HIGH-RISK",
+        "processing_ms": 106.2
+      },
+      "enforcement": {
+        "action": "BLOCK",
+        "slack_alert": true,
+        "jira_ticket": true,
+        "reason": "PII sensitivity score 86 \u2192 HIGH-RISK"
+      }
+    },
+    {
+      "event_id": "EVT-00011",
+      "timestamp": "2026-04-13 09:30:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch2_OCR_Presidio",
+      "request": {
+        "user_id": "USR001",
+        "user_name": "Ayesha Khan",
+        "department": "Finance",
+        "platform": "Microsoft OneDrive",
+        "file_name": "scanned_passport_copy.jpg",
+        "file_department": "HR",
+        "file_type": "scanned_pdf"
+      },
+      "pii_detection": {
+        "engine": "PaddleOCR + Microsoft Presidio",
+        "ocr_confidence": 0.96,
+        "branch_selected": 2,
+        "branch_reason": "OCR confidence \u2265 0.85",
+        "entities_detected": [
+          {
+            "type": "NID",
+            "count": 1,
+            "sensitivity_tier": "HIGH"
+          },
+          {
+            "type": "PERSON",
+            "count": 0,
+            "sensitivity_tier": "LOW"
+          },
+          {
+            "type": "DOB",
+            "count": 0,
+            "sensitivity_tier": "LOW"
+          }
+        ],
+        "high_count": 1,
+        "medium_count": 0,
+        "low_count": 0,
+        "sensitivity_score": 10,
+        "risk_category": "SAFE",
+        "base_system_would_score": 0,
+        "base_system_would_label": "SAFE (0 entities \u2014 blind to image content)",
+        "coverage_gain": "Base: 0, HybridSaaS-Sec: 10"
+      },
+      "enforcement": {
+        "action": "PERMIT",
+        "slack_alert": false,
+        "base_system_action": "PERMIT (missed entirely)",
+        "detection_improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00012",
+      "timestamp": "2026-04-13 09:38:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch2_OCR_Presidio",
+      "request": {
+        "user_id": "USR009",
+        "user_name": "Kamran Ali",
+        "department": "Engineering",
+        "platform": "Google Drive",
+        "file_name": "whiteboard_creds.png",
+        "file_department": "Engineering",
+        "file_type": "image"
+      },
+      "pii_detection": {
+        "engine": "PaddleOCR + Microsoft Presidio",
+        "ocr_confidence": 0.88,
+        "branch_selected": 2,
+        "branch_reason": "OCR confidence \u2265 0.85",
+        "entities_detected": [
+          {
+            "type": "PASSWORD",
+            "count": 1,
+            "sensitivity_tier": "HIGH"
+          },
+          {
+            "type": "EMAIL",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM"
+          }
+        ],
+        "high_count": 1,
+        "medium_count": 0,
+        "low_count": 0,
+        "sensitivity_score": 10,
+        "risk_category": "SAFE",
+        "base_system_would_score": 0,
+        "base_system_would_label": "SAFE (0 entities \u2014 blind to image content)",
+        "coverage_gain": "Base: 0, HybridSaaS-Sec: 10"
+      },
+      "enforcement": {
+        "action": "PERMIT",
+        "slack_alert": false,
+        "base_system_action": "PERMIT (missed entirely)",
+        "detection_improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00013",
+      "timestamp": "2026-04-13 09:51:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch3_VLM_PaliGemma",
+      "request": {
+        "user_id": "USR007",
+        "user_name": "Zara Hussain",
+        "department": "Sales",
+        "platform": "Google Drive",
+        "file_name": "handwritten_client_form.jpg",
+        "file_department": "Legal",
+        "file_type": "handwritten"
+      },
+      "pii_detection": {
+        "engine": "PaliGemma-3B VLM + Presidio",
+        "ocr_confidence": 0.61,
+        "branch_selected": 3,
+        "branch_reason": "OCR confidence < 0.85 \u2192 VLM fallback",
+        "entities_detected": [
+          {
+            "type": "PERSON",
+            "count": 0,
+            "sensitivity_tier": "LOW"
+          },
+          {
+            "type": "PHONE",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM"
+          },
+          {
+            "type": "EMAIL",
+            "count": 3,
+            "sensitivity_tier": "MEDIUM"
+          }
+        ],
+        "high_count": 0,
+        "medium_count": 3,
+        "low_count": 0,
+        "sensitivity_score": 15,
+        "risk_category": "SAFE",
+        "base_system_would_score": 0,
+        "base_system_would_label": "SAFE (0 entities \u2014 blind to image content)",
+        "coverage_gain": "Base: 0, HybridSaaS-Sec: 15"
+      },
+      "enforcement": {
+        "action": "PERMIT",
+        "slack_alert": false,
+        "base_system_action": "PERMIT (missed entirely)",
+        "detection_improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00014",
+      "timestamp": "2026-04-13 10:09:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch2_OCR_Presidio",
+      "request": {
+        "user_id": "USR006",
+        "user_name": "Ahmed Raza",
+        "department": "Engineering",
+        "platform": "Microsoft OneDrive",
+        "file_name": "id_card_scan.png",
+        "file_department": "HR",
+        "file_type": "scanned_pdf"
+      },
+      "pii_detection": {
+        "engine": "PaddleOCR + Microsoft Presidio",
+        "ocr_confidence": 0.93,
+        "branch_selected": 2,
+        "branch_reason": "OCR confidence \u2265 0.85",
+        "entities_detected": [
+          {
+            "type": "NID",
+            "count": 1,
+            "sensitivity_tier": "HIGH"
+          },
+          {
+            "type": "PERSON",
+            "count": 0,
+            "sensitivity_tier": "LOW"
+          }
+        ],
+        "high_count": 1,
+        "medium_count": 0,
+        "low_count": 0,
+        "sensitivity_score": 10,
+        "risk_category": "SAFE",
+        "base_system_would_score": 0,
+        "base_system_would_label": "SAFE (0 entities \u2014 blind to image content)",
+        "coverage_gain": "Base: 0, HybridSaaS-Sec: 10"
+      },
+      "enforcement": {
+        "action": "PERMIT",
+        "slack_alert": false,
+        "base_system_action": "PERMIT (missed entirely)",
+        "detection_improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00015",
+      "timestamp": "2026-04-13 10:27:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch3_VLM_PaliGemma",
+      "request": {
+        "user_id": "USR002",
+        "user_name": "Bilal Ahmed",
+        "department": "Engineering",
+        "platform": "Microsoft OneDrive",
+        "file_name": "meeting_photo_budget.jpg",
+        "file_department": "Finance",
+        "file_type": "image"
+      },
+      "pii_detection": {
+        "engine": "PaliGemma-3B VLM + Presidio",
+        "ocr_confidence": 0.79,
+        "branch_selected": 3,
+        "branch_reason": "OCR confidence < 0.85 \u2192 VLM fallback",
+        "entities_detected": [
+          {
+            "type": "CREDIT_CARD",
+            "count": 1,
+            "sensitivity_tier": "HIGH"
+          },
+          {
+            "type": "PERSON",
+            "count": 0,
+            "sensitivity_tier": "LOW"
+          },
+          {
+            "type": "PHONE",
+            "count": 2,
+            "sensitivity_tier": "MEDIUM"
+          }
+        ],
+        "high_count": 1,
+        "medium_count": 2,
+        "low_count": 0,
+        "sensitivity_score": 20,
+        "risk_category": "SENSITIVE",
+        "base_system_would_score": 0,
+        "base_system_would_label": "SAFE (0 entities \u2014 blind to image content)",
+        "coverage_gain": "Base: 0, HybridSaaS-Sec: 20"
+      },
+      "enforcement": {
+        "action": "ALERT",
+        "slack_alert": true,
+        "base_system_action": "PERMIT (missed entirely)",
+        "detection_improvement": true
+      }
+    },
+    {
+      "event_id": "EVT-00016",
+      "timestamp": "2026-04-13 10:43:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch2_OCR_Presidio",
+      "request": {
+        "user_id": "USR005",
+        "user_name": "Fatima Noor",
+        "department": "Finance",
+        "platform": "Microsoft OneDrive",
+        "file_name": "scanned_contract.pdf",
+        "file_department": "Legal",
+        "file_type": "scanned_pdf"
+      },
+      "pii_detection": {
+        "engine": "PaddleOCR + Microsoft Presidio",
+        "ocr_confidence": 0.91,
+        "branch_selected": 2,
+        "branch_reason": "OCR confidence \u2265 0.85",
+        "entities_detected": [
+          {
+            "type": "PERSON",
+            "count": 0,
+            "sensitivity_tier": "LOW"
+          },
+          {
+            "type": "EMAIL",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM"
+          },
+          {
+            "type": "PHONE",
+            "count": 2,
+            "sensitivity_tier": "MEDIUM"
+          }
+        ],
+        "high_count": 0,
+        "medium_count": 2,
+        "low_count": 0,
+        "sensitivity_score": 10,
+        "risk_category": "SAFE",
+        "base_system_would_score": 0,
+        "base_system_would_label": "SAFE (0 entities \u2014 blind to image content)",
+        "coverage_gain": "Base: 0, HybridSaaS-Sec: 10"
+      },
+      "enforcement": {
+        "action": "PERMIT",
+        "slack_alert": false,
+        "base_system_action": "PERMIT (missed entirely)",
+        "detection_improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00017",
+      "timestamp": "2026-04-13 10:56:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch3_VLM_PaliGemma",
+      "request": {
+        "user_id": "USR007",
+        "user_name": "Zara Hussain",
+        "department": "Sales",
+        "platform": "Microsoft OneDrive",
+        "file_name": "handwritten_ssn_form.jpg",
+        "file_department": "HR",
+        "file_type": "handwritten"
+      },
+      "pii_detection": {
+        "engine": "PaliGemma-3B VLM + Presidio",
+        "ocr_confidence": 0.54,
+        "branch_selected": 3,
+        "branch_reason": "OCR confidence < 0.85 \u2192 VLM fallback",
+        "entities_detected": [
+          {
+            "type": "NID",
+            "count": 2,
+            "sensitivity_tier": "HIGH"
+          },
+          {
+            "type": "PERSON",
+            "count": 0,
+            "sensitivity_tier": "LOW"
+          },
+          {
+            "type": "DOB",
+            "count": 0,
+            "sensitivity_tier": "LOW"
+          }
+        ],
+        "high_count": 2,
+        "medium_count": 0,
+        "low_count": 0,
+        "sensitivity_score": 20,
+        "risk_category": "SENSITIVE",
+        "base_system_would_score": 0,
+        "base_system_would_label": "SAFE (0 entities \u2014 blind to image content)",
+        "coverage_gain": "Base: 0, HybridSaaS-Sec: 20"
+      },
+      "enforcement": {
+        "action": "ALERT",
+        "slack_alert": true,
+        "base_system_action": "PERMIT (missed entirely)",
+        "detection_improvement": true
+      }
+    },
+    {
+      "event_id": "EVT-00018",
+      "timestamp": "2026-04-13 11:12:00",
+      "event_type": "PII_SCAN",
+      "module": "Branch3_VLM_PaliGemma",
+      "request": {
+        "user_id": "USR003",
+        "user_name": "Sara Malik",
+        "department": "HR",
+        "platform": "Google Drive",
+        "file_name": "screenshot_dashboard.png",
+        "file_department": "Finance",
+        "file_type": "image"
+      },
+      "pii_detection": {
+        "engine": "PaliGemma-3B VLM + Presidio",
+        "ocr_confidence": 0.83,
+        "branch_selected": 3,
+        "branch_reason": "OCR confidence < 0.85 \u2192 VLM fallback",
+        "entities_detected": [
+          {
+            "type": "CREDIT_CARD",
+            "count": 1,
+            "sensitivity_tier": "HIGH"
+          },
+          {
+            "type": "EMAIL",
+            "count": 0,
+            "sensitivity_tier": "MEDIUM"
+          },
+          {
+            "type": "IP_ADDRESS",
+            "count": 1,
+            "sensitivity_tier": "LOW"
+          }
+        ],
+        "high_count": 1,
+        "medium_count": 0,
+        "low_count": 1,
+        "sensitivity_score": 11,
+        "risk_category": "SAFE",
+        "base_system_would_score": 0,
+        "base_system_would_label": "SAFE (0 entities \u2014 blind to image content)",
+        "coverage_gain": "Base: 0, HybridSaaS-Sec: 11"
+      },
+      "enforcement": {
+        "action": "PERMIT",
+        "slack_alert": false,
+        "base_system_action": "PERMIT (missed entirely)",
+        "detection_improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00019",
+      "timestamp": "2026-04-13 11:26:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR007",
+        "user_name": "Zara Hussain",
+        "department": "Sales",
+        "platform": "Microsoft OneDrive",
+        "file_name": "audit_report_2025.pdf",
+        "time_gap_seconds": 376,
+        "activity_rate_per_hour": 9.574
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 3.721,
+        "formula": "0.3 \u00d7 9.574 + 0.7 \u00d7 3.721",
+        "new_ewma": 5.4769,
+        "deviation": 1.5725,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 9.574,
+          "file_type_cat": 3,
+          "geo_index": 0,
+          "endpoint_cat": 3,
+          "delta_perm": 0.0,
+          "collab_count": 3
+        },
+        "lstm_score": 0.1731,
+        "isolation_forest_score": 0.0542,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.1731 + 0.4 \u00d7 0.0542",
+        "hybrid_score": 0.1255,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 60,
+        "behavioral_anomaly_score": 0.1255,
+        "beta": 0.5,
+        "formula": "60 \u00d7 (1 + 0.5 \u00d7 0.1255) / 100",
+        "sbrs_value": 0.6377,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00020",
+      "timestamp": "2026-04-13 11:32:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR009",
+        "user_name": "Kamran Ali",
+        "department": "Engineering",
+        "platform": "Microsoft OneDrive",
+        "file_name": "employee_records.docx",
+        "time_gap_seconds": 989,
+        "activity_rate_per_hour": 3.64
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 6.416,
+        "formula": "0.3 \u00d7 3.64 + 0.7 \u00d7 6.416",
+        "new_ewma": 5.5832,
+        "deviation": 0.4326,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 3.64,
+          "file_type_cat": 2,
+          "geo_index": 0,
+          "endpoint_cat": 0,
+          "delta_perm": 0.82,
+          "collab_count": 8
+        },
+        "lstm_score": 0.8735,
+        "isolation_forest_score": 0.8368,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.8735 + 0.4 \u00d7 0.8368",
+        "hybrid_score": 0.8588,
+        "anomaly_flagged": true
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 89,
+        "behavioral_anomaly_score": 0.8588,
+        "beta": 0.5,
+        "formula": "89 \u00d7 (1 + 0.5 \u00d7 0.8588) / 100",
+        "sbrs_value": 1.2722,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": true
+      }
+    },
+    {
+      "event_id": "EVT-00021",
+      "timestamp": "2026-04-13 11:39:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR004",
+        "user_name": "Usman Tariq",
+        "department": "Legal",
+        "platform": "Google Drive",
+        "file_name": "nda_template.docx",
+        "time_gap_seconds": 427,
+        "activity_rate_per_hour": 8.431
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 6.611,
+        "formula": "0.3 \u00d7 8.431 + 0.7 \u00d7 6.611",
+        "new_ewma": 7.157,
+        "deviation": 0.2753,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 8.431,
+          "file_type_cat": 3,
+          "geo_index": 0,
+          "endpoint_cat": 3,
+          "delta_perm": 0.0,
+          "collab_count": 3
+        },
+        "lstm_score": 0.1097,
+        "isolation_forest_score": 0.0572,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.1097 + 0.4 \u00d7 0.0572",
+        "hybrid_score": 0.0887,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 63,
+        "behavioral_anomaly_score": 0.0887,
+        "beta": 0.5,
+        "formula": "63 \u00d7 (1 + 0.5 \u00d7 0.0887) / 100",
+        "sbrs_value": 0.6579,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00022",
+      "timestamp": "2026-04-13 11:45:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR003",
+        "user_name": "Sara Malik",
+        "department": "HR",
+        "platform": "Microsoft OneDrive",
+        "file_name": "config_secrets.env",
+        "time_gap_seconds": 31,
+        "activity_rate_per_hour": 116.129
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 3.313,
+        "formula": "0.3 \u00d7 116.129 + 0.7 \u00d7 3.313",
+        "new_ewma": 37.1578,
+        "deviation": 34.0422,
+        "threshold": 2.0,
+        "anomaly_flagged": true
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 116.129,
+          "file_type_cat": 0,
+          "geo_index": 0,
+          "endpoint_cat": 1,
+          "delta_perm": 0.0,
+          "collab_count": 0
+        },
+        "lstm_score": 0.2583,
+        "isolation_forest_score": 0.2172,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.2583 + 0.4 \u00d7 0.2172",
+        "hybrid_score": 0.2419,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 94,
+        "behavioral_anomaly_score": 0.2419,
+        "beta": 0.5,
+        "formula": "94 \u00d7 (1 + 0.5 \u00d7 0.2419) / 100",
+        "sbrs_value": 1.0537,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "BLOCK",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "BLOCK",
+        "improvement": true
+      }
+    },
+    {
+      "event_id": "EVT-00023",
+      "timestamp": "2026-04-13 11:55:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR003",
+        "user_name": "Sara Malik",
+        "department": "HR",
+        "platform": "Microsoft OneDrive",
+        "file_name": "config_secrets.env",
+        "time_gap_seconds": 971,
+        "activity_rate_per_hour": 3.708
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 7.349,
+        "formula": "0.3 \u00d7 3.708 + 0.7 \u00d7 7.349",
+        "new_ewma": 6.2567,
+        "deviation": 0.4954,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 3.708,
+          "file_type_cat": 3,
+          "geo_index": 0,
+          "endpoint_cat": 1,
+          "delta_perm": 0.0,
+          "collab_count": 3
+        },
+        "lstm_score": 0.1878,
+        "isolation_forest_score": 0.2538,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.1878 + 0.4 \u00d7 0.2538",
+        "hybrid_score": 0.2142,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 83,
+        "behavioral_anomaly_score": 0.2142,
+        "beta": 0.5,
+        "formula": "83 \u00d7 (1 + 0.5 \u00d7 0.2142) / 100",
+        "sbrs_value": 0.9189,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00024",
+      "timestamp": "2026-04-13 12:05:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR005",
+        "user_name": "Fatima Noor",
+        "department": "Finance",
+        "platform": "Microsoft OneDrive",
+        "file_name": "employee_records.docx",
+        "time_gap_seconds": 526,
+        "activity_rate_per_hour": 6.844
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 3.435,
+        "formula": "0.3 \u00d7 6.844 + 0.7 \u00d7 3.435",
+        "new_ewma": 4.4577,
+        "deviation": 0.9921,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 6.844,
+          "file_type_cat": 1,
+          "geo_index": 0,
+          "endpoint_cat": 2,
+          "delta_perm": 0.0,
+          "collab_count": 2
+        },
+        "lstm_score": 0.2386,
+        "isolation_forest_score": 0.0887,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.2386 + 0.4 \u00d7 0.0887",
+        "hybrid_score": 0.1786,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 61,
+        "behavioral_anomaly_score": 0.1786,
+        "beta": 0.5,
+        "formula": "61 \u00d7 (1 + 0.5 \u00d7 0.1786) / 100",
+        "sbrs_value": 0.6645,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00025",
+      "timestamp": "2026-04-13 12:13:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR009",
+        "user_name": "Kamran Ali",
+        "department": "Engineering",
+        "platform": "Google Drive",
+        "file_name": "source_code_v3.py",
+        "time_gap_seconds": 185,
+        "activity_rate_per_hour": 19.459
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 6.164,
+        "formula": "0.3 \u00d7 19.459 + 0.7 \u00d7 6.164",
+        "new_ewma": 10.1525,
+        "deviation": 2.1565,
+        "threshold": 2.0,
+        "anomaly_flagged": true
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 19.459,
+          "file_type_cat": 3,
+          "geo_index": 2,
+          "endpoint_cat": 3,
+          "delta_perm": 0.33,
+          "collab_count": 12
+        },
+        "lstm_score": 0.8211,
+        "isolation_forest_score": 0.7785,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.8211 + 0.4 \u00d7 0.7785",
+        "hybrid_score": 0.8041,
+        "anomaly_flagged": true
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 95,
+        "behavioral_anomaly_score": 0.8041,
+        "beta": 0.5,
+        "formula": "95 \u00d7 (1 + 0.5 \u00d7 0.8041) / 100",
+        "sbrs_value": 1.3319,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "BLOCK",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "BLOCK",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00026",
+      "timestamp": "2026-04-13 12:22:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR001",
+        "user_name": "Ayesha Khan",
+        "department": "Finance",
+        "platform": "Microsoft OneDrive",
+        "file_name": "nda_template.docx",
+        "time_gap_seconds": 443,
+        "activity_rate_per_hour": 8.126
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 2.117,
+        "formula": "0.3 \u00d7 8.126 + 0.7 \u00d7 2.117",
+        "new_ewma": 3.9197,
+        "deviation": 2.8371,
+        "threshold": 2.0,
+        "anomaly_flagged": true
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 8.126,
+          "file_type_cat": 0,
+          "geo_index": 0,
+          "endpoint_cat": 2,
+          "delta_perm": 0.0,
+          "collab_count": 2
+        },
+        "lstm_score": 0.2365,
+        "isolation_forest_score": 0.1458,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.2365 + 0.4 \u00d7 0.1458",
+        "hybrid_score": 0.2002,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 78,
+        "behavioral_anomaly_score": 0.2002,
+        "beta": 0.5,
+        "formula": "78 \u00d7 (1 + 0.5 \u00d7 0.2002) / 100",
+        "sbrs_value": 0.8581,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "BLOCK",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "BLOCK",
+        "improvement": true
+      }
+    },
+    {
+      "event_id": "EVT-00027",
+      "timestamp": "2026-04-13 12:31:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR007",
+        "user_name": "Zara Hussain",
+        "department": "Sales",
+        "platform": "Google Drive",
+        "file_name": "sales_leads_Q1.csv",
+        "time_gap_seconds": 1122,
+        "activity_rate_per_hour": 3.209
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 3.317,
+        "formula": "0.3 \u00d7 3.209 + 0.7 \u00d7 3.317",
+        "new_ewma": 3.2846,
+        "deviation": 0.0325,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 3.209,
+          "file_type_cat": 3,
+          "geo_index": 0,
+          "endpoint_cat": 2,
+          "delta_perm": 0.0,
+          "collab_count": 3
+        },
+        "lstm_score": 0.2052,
+        "isolation_forest_score": 0.1159,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.2052 + 0.4 \u00d7 0.1159",
+        "hybrid_score": 0.1695,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 60,
+        "behavioral_anomaly_score": 0.1695,
+        "beta": 0.5,
+        "formula": "60 \u00d7 (1 + 0.5 \u00d7 0.1695) / 100",
+        "sbrs_value": 0.6509,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00028",
+      "timestamp": "2026-04-13 12:36:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR008",
+        "user_name": "Omar Sheikh",
+        "department": "Legal",
+        "platform": "Google Drive",
+        "file_name": "nda_template.docx",
+        "time_gap_seconds": 281,
+        "activity_rate_per_hour": 12.811
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 5.978,
+        "formula": "0.3 \u00d7 12.811 + 0.7 \u00d7 5.978",
+        "new_ewma": 8.0279,
+        "deviation": 1.1428,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 12.811,
+          "file_type_cat": 3,
+          "geo_index": 0,
+          "endpoint_cat": 1,
+          "delta_perm": 0.0,
+          "collab_count": 0
+        },
+        "lstm_score": 0.2785,
+        "isolation_forest_score": 0.1435,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.2785 + 0.4 \u00d7 0.1435",
+        "hybrid_score": 0.2245,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 15,
+        "behavioral_anomaly_score": 0.2245,
+        "beta": 0.5,
+        "formula": "15 \u00d7 (1 + 0.5 \u00d7 0.2245) / 100",
+        "sbrs_value": 0.1668,
+        "risk_category": "SAFE"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "PERMIT",
+        "final_action": "PERMIT",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00029",
+      "timestamp": "2026-04-13 12:43:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR007",
+        "user_name": "Zara Hussain",
+        "department": "Sales",
+        "platform": "Google Drive",
+        "file_name": "board_meeting_notes.docx",
+        "time_gap_seconds": 690,
+        "activity_rate_per_hour": 5.217
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 6.512,
+        "formula": "0.3 \u00d7 5.217 + 0.7 \u00d7 6.512",
+        "new_ewma": 6.1235,
+        "deviation": 0.1988,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 5.217,
+          "file_type_cat": 3,
+          "geo_index": 0,
+          "endpoint_cat": 0,
+          "delta_perm": 0.0,
+          "collab_count": 0
+        },
+        "lstm_score": 0.1053,
+        "isolation_forest_score": 0.0892,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.1053 + 0.4 \u00d7 0.0892",
+        "hybrid_score": 0.0989,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 58,
+        "behavioral_anomaly_score": 0.0989,
+        "beta": 0.5,
+        "formula": "58 \u00d7 (1 + 0.5 \u00d7 0.0989) / 100",
+        "sbrs_value": 0.6087,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00030",
+      "timestamp": "2026-04-13 12:51:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR004",
+        "user_name": "Usman Tariq",
+        "department": "Legal",
+        "platform": "Google Drive",
+        "file_name": "audit_report_2025.pdf",
+        "time_gap_seconds": 160,
+        "activity_rate_per_hour": 22.5
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 3.196,
+        "formula": "0.3 \u00d7 22.5 + 0.7 \u00d7 3.196",
+        "new_ewma": 8.9872,
+        "deviation": 6.0382,
+        "threshold": 2.0,
+        "anomaly_flagged": true
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 22.5,
+          "file_type_cat": 1,
+          "geo_index": 0,
+          "endpoint_cat": 1,
+          "delta_perm": 0.0,
+          "collab_count": 3
+        },
+        "lstm_score": 0.2244,
+        "isolation_forest_score": 0.1933,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.2244 + 0.4 \u00d7 0.1933",
+        "hybrid_score": 0.212,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 7,
+        "behavioral_anomaly_score": 0.212,
+        "beta": 0.5,
+        "formula": "7 \u00d7 (1 + 0.5 \u00d7 0.212) / 100",
+        "sbrs_value": 0.0774,
+        "risk_category": "SAFE"
+      },
+      "enforcement": {
+        "ewma_action": "BLOCK",
+        "sbrs_action": "PERMIT",
+        "final_action": "PERMIT",
+        "base_system_would": "BLOCK",
+        "improvement": true
+      }
+    },
+    {
+      "event_id": "EVT-00031",
+      "timestamp": "2026-04-13 12:55:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR010",
+        "user_name": "Nadia Farooq",
+        "department": "Finance",
+        "platform": "Google Drive",
+        "file_name": "audit_report_2025.pdf",
+        "time_gap_seconds": 466,
+        "activity_rate_per_hour": 7.725
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 4.213,
+        "formula": "0.3 \u00d7 7.725 + 0.7 \u00d7 4.213",
+        "new_ewma": 5.2666,
+        "deviation": 0.8334,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 7.725,
+          "file_type_cat": 1,
+          "geo_index": 2,
+          "endpoint_cat": 2,
+          "delta_perm": 0.11,
+          "collab_count": 5
+        },
+        "lstm_score": 0.8472,
+        "isolation_forest_score": 0.7805,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.8472 + 0.4 \u00d7 0.7805",
+        "hybrid_score": 0.8205,
+        "anomaly_flagged": true
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 82,
+        "behavioral_anomaly_score": 0.8205,
+        "beta": 0.5,
+        "formula": "82 \u00d7 (1 + 0.5 \u00d7 0.8205) / 100",
+        "sbrs_value": 1.1564,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": true
+      }
+    },
+    {
+      "event_id": "EVT-00032",
+      "timestamp": "2026-04-13 13:02:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR010",
+        "user_name": "Nadia Farooq",
+        "department": "Finance",
+        "platform": "Google Drive",
+        "file_name": "source_code_v3.py",
+        "time_gap_seconds": 788,
+        "activity_rate_per_hour": 4.569
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 2.456,
+        "formula": "0.3 \u00d7 4.569 + 0.7 \u00d7 2.456",
+        "new_ewma": 3.0899,
+        "deviation": 0.86,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 4.569,
+          "file_type_cat": 2,
+          "geo_index": 0,
+          "endpoint_cat": 0,
+          "delta_perm": 0.8,
+          "collab_count": 14
+        },
+        "lstm_score": 0.8417,
+        "isolation_forest_score": 0.8172,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.8417 + 0.4 \u00d7 0.8172",
+        "hybrid_score": 0.8319,
+        "anomaly_flagged": true
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 93,
+        "behavioral_anomaly_score": 0.8319,
+        "beta": 0.5,
+        "formula": "93 \u00d7 (1 + 0.5 \u00d7 0.8319) / 100",
+        "sbrs_value": 1.3168,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": true
+      }
+    },
+    {
+      "event_id": "EVT-00033",
+      "timestamp": "2026-04-13 13:05:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR006",
+        "user_name": "Ahmed Raza",
+        "department": "Engineering",
+        "platform": "Microsoft OneDrive",
+        "file_name": "employee_records.docx",
+        "time_gap_seconds": 1111,
+        "activity_rate_per_hour": 3.24
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 7.097,
+        "formula": "0.3 \u00d7 3.24 + 0.7 \u00d7 7.097",
+        "new_ewma": 5.9399,
+        "deviation": 0.5434,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 3.24,
+          "file_type_cat": 2,
+          "geo_index": 0,
+          "endpoint_cat": 3,
+          "delta_perm": 0.0,
+          "collab_count": 1
+        },
+        "lstm_score": 0.1304,
+        "isolation_forest_score": 0.094,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.1304 + 0.4 \u00d7 0.094",
+        "hybrid_score": 0.1158,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 67,
+        "behavioral_anomaly_score": 0.1158,
+        "beta": 0.5,
+        "formula": "67 \u00d7 (1 + 0.5 \u00d7 0.1158) / 100",
+        "sbrs_value": 0.7088,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00034",
+      "timestamp": "2026-04-13 13:14:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR003",
+        "user_name": "Sara Malik",
+        "department": "HR",
+        "platform": "Microsoft OneDrive",
+        "file_name": "audit_report_2025.pdf",
+        "time_gap_seconds": 1088,
+        "activity_rate_per_hour": 3.309
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 4.901,
+        "formula": "0.3 \u00d7 3.309 + 0.7 \u00d7 4.901",
+        "new_ewma": 4.4234,
+        "deviation": 0.3248,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 3.309,
+          "file_type_cat": 2,
+          "geo_index": 0,
+          "endpoint_cat": 1,
+          "delta_perm": 0.0,
+          "collab_count": 0
+        },
+        "lstm_score": 0.2674,
+        "isolation_forest_score": 0.0917,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.2674 + 0.4 \u00d7 0.0917",
+        "hybrid_score": 0.1971,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 60,
+        "behavioral_anomaly_score": 0.1971,
+        "beta": 0.5,
+        "formula": "60 \u00d7 (1 + 0.5 \u00d7 0.1971) / 100",
+        "sbrs_value": 0.6591,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00035",
+      "timestamp": "2026-04-13 13:21:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR008",
+        "user_name": "Omar Sheikh",
+        "department": "Legal",
+        "platform": "Microsoft OneDrive",
+        "file_name": "client_contracts.pdf",
+        "time_gap_seconds": 519,
+        "activity_rate_per_hour": 6.936
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 4.966,
+        "formula": "0.3 \u00d7 6.936 + 0.7 \u00d7 4.966",
+        "new_ewma": 5.557,
+        "deviation": 0.3966,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 6.936,
+          "file_type_cat": 1,
+          "geo_index": 0,
+          "endpoint_cat": 2,
+          "delta_perm": 0.0,
+          "collab_count": 2
+        },
+        "lstm_score": 0.2111,
+        "isolation_forest_score": 0.1295,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.2111 + 0.4 \u00d7 0.1295",
+        "hybrid_score": 0.1785,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 46,
+        "behavioral_anomaly_score": 0.1785,
+        "beta": 0.5,
+        "formula": "46 \u00d7 (1 + 0.5 \u00d7 0.1785) / 100",
+        "sbrs_value": 0.5011,
+        "risk_category": "SENSITIVE"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "ALERT",
+        "final_action": "ALERT",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00036",
+      "timestamp": "2026-04-13 13:29:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR005",
+        "user_name": "Fatima Noor",
+        "department": "Finance",
+        "platform": "Microsoft OneDrive",
+        "file_name": "source_code_v3.py",
+        "time_gap_seconds": 585,
+        "activity_rate_per_hour": 6.154
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 4.439,
+        "formula": "0.3 \u00d7 6.154 + 0.7 \u00d7 4.439",
+        "new_ewma": 4.9535,
+        "deviation": 0.3863,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 6.154,
+          "file_type_cat": 3,
+          "geo_index": 0,
+          "endpoint_cat": 3,
+          "delta_perm": 0.0,
+          "collab_count": 0
+        },
+        "lstm_score": 0.132,
+        "isolation_forest_score": 0.1123,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.132 + 0.4 \u00d7 0.1123",
+        "hybrid_score": 0.1241,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 76,
+        "behavioral_anomaly_score": 0.1241,
+        "beta": 0.5,
+        "formula": "76 \u00d7 (1 + 0.5 \u00d7 0.1241) / 100",
+        "sbrs_value": 0.8072,
+        "risk_category": "HIGH-RISK"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "BLOCK",
+        "final_action": "BLOCK",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00037",
+      "timestamp": "2026-04-13 13:33:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR005",
+        "user_name": "Fatima Noor",
+        "department": "Finance",
+        "platform": "Microsoft OneDrive",
+        "file_name": "nda_template.docx",
+        "time_gap_seconds": 473,
+        "activity_rate_per_hour": 7.611
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 5.321,
+        "formula": "0.3 \u00d7 7.611 + 0.7 \u00d7 5.321",
+        "new_ewma": 6.008,
+        "deviation": 0.4303,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 7.611,
+          "file_type_cat": 2,
+          "geo_index": 0,
+          "endpoint_cat": 3,
+          "delta_perm": 0.0,
+          "collab_count": 2
+        },
+        "lstm_score": 0.138,
+        "isolation_forest_score": 0.0733,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.138 + 0.4 \u00d7 0.0733",
+        "hybrid_score": 0.1121,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 49,
+        "behavioral_anomaly_score": 0.1121,
+        "beta": 0.5,
+        "formula": "49 \u00d7 (1 + 0.5 \u00d7 0.1121) / 100",
+        "sbrs_value": 0.5175,
+        "risk_category": "SENSITIVE"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "ALERT",
+        "final_action": "ALERT",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    },
+    {
+      "event_id": "EVT-00038",
+      "timestamp": "2026-04-13 13:40:00",
+      "event_type": "ANOMALY_DETECTION",
+      "module": "HybridSaaS_AnomalyEngine",
+      "request": {
+        "user_id": "USR005",
+        "user_name": "Fatima Noor",
+        "department": "Finance",
+        "platform": "Google Drive",
+        "file_name": "source_code_v3.py",
+        "time_gap_seconds": 492,
+        "activity_rate_per_hour": 7.317
+      },
+      "ewma_analysis": {
+        "window": "1h",
+        "lambda": 0.3,
+        "previous_ewma": 6.573,
+        "formula": "0.3 \u00d7 7.317 + 0.7 \u00d7 6.573",
+        "new_ewma": 6.7962,
+        "deviation": 0.1132,
+        "threshold": 2.0,
+        "anomaly_flagged": false
+      },
+      "lstm_if_analysis": {
+        "feature_vector": {
+          "activity_rate": 7.317,
+          "file_type_cat": 3,
+          "geo_index": 0,
+          "endpoint_cat": 2,
+          "delta_perm": 0.0,
+          "collab_count": 2
+        },
+        "lstm_score": 0.0349,
+        "isolation_forest_score": 0.0775,
+        "alpha": 0.6,
+        "formula": "0.6 \u00d7 0.0349 + 0.4 \u00d7 0.0775",
+        "hybrid_score": 0.0519,
+        "anomaly_flagged": false
+      },
+      "sbrs": {
+        "pii_sensitivity_score": 28,
+        "behavioral_anomaly_score": 0.0519,
+        "beta": 0.5,
+        "formula": "28 \u00d7 (1 + 0.5 \u00d7 0.0519) / 100",
+        "sbrs_value": 0.2873,
+        "risk_category": "SENSITIVE"
+      },
+      "enforcement": {
+        "ewma_action": "PERMIT",
+        "sbrs_action": "ALERT",
+        "final_action": "ALERT",
+        "base_system_would": "PERMIT",
+        "improvement": false
+      }
+    }
+  ]
+}
