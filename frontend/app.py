@@ -76,6 +76,13 @@ st.set_page_config(
 st.markdown(
     """
 <style>
+  /* ---------- Hide Streamlit's top-right toolbar / Deploy button ------ */
+  [data-testid="stToolbar"],
+  [data-testid="stDecoration"],
+  .stDeployButton,
+  #MainMenu { display: none !important; visibility: hidden !important; }
+  header { background: transparent !important; }
+
   /* ---------- Page background gradient -------------------------------- */
   [data-testid="stAppViewContainer"] {
     background: radial-gradient(circle at 20% 0%, #1b2735 0%, #0b1320 55%, #06090f 100%);
@@ -1086,6 +1093,337 @@ Drive at 2 a.m. from an unusual city.
         """
     )
 
+    # ------------------------------------------------------------------
+    # Threat model + privacy properties
+    # ------------------------------------------------------------------
+    st.subheader("Threat model")
+    st.markdown(
+        """
+HybridSaaS-Sec is designed for the *insider-and-misconfiguration* threat
+class that dominates real-world SaaS breaches:
+
+- **Malicious insider** \u2014 an employee with legitimate credentials trying
+  to exfiltrate sensitive data through `DOWNLOAD`, `SHARE`, or `UPLOAD`
+  API calls.
+- **Compromised account** \u2014 a credential stuffed or phished session
+  acting from an unusual geolocation / device fingerprint.
+  *(Signal: large `geo_index` and `permission_scope_delta` features.)*
+- **Misconfiguration** \u2014 a bulk-share or public-link API call exposing
+  documents that contain regulated PII.
+  *(Signal: spike in `collab_network_density` while file `S` is high.)*
+- **Shadow IT** \u2014 employees moving regulated data into SaaS apps that
+  the security team has no visibility into; the MITM proxy logs the
+  destination platform for every intercepted call.
+
+It is **not** designed to stop nation-state network attackers or to defend
+the SaaS provider itself \u2014 those are upstream of the proxy.
+        """
+    )
+
+    st.subheader("Privacy properties (what the proxy never keeps)")
+    st.markdown(
+        """
+A security gateway that decrypts traffic is itself a juicy target. The
+paper hardens this with four guarantees:
+
+1. **Forward secrecy.** Each TLS session uses an ephemeral
+   Elliptic-Curve Diffie-Hellman (ECDHE) key. Even if a long-term private
+   key leaks tomorrow, yesterday's intercepted sessions remain unreadable.
+2. **Selective interception (SNI-based).** The proxy only opens connections
+   to allow-listed SaaS hostnames. Traffic to personal banking, healthcare,
+   etc. passes through untouched.
+3. **In-memory scanning only.** File payloads are scanned in RAM and
+   discarded once `S` is computed. The disk artefacts only ever contain
+   *aggregated metadata* (entity counts, scores, timestamps).
+4. **Differential redaction in logs.** Audit logs store entity *types and
+   counts* (e.g. `CREDIT_CARD x 3`) but never the actual values.
+        """
+    )
+
+    # ------------------------------------------------------------------
+    # Detailed module walk-through
+    # ------------------------------------------------------------------
+    st.subheader("A. MITM Proxy \u2014 in detail")
+    st.markdown(
+        """
+The proxy implements a classic *split-TLS* design:
+
+```
+   Client                Proxy                          SaaS provider
+     |  ClientHello (SNI)   |                                |
+     | -------------------> |  ClientHello (re-issued)       |
+     |                      | -----------------------------> |
+     |                      |        ServerHello, cert       |
+     |                      | <----------------------------- |
+     |   ServerHello with   |                                |
+     |   proxy-issued cert  |                                |
+     | <------------------- |                                |
+     |                                                       |
+     | ===== encrypted payload (decrypted briefly here) ==== |
+```
+
+Key design choices:
+
+- **Throughput:** event-driven I/O (uvloop / nginx-style) gives ~12k
+  intercepted req/s on a single 8-core node in the paper's benchmark.
+- **Failure-open vs failure-closed:** by default the proxy *fails open*
+  on its own internal errors but *fails closed* on enforcement decisions
+  \u2014 i.e. if SBRS \u2265 0.60 cannot be evaluated, the request is blocked.
+- **Side-channel quietness:** the proxy adds < 8 ms median latency to
+  intercepted calls so users don't notice it.
+        """
+    )
+
+    st.subheader("B. Multimodal PII Pipeline \u2014 in detail")
+    st.markdown(
+        """
+A single text-based scanner (Presidio alone) misses everything in image
+form. HybridSaaS-Sec routes each intercepted file through a **decision
+tree** based on its type and OCR confidence:
+        """
+    )
+    st.markdown(
+        """
+```
+                file blob
+                    |
+        is text-extractable?
+                    |
+           yes-----/ \\-----no
+           |               |
+   Branch 1: Presidio   run PaddleOCR
+           |               |
+           |       OCR confidence >= 0.85 ?
+           |               |
+           |       yes-----/ \\-----no
+           |       |               |
+           |   Branch 2:        Branch 3:
+           |   OCR -> Presidio  PaliGemma-3B VLM
+           |       |               |
+           +-------+---------------+
+                    |
+               entity list
+                    |
+        bucket into H / M / L tiers
+                    |
+         S = min(10H + 5M + 1L, 100)
+```
+        """
+    )
+    tier_df = pd.DataFrame({
+        "Tier":   ["High (H)",   "Medium (M)",   "Low (L)"],
+        "Weight": [10, 5, 1],
+        "Examples": [
+            "CREDIT_CARD, NATIONAL_ID, IBAN, API_SECRET, MEDICAL_RECORD",
+            "EMAIL_ADDRESS, PHONE_NUMBER, IP_ADDRESS, DATE_OF_BIRTH",
+            "PERSON_NAME, ORG_NAME, LOCATION",
+        ],
+    })
+    st.dataframe(tier_df, hide_index=True, use_container_width=True)
+    st.caption(
+        "The weights are deliberately exponential-ish so that one credit-card "
+        "contributes ten times more than one person-name; the `min(., 100)` cap "
+        "prevents large documents from saturating the score."
+    )
+
+    st.subheader("C. Hybrid Anomaly Engine \u2014 in detail")
+    st.markdown(
+        """
+#### The 6-dimensional feature vector
+
+Every intercepted event is reduced to a single normalised vector
+`x_t \u2208 [0, 1]^6` before any model touches it:
+        """
+    )
+    feat_df = pd.DataFrame({
+        "Feature": [
+            "activity_rate", "file_type_category", "geo_index",
+            "endpoint_operation", "permission_scope_delta",
+            "collab_network_density",
+        ],
+        "What it captures": [
+            "Requests / minute for this user, normalised against their personal max.",
+            "One-hot bucket of file type (text / image / scanned / handwriting / binary).",
+            "Cosine distance between current geo-IP and the user's prior 30-day centroid.",
+            "Privilege weight of the API verb (READ < SHARE < DELETE < ADMIN).",
+            "Change in the user's effective permission set since the last call.",
+            "Out-degree of the user in the 24h collaboration graph (who they shared with).",
+        ],
+    })
+    st.dataframe(feat_df, hide_index=True, use_container_width=True)
+
+    st.markdown(
+        """
+#### LSTM branch (temporal anomaly)
+
+For each user the model keeps the last **24h of activity** as a sequence
+of feature vectors. An **LSTM with hidden size 128** is trained on the
+user's own history; at inference time the cosine similarity between the
+LSTM's predicted next vector and the actual observed vector is mapped to
+`a_LSTM \u2208 [0, 1]` (1 = maximally surprising).
+
+This is what catches **drift** \u2014 "this user has never downloaded
+payroll data at 2 a.m. before".
+
+#### Isolation Forest branch (structural anomaly)
+
+A 100-tree Isolation Forest is trained on **the whole organisation's**
+activity, not per-user. The shorter the average isolation path of the
+current point, the higher `a_IF`.
+
+This is what catches **outliers** \u2014 "no one in this company has ever
+shared this many files at once".
+
+#### Why fuse them?
+
+LSTM alone is blind to behaviours that are normal for *one* user but
+abnormal for the *organisation*. Isolation Forest alone is blind to
+personal drift. The hybrid score `A_hybrid` keeps both:
+        """
+    )
+    st.latex(r"A_{\text{hybrid}} = \alpha \cdot a_{\text{LSTM}} + (1-\alpha)\, a_{\text{IF}},\quad \alpha\in[0,1]")
+
+    st.subheader("D. SBRS \u2014 in detail")
+    st.markdown(
+        """
+The Semantic-Behavioral Risk Score is intentionally **multiplicative in S**
+and **additive in the anomaly amplifier `(1 + \u03b2 A_hybrid)`**:
+        """
+    )
+    st.latex(r"\text{SBRS} = \frac{S \,\bigl(1 + \beta\, A_{\text{hybrid}}\bigr)}{100}")
+    st.markdown(
+        """
+This shape has three useful properties:
+
+1. **Benign data is never blocked.** If `S = 0` then `SBRS = 0` regardless
+   of how anomalous the behaviour looks \u2014 critical for keeping the
+   false-positive rate low (the paper measures 11.2% versus EWMA's 42.7%).
+2. **Sensitive data + normal behaviour escalates softly.** With `A = 0`,
+   `SBRS = S/100` \u2014 a `0.40` ALERT for a moderately sensitive file is
+   a reasonable default.
+3. **\u03b2 is the only enterprise knob you have to tune.** A risk-averse
+   bank can run with `\u03b2 = 1.0` (anomalies double the SBRS at most);
+   a developer-tooling SaaS can run with `\u03b2 = 0.25`.
+
+Enforcement bands calibrated from `anomaly_detection_comparison.csv`:
+        """
+    )
+    band_df = pd.DataFrame({
+        "SBRS range": ["< 0.20", "0.20 \u2013 0.60", "\u2265 0.60"],
+        "Category":  ["SAFE", "SENSITIVE", "HIGH-RISK"],
+        "Action":    ["PERMIT", "ALERT (log + notify)", "BLOCK (auto-ticket)"],
+    })
+    st.dataframe(band_df, hide_index=True, use_container_width=True)
+
+    # ------------------------------------------------------------------
+    # Latency budget
+    # ------------------------------------------------------------------
+    st.subheader("End-to-end latency budget")
+    st.markdown(
+        "The paper's Section V.C reports a **median total latency of "
+        "~95 ms** added by HybridSaaS-Sec on top of the underlying SaaS "
+        "API call. The contribution per stage:"
+    )
+    lat_df = pd.DataFrame({
+        "Stage": [
+            "MITM TLS termination & re-encrypt",
+            "Branch 1 (Presidio, text)",
+            "Branch 2 (PaddleOCR + Presidio)",
+            "Branch 3 (PaliGemma VLM, INT8)",
+            "LSTM forward pass (h=128)",
+            "Isolation Forest scoring",
+            "SBRS arithmetic + decision",
+        ],
+        "Median (ms)":  [6, 18, 110, 380, 12, 3, 0.4],
+        "P99 (ms)":     [12, 35, 180, 620, 22, 6, 0.8],
+    })
+    fig_lat = px.bar(
+        lat_df, x="Median (ms)", y="Stage", orientation="h",
+        color="Median (ms)", color_continuous_scale="Blues",
+        title="Median latency contribution per stage",
+    )
+    fig_lat.update_layout(
+        height=320, paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#ecf0f1"),
+        coloraxis_showscale=False,
+        margin=dict(l=10, r=10, t=40, b=10),
+    )
+    lat_n = _zoom_reset_button("docs_latency")
+    st.plotly_chart(
+        fig_lat, use_container_width=True, config=PLOTLY_CONFIG,
+        key=f"docs_latency_{lat_n}",
+    )
+    st.dataframe(lat_df, hide_index=True, use_container_width=True)
+    st.caption(
+        "Branches 2 and 3 are only invoked when needed (image / handwriting), "
+        "so the *expected* per-call latency is closer to the Branch-1 path."
+    )
+
+    # ------------------------------------------------------------------
+    # Comparison vs commercial alternatives
+    # ------------------------------------------------------------------
+    st.subheader("How does it compare to commercial DLP tools?")
+    cmp_df = pd.DataFrame({
+        "Capability": [
+            "Inspects encrypted SaaS API traffic in-line",
+            "OCR + handwriting recognition",
+            "Vision-Language Model semantic understanding",
+            "Per-user temporal behavioural baseline (LSTM)",
+            "Org-wide structural outlier detection (Isolation Forest)",
+            "Single unified risk score (SBRS)",
+            "Open formulation / paper-reproducible",
+        ],
+        "Legacy network DLP": ["\u2713", "partial", "\u2717", "\u2717", "\u2717", "\u2717", "\u2717"],
+        "Cloud-native CASB":  ["\u2713", "partial", "\u2717", "partial", "partial", "\u2717", "\u2717"],
+        "HybridSaaS-Sec":     ["\u2713", "\u2713",  "\u2713", "\u2713", "\u2713", "\u2713", "\u2713"],
+    })
+    st.dataframe(cmp_df, hide_index=True, use_container_width=True)
+
+    # ------------------------------------------------------------------
+    # FAQ
+    # ------------------------------------------------------------------
+    st.subheader("FAQ")
+    with st.expander("Why a *Man-in-the-Middle*? Isn't that exactly what attackers do?"):
+        st.markdown(
+            "Yes \u2014 the *technique* is the same; the *trust model* is opposite. "
+            "The enterprise installs its own root certificate on managed devices, "
+            "so the proxy is part of the trusted computing base. Attackers without "
+            "that root cannot mount the same interception."
+        )
+    with st.expander("Could the LSTM be replaced with a transformer?"):
+        st.markdown(
+            "In principle yes. The paper sticks with LSTM(h=128) because the "
+            "per-user sequences are short (24h) and the inference budget is tight "
+            "(12 ms median). A transformer would add ~30 ms with little recall gain "
+            "in the authors' ablation."
+        )
+    with st.expander("What stops the proxy from logging the actual PII?"):
+        st.markdown(
+            "Two things: (a) the pipeline by construction passes only entity *types* "
+            "and *counts* to the logger, never the values; (b) the deployment "
+            "manifest enforces a read-only filesystem on the scanner pods so even "
+            "a code bug cannot persist the raw text."
+        )
+    with st.expander("How does HybridSaaS-Sec scale to thousands of users?"):
+        st.markdown(
+            "The proxy is stateless and horizontally scalable behind a layer-4 "
+            "load balancer. Per-user LSTM weights live in a Redis-backed feature "
+            "store (one row per user, ~2 KB), keyed by `user_id`. Isolation Forest "
+            "is re-trained nightly on the rolling 30-day window."
+        )
+    with st.expander("What are the limitations?"):
+        st.markdown(
+            "- Branch 3 (VLM) is expensive (380 ms median); large-scale enterprises "
+            "may need a cheaper distilled model.  \n"
+            "- The OCR threshold \u03c4 = 0.85 was tuned on English text; non-Latin "
+            "scripts may need lower \u03c4 to avoid over-routing to Branch 3.  \n"
+            "- The simulation reproduces aggregated metrics, not a packet-level "
+            "trace; real-world deployment will show variance on the LSTM warm-up "
+            "period for new users."
+        )
+
+    # ------------------------------------------------------------------
     st.subheader("Further reading")
     st.markdown(
         """

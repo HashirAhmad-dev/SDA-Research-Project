@@ -1,0 +1,20 @@
+[server]
+headless = true
+enableCORS = false
+enableXsrfProtection = true
+
+[browser]
+gatherUsageStats = false
+
+[client]
+# "minimal" removes the Deploy button + several developer affordances.
+toolbarMode = "minimal"
+showErrorDetails = false
+
+[theme]
+base = "dark"
+primaryColor = "#3498db"
+backgroundColor = "#0b1320"
+secondaryBackgroundColor = "#162033"
+textColor = "#ecf0f1"
+font = "sans serif"
