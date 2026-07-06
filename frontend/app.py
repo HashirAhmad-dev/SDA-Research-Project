@@ -88,6 +88,12 @@ st.markdown(
     background: radial-gradient(circle at 20% 0%, #1b2735 0%, #0b1320 55%, #06090f 100%);
   }
   [data-testid="stHeader"] { background: transparent; }
+  [data-testid="collapsedControl"],
+  [data-testid="stSidebarCollapsedControl"] {
+    display: flex !important;
+    visibility: visible !important;
+    z-index: 999999 !important;
+  }
   [data-testid="stSidebar"] {
     background: linear-gradient(180deg, rgba(20,28,40,0.95), rgba(10,16,24,0.95));
     border-right: 1px solid rgba(255,255,255,0.05);
