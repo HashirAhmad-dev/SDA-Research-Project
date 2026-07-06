@@ -90,9 +90,13 @@ st.markdown(
   [data-testid="stHeader"] { background: transparent; }
   [data-testid="collapsedControl"],
   [data-testid="stSidebarCollapsedControl"] {
-    display: flex !important;
-    visibility: visible !important;
     z-index: 999999 !important;
+    pointer-events: auto !important;
+    color: #ecf0f1 !important;
+  }
+  [data-testid="collapsedControl"]:hover,
+  [data-testid="stSidebarCollapsedControl"]:hover {
+    color: #3498db !important;
   }
   [data-testid="stSidebar"] {
     background: linear-gradient(180deg, rgba(20,28,40,0.95), rgba(10,16,24,0.95));
