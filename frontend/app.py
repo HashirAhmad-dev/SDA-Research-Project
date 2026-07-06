@@ -87,7 +87,10 @@ st.markdown(
   [data-testid="stAppViewContainer"] {
     background: radial-gradient(circle at 20% 0%, #1b2735 0%, #0b1320 55%, #06090f 100%);
   }
-  [data-testid="stHeader"] { background: transparent; }
+  [data-testid="stHeader"] { 
+    background: transparent; 
+    transform: none !important;
+  }
   [data-testid="collapsedControl"],
   [data-testid="stSidebarCollapsedControl"] {
     z-index: 999999 !important;
