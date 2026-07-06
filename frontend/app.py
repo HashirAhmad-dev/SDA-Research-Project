@@ -77,7 +77,6 @@ st.markdown(
     """
 <style>
   /* ---------- Hide Streamlit's top-right toolbar / Deploy button ------ */
-  [data-testid="stToolbar"],
   [data-testid="stDecoration"],
   .stDeployButton,
   #MainMenu { display: none !important; visibility: hidden !important; }
@@ -91,15 +90,30 @@ st.markdown(
     background: transparent; 
     transform: none !important;
   }
+  /* ---------- Force the sidebar toggle to be fully visible and clickable ---------- */
   [data-testid="collapsedControl"],
   [data-testid="stSidebarCollapsedControl"] {
-    z-index: 999999 !important;
+    display: flex !important;
+    visibility: visible !important;
+    position: fixed !important;
+    top: 15px !important;
+    left: 15px !important;
+    z-index: 2147483647 !important;
     pointer-events: auto !important;
-    color: #ecf0f1 !important;
+    background-color: rgba(30, 40, 50, 0.8) !important;
+    border-radius: 6px !important;
+    padding: 6px !important;
+  }
+  [data-testid="collapsedControl"] svg,
+  [data-testid="stSidebarCollapsedControl"] svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    width: 24px !important;
+    height: 24px !important;
   }
   [data-testid="collapsedControl"]:hover,
   [data-testid="stSidebarCollapsedControl"]:hover {
-    color: #3498db !important;
+    background-color: #3498db !important;
   }
   [data-testid="stSidebar"] {
     background: linear-gradient(180deg, rgba(20,28,40,0.95), rgba(10,16,24,0.95));
