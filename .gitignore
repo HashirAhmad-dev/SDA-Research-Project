@@ -1,0 +1,19 @@
+# Secrets - HF_TOKEN for the Branch 3 VLM call lives here. Never commit.
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Generated evaluation artefacts (rebuild with the scripts in evaluation/)
+evaluation/artifacts/
+evaluation/pii_testset/
+evaluation/data/*.csv
+evaluation/data/vlm_cache/
+# Per-model PII CSV variants; the canonical pii_scan_results_v2_real.csv is kept.
+pii_scan_results_v2_*-*.csv

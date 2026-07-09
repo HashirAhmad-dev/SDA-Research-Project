@@ -30,6 +30,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from backend.anomaly_engine import DEFAULT_ALPHA, evaluate as eval_anomaly  # noqa: E402
 from backend.data_loader import load_all  # noqa: E402
+from backend.measured_metrics import load_measured_metrics  # noqa: E402
 from backend.pii_pipeline import scan_event as pii_scan_event  # noqa: E402
 from backend.risk_orchestrator import (DEFAULT_BETA, _event_summary,  # noqa: E402
                                        compute_sbrs, score_event)
@@ -265,7 +266,8 @@ def _dataset():
 
 
 DATASET = _dataset()
-METRICS = PaperMetrics()
+METRICS = PaperMetrics()          # what the paper claims (unverified)
+MEASURED = load_measured_metrics()  # what this repo actually measured; None if unbuilt
 
 
 # ---------------------------------------------------------------------------
@@ -284,8 +286,9 @@ with st.sidebar:
     )
     beta = st.slider(
         "beta (enterprise risk multiplier)",
-        min_value=0.0, max_value=2.0, value=DEFAULT_BETA, step=0.05,
-        help="SBRS = S * (1 + beta * A_hybrid) / 100"
+        min_value=0.0, max_value=5.0, value=DEFAULT_BETA, step=0.05,
+        help="SBRS = S * (1 + beta * A_hybrid) / 100  "
+             "(recalibrated default 2.5; see evaluation/SBRS_RECALIBRATION.md)"
     )
 
     st.divider()
@@ -345,16 +348,58 @@ analytics into modular pipelines:
         """
     )
 
-    st.subheader("Headline empirical results (Section V)")
-    c1, c2, c3, c4 = st.columns(4)
-    c1.metric("EWMA FPR (legacy)", f"{METRICS.ewma_fpr*100:.1f} %")
-    c2.metric("Hybrid FPR", f"{METRICS.hybrid_fpr*100:.1f} %",
-              delta=f"-{(METRICS.ewma_fpr-METRICS.hybrid_fpr)*100:.1f} pp")
-    c3.metric("SBRS F1-score", f"{METRICS.sbrs_f1:.2f}")
-    c4.metric("Overall PII coverage", f"{METRICS.pii_coverage_overall:.2f}",
-              delta=f"+{(METRICS.pii_coverage_overall-0.71):.2f}")
+    st.subheader("Headline results - measured on the held-out test split")
+    if MEASURED is None:
+        st.warning(
+            "No measured metrics yet. Run `python -m evaluation.generate_sessions` "
+            "then `python -m evaluation.train_and_evaluate`. The paper's claimed "
+            "numbers below are unverified and are known not to reproduce."
+        )
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("EWMA FPR", "not measured")
+        c2.metric("Hybrid FPR", "not measured")
+        c3.metric("Hybrid F1", "not measured")
+        c4.metric("Latency / call", "not measured")
+    else:
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("EWMA FPR (legacy engine)", f"{MEASURED.ewma_fpr*100:.2f} %",
+                  help=f"Paper claims {METRICS.ewma_fpr*100:.1f} %")
+        c2.metric("Hybrid FPR", f"{MEASURED.hybrid_fpr*100:.2f} %",
+                  delta=f"-{(MEASURED.ewma_fpr-MEASURED.hybrid_fpr)*100:.2f} pp",
+                  help=f"Paper claims {METRICS.hybrid_fpr*100:.1f} %")
+        c3.metric("Hybrid F1 (anomaly flag)", f"{MEASURED.hybrid_f1:.3f}",
+                  help=f"Paper claims F1 {METRICS.sbrs_f1:.2f} for enforcement. "
+                       f"Measured enforcement-band F1 is only "
+                       f"{MEASURED.enforcement_f1_alert_or_block:.3f}.")
+        c4.metric("Latency / scoring call", f"{MEASURED.latency_mean_ms:.1f} ms",
+                  help=MEASURED.latency_scope)
 
-    st.subheader("PII coverage by file type (Table I)")
+        st.caption(
+            f"n = {MEASURED.test_sessions:,} held-out sessions "
+            f"({MEASURED.test_positives} true threats, {MEASURED.users} users). "
+            f"alpha = {MEASURED.alpha:.2f}, tau = {MEASURED.tau_hybrid:.2f}, "
+            f"both tuned on validation."
+        )
+        st.error(
+            f"**The paper's behavioural numbers do not reproduce.** Claimed: EWMA "
+            f"FPR {METRICS.ewma_fpr*100:.1f}% -> hybrid {METRICS.hybrid_fpr*100:.1f}%, "
+            f"F1 {METRICS.sbrs_f1:.2f}. Measured: EWMA FPR "
+            f"{MEASURED.ewma_fpr*100:.2f}% -> hybrid {MEASURED.hybrid_fpr*100:.2f}%, "
+            f"enforcement F1 {MEASURED.enforcement_f1_alert_or_block:.3f}. The engine "
+            f"also misses slow malicious insiders (episode recall "
+            f"{MEASURED.malicious_insider_episode_recall:.3f}). It *does* suppress the "
+            f"benign-burst false positive: "
+            f"{MEASURED.benign_burst_ewma_flag_rate*100:.1f}% of benign bursts flagged "
+            f"by EWMA vs {MEASURED.benign_burst_hybrid_flag_rate*100:.1f}% by the "
+            f"hybrid. See `evaluation/REAL_RESULTS.md`."
+        )
+
+    st.subheader("PII coverage by file type (Table I) - claimed, NOT measured")
+    st.caption(
+        "Unlike the behavioural numbers above, these were not reproduced. The PII "
+        "pipeline replays stored outcomes from `hybridSaaS_events.json`; no OCR or "
+        "VLM is executed, so this repo cannot measure coverage. Paper's claims only."
+    )
     cov = pd.DataFrame({
         "File type": [
             "Text-extractable (DOCX/TXT/PDF)",

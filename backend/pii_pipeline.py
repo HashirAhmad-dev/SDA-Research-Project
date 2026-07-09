@@ -62,6 +62,37 @@ def compute_sensitivity(high: int, medium: int, low: int) -> int:
     ))
 
 
+def _normalise_entity(raw: Dict[str, Any]) -> PIIEntity:
+    """Build a PIIEntity, deriving `weight`/`contribution` when absent.
+
+    `hybridSaaS_events.json` stores entities in two shapes. Branch 1 records
+    carry the full {type, count, sensitivity_tier, weight, contribution};
+    the Branch 2/3 records carry only {type, count, sensitivity_tier} and left
+    `PIIEntity(**e)` raising ValidationError on 8 of the 38 events -- which took
+    `/score/{event_id}` and the dashboard's scoring view down with it.
+
+    Both fields are fully determined by the paper's weighted entity model, so we
+    derive rather than relax the schema:
+
+        weight       = ENTITY_WEIGHTS[sensitivity_tier]
+        contribution = weight * count
+
+    Verified against every long-form entity in the log (e.g. NID x3 @ HIGH -> 30,
+    PHONE x8 @ MEDIUM -> 40); see `_selftest_entity_derivation` below.
+    """
+    tier = str(raw.get("sensitivity_tier", "LOW")).upper()
+    count = int(raw.get("count", 0))
+    weight = int(raw.get("weight", ENTITY_WEIGHTS.get(tier, 1)))
+    contribution = int(raw.get("contribution", weight * count))
+    return PIIEntity(
+        type=str(raw.get("type", "UNKNOWN")),
+        count=count,
+        sensitivity_tier=tier,
+        weight=weight,
+        contribution=contribution,
+    )
+
+
 def scan_event(event: Dict[str, Any]) -> PIIResult:
     """Run the (simulated) multimodal PII pipeline against a single event.
 
@@ -72,7 +103,7 @@ def scan_event(event: Dict[str, Any]) -> PIIResult:
     pii = event.get("pii_detection") or {}
     request = event.get("request") or {}
 
-    entities = [PIIEntity(**e) for e in pii.get("entities_detected", [])]
+    entities = [_normalise_entity(e) for e in pii.get("entities_detected", [])]
     high = int(pii.get("high_count", 0))
     medium = int(pii.get("medium_count", 0))
     low = int(pii.get("low_count", 0))
@@ -121,3 +152,38 @@ def scan_by_event_id(dataset: HybridSaaSDataset, event_id: str) -> PIIResult:
     if ev is None:
         raise KeyError(f"Unknown event_id '{event_id}'")
     return scan_event(ev)
+
+
+def _selftest_entity_derivation(dataset: HybridSaaSDataset) -> Dict[str, int]:
+    """Prove `_normalise_entity` reproduces every entity that ships full fields.
+
+    Guards the derivation used for the short-form Branch 2/3 records: for each
+    long-form entity in the log, recompute weight/contribution from tier+count
+    and assert they match what the log states.
+    """
+    checked = derived = 0
+    for ev in dataset.events:
+        for raw in (ev.get("pii_detection") or {}).get("entities_detected", []):
+            if "weight" not in raw or "contribution" not in raw:
+                derived += 1
+                continue
+            stripped = {k: v for k, v in raw.items()
+                        if k not in ("weight", "contribution")}
+            got, want = _normalise_entity(stripped), _normalise_entity(raw)
+            if (got.weight, got.contribution) != (want.weight, want.contribution):
+                raise AssertionError(
+                    f"{ev['event_id']} {raw['type']}: derived "
+                    f"({got.weight}, {got.contribution}) != "
+                    f"logged ({want.weight}, {want.contribution})"
+                )
+            checked += 1
+    return {"verified_against_logged": checked, "derived_short_form": derived}
+
+
+if __name__ == "__main__":  # pragma: no cover
+    from .data_loader import load_all
+
+    ds = load_all()
+    print("entity derivation self-test:", _selftest_entity_derivation(ds))
+    ok = sum(1 for eid in ds.event_ids() if scan_by_event_id(ds, eid))
+    print(f"scan_event() succeeded on {ok}/{len(ds.events)} events")

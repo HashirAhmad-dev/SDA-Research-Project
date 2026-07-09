@@ -1,0 +1,1008 @@
+{
+ "corpus": {
+  "documents": 120,
+  "by_category": {
+   "text_extractable": 40,
+   "scanned": 40,
+   "handwritten": 40
+  },
+  "gold_entities": 368,
+  "pii_free_docs": 19
+ },
+ "matching": {
+  "primary": "type must match exactly; value normalised (lowercase, accents stripped, non-alphanumeric removed) then compared with SequenceMatcher ratio >= 0.85",
+  "secondary": "exact_match = normalised values must be identical"
+ },
+ "ocr": {
+  "engine": "EasyOCR (PaddleOCR unavailable: no paddlepaddle wheel)",
+  "confidence": "char-weighted mean of per-box confidences",
+  "mean_confidence_by_category": {
+   "scanned": 0.8435465185722479,
+   "handwritten": 0.8197449849443613
+  },
+  "pristine_render_confidence_note": 0.804
+ },
+ "vlm": {
+  "model": "Qwen/Qwen2.5-VL-72B-Instruct:ovhcloud",
+  "endpoint": "https://router.huggingface.co/v1",
+  "substitution_note": "paper specifies PaliGemma-3B INT8 on-box. Qwen2.5-VL-3B/7B/32B are not served by any HF Inference Provider; gemma-3-4b-it is the closest routable size to the paper's 3B, and Qwen2.5-VL-72B is run as a same-family upper bound.",
+  "cost": {
+   "model": "Qwen/Qwen2.5-VL-72B-Instruct:ovhcloud",
+   "pricing_per_1m_tokens": {
+    "provider": "ovhcloud",
+    "input_per_m": 1.01,
+    "output_per_m": 1.01
+   },
+   "calls_billed_this_run": 0,
+   "calls_served_from_cache": 80,
+   "billed_prompt_tokens": 0,
+   "billed_completion_tokens": 0,
+   "actual_cost_usd_this_run": 0.0,
+   "note": "cost covers only the calls actually billed this run; cache hits (incl. any migrated from earlier sessions) are free. USD assumes router 'pricing' fields are $/1M tokens."
+  },
+  "statuses": {
+   "ok+cached": 80
+  },
+  "provider_capped": false,
+  "cap_reason": null,
+  "images_in_corpus": 80,
+  "completed_including_cache": 80,
+  "not_attempted_due_to_cap": 0,
+  "coverage_by_category": {
+   "scanned": {
+    "images": 40,
+    "vlm_scored": 40
+   },
+   "handwritten": {
+    "images": 40,
+    "vlm_scored": 40
+   }
+  }
+ },
+ "tau_calibration": {
+  "calib_docs": 20,
+  "eval_docs": 100,
+  "best_tau_on_calib": 0.98,
+  "calib_f1": 1.0,
+  "sweep": [
+   {
+    "tau": 0.5,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.51,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.52,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.53,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.54,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.55,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.56,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.57,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.58,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.59,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.6,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.61,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.62,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.63,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.64,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.65,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.66,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.67,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.68,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.69,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.7,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.71,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.72,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.73,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.74,
+    "f1": 0.746031746031746
+   },
+   {
+    "tau": 0.75,
+    "f1": 0.7559055118110236
+   },
+   {
+    "tau": 0.76,
+    "f1": 0.7656250000000001
+   },
+   {
+    "tau": 0.77,
+    "f1": 0.7656250000000001
+   },
+   {
+    "tau": 0.78,
+    "f1": 0.7874015748031497
+   },
+   {
+    "tau": 0.79,
+    "f1": 0.7874015748031497
+   },
+   {
+    "tau": 0.8,
+    "f1": 0.7874015748031497
+   },
+   {
+    "tau": 0.81,
+    "f1": 0.7874015748031497
+   },
+   {
+    "tau": 0.82,
+    "f1": 0.7874015748031497
+   },
+   {
+    "tau": 0.83,
+    "f1": 0.8031496062992125
+   },
+   {
+    "tau": 0.84,
+    "f1": 0.8031496062992125
+   },
+   {
+    "tau": 0.85,
+    "f1": 0.8702290076335878
+   },
+   {
+    "tau": 0.86,
+    "f1": 0.8702290076335878
+   },
+   {
+    "tau": 0.87,
+    "f1": 0.8702290076335878
+   },
+   {
+    "tau": 0.88,
+    "f1": 0.9022556390977443
+   },
+   {
+    "tau": 0.89,
+    "f1": 0.9022556390977443
+   },
+   {
+    "tau": 0.9,
+    "f1": 0.9545454545454546
+   },
+   {
+    "tau": 0.91,
+    "f1": 0.9545454545454546
+   },
+   {
+    "tau": 0.92,
+    "f1": 0.9848484848484849
+   },
+   {
+    "tau": 0.93,
+    "f1": 0.9848484848484849
+   },
+   {
+    "tau": 0.94,
+    "f1": 0.9848484848484849
+   },
+   {
+    "tau": 0.95,
+    "f1": 0.9848484848484849
+   },
+   {
+    "tau": 0.96,
+    "f1": 0.9848484848484849
+   },
+   {
+    "tau": 0.97,
+    "f1": 0.9848484848484849
+   },
+   {
+    "tau": 0.98,
+    "f1": 1.0
+   },
+   {
+    "tau": 0.99,
+    "f1": 1.0
+   },
+   {
+    "tau": 1.0,
+    "f1": 1.0
+   }
+  ]
+ },
+ "results": {
+  "paper_tau_0.85": {
+   "tau": 0.85,
+   "by_category": {
+    "text_extractable": {
+     "tp": 106,
+     "fp": 13,
+     "fn": 22,
+     "precision": 0.8907563025210085,
+     "recall": 0.828125,
+     "f1": 0.8582995951417005,
+     "n_docs": 40,
+     "exact_match": {
+      "tp": 104,
+      "fp": 15,
+      "fn": 24,
+      "precision": 0.8739495798319328,
+      "recall": 0.8125,
+      "f1": 0.8421052631578948
+     },
+     "routed": {
+      "Branch1_Presidio": 40,
+      "Branch2_OCR+Presidio": 0,
+      "Branch3_VLM+Presidio": 0
+     }
+    },
+    "scanned": {
+     "tp": 124,
+     "fp": 4,
+     "fn": 11,
+     "precision": 0.96875,
+     "recall": 0.9185185185185185,
+     "f1": 0.9429657794676807,
+     "n_docs": 40,
+     "exact_match": {
+      "tp": 121,
+      "fp": 7,
+      "fn": 14,
+      "precision": 0.9453125,
+      "recall": 0.8962962962962963,
+      "f1": 0.9201520912547527
+     },
+     "routed": {
+      "Branch1_Presidio": 0,
+      "Branch2_OCR+Presidio": 17,
+      "Branch3_VLM+Presidio": 23
+     }
+    },
+    "handwritten": {
+     "tp": 84,
+     "fp": 17,
+     "fn": 21,
+     "precision": 0.8316831683168316,
+     "recall": 0.8,
+     "f1": 0.8155339805825242,
+     "n_docs": 40,
+     "exact_match": {
+      "tp": 82,
+      "fp": 19,
+      "fn": 23,
+      "precision": 0.8118811881188119,
+      "recall": 0.780952380952381,
+      "f1": 0.7961165048543689
+     },
+     "routed": {
+      "Branch1_Presidio": 0,
+      "Branch2_OCR+Presidio": 19,
+      "Branch3_VLM+Presidio": 21
+     }
+    }
+   },
+   "overall_micro": {
+    "tp": 314,
+    "fp": 34,
+    "fn": 54,
+    "precision": 0.9022988505747126,
+    "recall": 0.8532608695652174,
+    "f1": 0.8770949720670391
+   },
+   "overall_weighted_recall": 0.8488811728395061,
+   "by_entity_type": {
+    "CREDIT_CARD": {
+     "tp": 31,
+     "fp": 0,
+     "fn": 3,
+     "precision": 1.0,
+     "recall": 0.9117647058823529,
+     "f1": 0.9538461538461539
+    },
+    "NID": {
+     "tp": 22,
+     "fp": 0,
+     "fn": 0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0
+    },
+    "PASSWORD": {
+     "tp": 28,
+     "fp": 2,
+     "fn": 0,
+     "precision": 0.9333333333333333,
+     "recall": 1.0,
+     "f1": 0.9655172413793104
+    },
+    "EMAIL": {
+     "tp": 53,
+     "fp": 0,
+     "fn": 10,
+     "precision": 1.0,
+     "recall": 0.8412698412698413,
+     "f1": 0.9137931034482758
+    },
+    "PHONE": {
+     "tp": 41,
+     "fp": 0,
+     "fn": 3,
+     "precision": 1.0,
+     "recall": 0.9318181818181818,
+     "f1": 0.9647058823529412
+    },
+    "ADDRESS": {
+     "tp": 18,
+     "fp": 5,
+     "fn": 26,
+     "precision": 0.782608695652174,
+     "recall": 0.4090909090909091,
+     "f1": 0.537313432835821
+    },
+    "PERSON": {
+     "tp": 90,
+     "fp": 24,
+     "fn": 11,
+     "precision": 0.7894736842105263,
+     "recall": 0.8910891089108911,
+     "f1": 0.8372093023255814
+    },
+    "DOB": {
+     "tp": 31,
+     "fp": 3,
+     "fn": 1,
+     "precision": 0.9117647058823529,
+     "recall": 0.96875,
+     "f1": 0.9393939393939394
+    }
+   },
+   "n_docs_branch3_not_executed": 0,
+   "executed_only": {
+    "n_docs": 120,
+    "by_category": {
+     "text_extractable": {
+      "tp": 106,
+      "fp": 13,
+      "fn": 22,
+      "precision": 0.8907563025210085,
+      "recall": 0.828125,
+      "f1": 0.8582995951417005,
+      "n_docs": 40
+     },
+     "scanned": {
+      "tp": 124,
+      "fp": 4,
+      "fn": 11,
+      "precision": 0.96875,
+      "recall": 0.9185185185185185,
+      "f1": 0.9429657794676807,
+      "n_docs": 40
+     },
+     "handwritten": {
+      "tp": 84,
+      "fp": 17,
+      "fn": 21,
+      "precision": 0.8316831683168316,
+      "recall": 0.8,
+      "f1": 0.8155339805825242,
+      "n_docs": 40
+     }
+    },
+    "overall_micro": {
+     "tp": 314,
+     "fp": 34,
+     "fn": 54,
+     "precision": 0.9022988505747126,
+     "recall": 0.8532608695652174,
+     "f1": 0.8770949720670391
+    },
+    "overall_weighted_recall": 0.8488811728395061,
+    "by_entity_type": {
+     "CREDIT_CARD": {
+      "tp": 31,
+      "fp": 0,
+      "fn": 3,
+      "precision": 1.0,
+      "recall": 0.9117647058823529,
+      "f1": 0.9538461538461539
+     },
+     "NID": {
+      "tp": 22,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+     },
+     "PASSWORD": {
+      "tp": 28,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.9333333333333333,
+      "recall": 1.0,
+      "f1": 0.9655172413793104
+     },
+     "EMAIL": {
+      "tp": 53,
+      "fp": 0,
+      "fn": 10,
+      "precision": 1.0,
+      "recall": 0.8412698412698413,
+      "f1": 0.9137931034482758
+     },
+     "PHONE": {
+      "tp": 41,
+      "fp": 0,
+      "fn": 3,
+      "precision": 1.0,
+      "recall": 0.9318181818181818,
+      "f1": 0.9647058823529412
+     },
+     "ADDRESS": {
+      "tp": 18,
+      "fp": 5,
+      "fn": 26,
+      "precision": 0.782608695652174,
+      "recall": 0.4090909090909091,
+      "f1": 0.537313432835821
+     },
+     "PERSON": {
+      "tp": 90,
+      "fp": 24,
+      "fn": 11,
+      "precision": 0.7894736842105263,
+      "recall": 0.8910891089108911,
+      "f1": 0.8372093023255814
+     },
+     "DOB": {
+      "tp": 31,
+      "fp": 3,
+      "fn": 1,
+      "precision": 0.9117647058823529,
+      "recall": 0.96875,
+      "f1": 0.9393939393939394
+     }
+    }
+   }
+  },
+  "calibrated_tau": {
+   "tau": 0.98,
+   "by_category": {
+    "text_extractable": {
+     "tp": 106,
+     "fp": 13,
+     "fn": 22,
+     "precision": 0.8907563025210085,
+     "recall": 0.828125,
+     "f1": 0.8582995951417005,
+     "n_docs": 40,
+     "exact_match": {
+      "tp": 104,
+      "fp": 15,
+      "fn": 24,
+      "precision": 0.8739495798319328,
+      "recall": 0.8125,
+      "f1": 0.8421052631578948
+     },
+     "routed": {
+      "Branch1_Presidio": 40,
+      "Branch2_OCR+Presidio": 0,
+      "Branch3_VLM+Presidio": 0
+     }
+    },
+    "scanned": {
+     "tp": 135,
+     "fp": 0,
+     "fn": 0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "n_docs": 40,
+     "exact_match": {
+      "tp": 133,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.9851851851851852,
+      "recall": 0.9851851851851852,
+      "f1": 0.9851851851851852
+     },
+     "routed": {
+      "Branch1_Presidio": 0,
+      "Branch2_OCR+Presidio": 0,
+      "Branch3_VLM+Presidio": 40
+     }
+    },
+    "handwritten": {
+     "tp": 104,
+     "fp": 1,
+     "fn": 1,
+     "precision": 0.9904761904761905,
+     "recall": 0.9904761904761905,
+     "f1": 0.9904761904761905,
+     "n_docs": 40,
+     "exact_match": {
+      "tp": 102,
+      "fp": 3,
+      "fn": 3,
+      "precision": 0.9714285714285714,
+      "recall": 0.9714285714285714,
+      "f1": 0.9714285714285714
+     },
+     "routed": {
+      "Branch1_Presidio": 0,
+      "Branch2_OCR+Presidio": 1,
+      "Branch3_VLM+Presidio": 39
+     }
+    }
+   },
+   "overall_micro": {
+    "tp": 345,
+    "fp": 14,
+    "fn": 23,
+    "precision": 0.9610027855153204,
+    "recall": 0.9375,
+    "f1": 0.9491059147180192
+   },
+   "overall_weighted_recall": 0.9395337301587302,
+   "by_entity_type": {
+    "CREDIT_CARD": {
+     "tp": 32,
+     "fp": 0,
+     "fn": 2,
+     "precision": 1.0,
+     "recall": 0.9411764705882353,
+     "f1": 0.9696969696969697
+    },
+    "NID": {
+     "tp": 22,
+     "fp": 0,
+     "fn": 0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0
+    },
+    "PASSWORD": {
+     "tp": 28,
+     "fp": 0,
+     "fn": 0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0
+    },
+    "EMAIL": {
+     "tp": 63,
+     "fp": 0,
+     "fn": 0,
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0
+    },
+    "PHONE": {
+     "tp": 43,
+     "fp": 0,
+     "fn": 1,
+     "precision": 1.0,
+     "recall": 0.9772727272727273,
+     "f1": 0.9885057471264368
+    },
+    "ADDRESS": {
+     "tp": 29,
+     "fp": 1,
+     "fn": 15,
+     "precision": 0.9666666666666667,
+     "recall": 0.6590909090909091,
+     "f1": 0.7837837837837838
+    },
+    "PERSON": {
+     "tp": 96,
+     "fp": 11,
+     "fn": 5,
+     "precision": 0.897196261682243,
+     "recall": 0.9504950495049505,
+     "f1": 0.923076923076923
+    },
+    "DOB": {
+     "tp": 32,
+     "fp": 2,
+     "fn": 0,
+     "precision": 0.9411764705882353,
+     "recall": 1.0,
+     "f1": 0.9696969696969697
+    }
+   },
+   "n_docs_branch3_not_executed": 0,
+   "executed_only": {
+    "n_docs": 120,
+    "by_category": {
+     "text_extractable": {
+      "tp": 106,
+      "fp": 13,
+      "fn": 22,
+      "precision": 0.8907563025210085,
+      "recall": 0.828125,
+      "f1": 0.8582995951417005,
+      "n_docs": 40
+     },
+     "scanned": {
+      "tp": 135,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "n_docs": 40
+     },
+     "handwritten": {
+      "tp": 104,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.9904761904761905,
+      "recall": 0.9904761904761905,
+      "f1": 0.9904761904761905,
+      "n_docs": 40
+     }
+    },
+    "overall_micro": {
+     "tp": 345,
+     "fp": 14,
+     "fn": 23,
+     "precision": 0.9610027855153204,
+     "recall": 0.9375,
+     "f1": 0.9491059147180192
+    },
+    "overall_weighted_recall": 0.9395337301587302,
+    "by_entity_type": {
+     "CREDIT_CARD": {
+      "tp": 32,
+      "fp": 0,
+      "fn": 2,
+      "precision": 1.0,
+      "recall": 0.9411764705882353,
+      "f1": 0.9696969696969697
+     },
+     "NID": {
+      "tp": 22,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+     },
+     "PASSWORD": {
+      "tp": 28,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+     },
+     "EMAIL": {
+      "tp": 63,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+     },
+     "PHONE": {
+      "tp": 43,
+      "fp": 0,
+      "fn": 1,
+      "precision": 1.0,
+      "recall": 0.9772727272727273,
+      "f1": 0.9885057471264368
+     },
+     "ADDRESS": {
+      "tp": 29,
+      "fp": 1,
+      "fn": 15,
+      "precision": 0.9666666666666667,
+      "recall": 0.6590909090909091,
+      "f1": 0.7837837837837838
+     },
+     "PERSON": {
+      "tp": 96,
+      "fp": 11,
+      "fn": 5,
+      "precision": 0.897196261682243,
+      "recall": 0.9504950495049505,
+      "f1": 0.923076923076923
+     },
+     "DOB": {
+      "tp": 32,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.9411764705882353,
+      "recall": 1.0,
+      "f1": 0.9696969696969697
+     }
+    }
+   }
+  }
+ },
+ "baseline_text_only": {
+  "by_category": {
+   "text_extractable": {
+    "tp": 106,
+    "fp": 13,
+    "fn": 22,
+    "precision": 0.8907563025210085,
+    "recall": 0.828125,
+    "f1": 0.8582995951417005,
+    "n_docs": 40
+   },
+   "scanned": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 135,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "n_docs": 40
+   },
+   "handwritten": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 105,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "n_docs": 40
+   }
+  },
+  "overall_weighted_recall": 0.2760416666666667,
+  "overall_micro": {
+   "tp": 106,
+   "fp": 13,
+   "fn": 262,
+   "precision": 0.8907563025210085,
+   "recall": 0.28804347826086957,
+   "f1": 0.4353182751540042
+  }
+ },
+ "head_to_head_on_images_the_vlm_saw": {
+  "n_docs": 80,
+  "by_category": {
+   "scanned": 40,
+   "handwritten": 40
+  },
+  "gold_entities": 240,
+  "ocr_presidio": {
+   "tp": 157,
+   "fp": 52,
+   "fn": 83,
+   "precision": 0.7511961722488039,
+   "recall": 0.6541666666666667,
+   "f1": 0.6993318485523384
+  },
+  "vlm": {
+   "tp": 240,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0
+  },
+  "by_entity_type_vlm": {
+   "CREDIT_CARD": {
+    "tp": 19,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "NID": {
+    "tp": 17,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "PASSWORD": {
+    "tp": 17,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "EMAIL": {
+    "tp": 42,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "PHONE": {
+    "tp": 29,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "ADDRESS": {
+    "tp": 28,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "PERSON": {
+    "tp": 68,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "DOB": {
+    "tp": 20,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   }
+  },
+  "by_entity_type_ocr": {
+   "CREDIT_CARD": {
+    "tp": 15,
+    "fp": 0,
+    "fn": 4,
+    "precision": 1.0,
+    "recall": 0.7894736842105263,
+    "f1": 0.8823529411764706
+   },
+   "NID": {
+    "tp": 17,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+   },
+   "PASSWORD": {
+    "tp": 12,
+    "fp": 7,
+    "fn": 5,
+    "precision": 0.631578947368421,
+    "recall": 0.7058823529411765,
+    "f1": 0.6666666666666667
+   },
+   "EMAIL": {
+    "tp": 15,
+    "fp": 0,
+    "fn": 27,
+    "precision": 1.0,
+    "recall": 0.35714285714285715,
+    "f1": 0.5263157894736842
+   },
+   "PHONE": {
+    "tp": 21,
+    "fp": 2,
+    "fn": 8,
+    "precision": 0.9130434782608695,
+    "recall": 0.7241379310344828,
+    "f1": 0.8076923076923076
+   },
+   "ADDRESS": {
+    "tp": 2,
+    "fp": 6,
+    "fn": 26,
+    "precision": 0.25,
+    "recall": 0.07142857142857142,
+    "f1": 0.11111111111111112
+   },
+   "PERSON": {
+    "tp": 56,
+    "fp": 32,
+    "fn": 12,
+    "precision": 0.6363636363636364,
+    "recall": 0.8235294117647058,
+    "f1": 0.717948717948718
+   },
+   "DOB": {
+    "tp": 19,
+    "fp": 5,
+    "fn": 1,
+    "precision": 0.7916666666666666,
+    "recall": 0.95,
+    "f1": 0.8636363636363635
+   }
+  }
+ },
+ "counterfactual_vlm_on_high_confidence_docs": {
+  "n_docs": 36,
+  "note": "docs OCR was confident about (conf >= tau) AND the VLM also scored. Tests whether the cascade's cheap branch was the right call on the documents it kept for itself.",
+  "ocr": {
+   "tp": 65,
+   "fp": 21,
+   "fn": 32,
+   "precision": 0.7558139534883721,
+   "recall": 0.6701030927835051,
+   "f1": 0.7103825136612022
+  },
+  "vlm": {
+   "tp": 97,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0
+  }
+ },
+ "latency_ms": {
+  "branch1_mean": 11.202002500431263,
+  "branch1_p95": 15.167094995558685,
+  "branch2_mean": 2489.0035612492284,
+  "branch2_p95": 3233.497614998487,
+  "branch3_mean": 3116.9587312495423,
+  "branch3_note": "network round-trip to a hosted model, not on-box compute"
+ }
+}

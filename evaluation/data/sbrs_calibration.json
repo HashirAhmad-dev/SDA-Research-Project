@@ -1,0 +1,161 @@
+{
+ "reused_data": "C:\\Users\\loons\\Documents\\GitHub\\SDA-Research-Project\\evaluation\\data\\scored_all_splits.csv",
+ "val_sessions": 2516,
+ "val_threats": 95,
+ "test_sessions": 2352,
+ "test_threats": 96,
+ "beta": {
+  "chosen": 2.5,
+  "criterion": "smallest beta reaching >=99% of max val AUC(SBRS vs threat)",
+  "val_auc_by_beta": {
+   "0.0": 0.6934498576056001,
+   "0.5": 0.7841387856257744,
+   "1.0": 0.8156699058675189,
+   "1.5": 0.8239353029413683,
+   "2.0": 0.8293658557794734,
+   "2.5": 0.8326876671231983,
+   "3.0": 0.8349529337594296,
+   "3.5": 0.8367225374464662,
+   "4.0": 0.8373790734581187,
+   "4.5": 0.837913867692776,
+   "5.0": 0.8381486554055523,
+   "6.0": 0.8383312680710451,
+   "8.0": 0.8384617056892542,
+   "10.0": 0.838918237352986,
+   "12.0": 0.8389878040826975,
+   "14.0": 0.8387964955759908,
+   "16.0": 0.838626926672319,
+   "18.0": 0.8381182199613035,
+   "20.0": 0.8378399530424574
+  },
+  "val_auc_max": 0.8389878040826975
+ },
+ "bands": {
+  "t_alert": 1.22382,
+  "t_block": 1.8436665000000028,
+  "derivation": "t_alert=95.0th pctl of benign val SBRS; t_block=99.5th pctl of benign val SBRS"
+ },
+ "test": {
+  "new_calibrated": {
+   "flagged_f1": 0.4793388429752066,
+   "flagged": {
+    "tp": 58,
+    "fp": 88,
+    "fn": 38,
+    "tn": 2168,
+    "precision": 0.3972602739726027,
+    "recall": 0.6041666666666666,
+    "f1": 0.4793388429752066,
+    "fpr": 0.03900709219858156
+   },
+   "block": {
+    "tp": 26,
+    "fp": 9,
+    "fn": 70,
+    "tn": 2247,
+    "precision": 0.7428571428571429,
+    "recall": 0.2708333333333333,
+    "f1": 0.39694656488549623,
+    "fpr": 0.003989361702127659
+   },
+   "auto_alert_or_block_rate": 0.06207482993197279,
+   "auto_block_rate": 0.01488095238095238,
+   "benign_alert_or_block_rate": 0.03900709219858156,
+   "benign_block_rate": 0.003989361702127659,
+   "threat_permit_rate": 0.3958333333333333,
+   "n_permit": 2206,
+   "n_alert": 111,
+   "n_block": 35,
+   "benign_burst_alert_or_block_rate": 0.0,
+   "benign_burst_block_rate": 0.0
+  },
+  "old_code_beta0.5_bands0.20_0.60": {
+   "flagged_f1": 0.08658823529411765,
+   "flagged": {
+    "tp": 92,
+    "fp": 1937,
+    "fn": 4,
+    "tn": 319,
+    "precision": 0.045342533267619514,
+    "recall": 0.9583333333333334,
+    "f1": 0.08658823529411765,
+    "fpr": 0.8585992907801419
+   },
+   "block": {
+    "tp": 81,
+    "fp": 877,
+    "fn": 15,
+    "tn": 1379,
+    "precision": 0.08455114822546973,
+    "recall": 0.84375,
+    "f1": 0.15370018975332067,
+    "fpr": 0.3887411347517731
+   },
+   "auto_alert_or_block_rate": 0.8626700680272109,
+   "auto_block_rate": 0.407312925170068,
+   "benign_alert_or_block_rate": 0.8585992907801419,
+   "benign_block_rate": 0.3887411347517731,
+   "threat_permit_rate": 0.041666666666666664,
+   "n_permit": 323,
+   "n_alert": 1071,
+   "n_block": 958,
+   "benign_burst_alert_or_block_rate": 0.37037037037037035,
+   "benign_burst_block_rate": 0.0
+  },
+  "doc_beta0.5_bands0.50_1.00": {
+   "flagged_f1": 0.13365155131264916,
+   "flagged": {
+    "tp": 84,
+    "fp": 1077,
+    "fn": 12,
+    "tn": 1179,
+    "precision": 0.07235142118863049,
+    "recall": 0.875,
+    "f1": 0.13365155131264916,
+    "fpr": 0.4773936170212766
+   },
+   "block": {
+    "tp": 19,
+    "fp": 41,
+    "fn": 77,
+    "tn": 2215,
+    "precision": 0.31666666666666665,
+    "recall": 0.19791666666666666,
+    "f1": 0.2435897435897436,
+    "fpr": 0.018173758865248225
+   },
+   "auto_alert_or_block_rate": 0.49362244897959184,
+   "auto_block_rate": 0.025510204081632654,
+   "benign_alert_or_block_rate": 0.4773936170212766,
+   "benign_block_rate": 0.018173758865248225,
+   "threat_permit_rate": 0.125,
+   "n_permit": 1191,
+   "n_alert": 1101,
+   "n_block": 60,
+   "benign_burst_alert_or_block_rate": 0.0,
+   "benign_burst_block_rate": 0.0
+  }
+ },
+ "test_per_class_recall_new": {
+  "malicious_insider": {
+   "n": 51,
+   "alert_or_block_recall": 0.3333333333333333,
+   "block_recall": 0.0196078431372549
+  },
+  "compromised_account": {
+   "n": 13,
+   "alert_or_block_recall": 1.0,
+   "block_recall": 0.8461538461538461
+  },
+  "negligent_insider": {
+   "n": 18,
+   "alert_or_block_recall": 1.0,
+   "block_recall": 0.5555555555555556
+  },
+  "overscoped_thirdparty": {
+   "n": 14,
+   "alert_or_block_recall": 0.7142857142857143,
+   "block_recall": 0.2857142857142857
+  }
+ }
+}

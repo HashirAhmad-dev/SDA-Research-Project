@@ -1,0 +1,121 @@
+scan_id,timestamp,user_id,user_name,department,platform,file_name,file_type,branch_used,ocr_confidence,high_entities,medium_entities,low_entities,sensitivity_score,risk_category,base_system_score,base_system_label,processing_ms,action_taken,slack_alert_sent,jira_ticket_created
+PII-0001,2026-06-19 16:00:40,USR046,Dennis Harris,HR,Google Drive,DOC-0001.txt,text_extractable,Branch1_Presidio,N/A,1,2,2,22,SENSITIVE,22,SENSITIVE,37.8,ALERT,True,False
+PII-0002,2026-07-03 01:50:02,USR041,Andrea Rivers,HR,Microsoft OneDrive,DOC-0002.txt,text_extractable,Branch1_Presidio,N/A,0,0,1,1,SAFE,1,SAFE,9.3,PERMIT,False,False
+PII-0003,2026-06-18 15:06:56,USR049,Lauren Mcpherson,HR,Google Drive,DOC-0003.txt,text_extractable,Branch1_Presidio,N/A,1,0,2,12,SAFE,12,SAFE,29.2,PERMIT,False,False
+PII-0004,2026-06-26 14:06:23,USR005,Hannah Jones,Sales,Microsoft OneDrive,DOC-0004.txt,text_extractable,Branch1_Presidio,N/A,1,0,2,12,SAFE,12,SAFE,13.6,PERMIT,False,False
+PII-0005,2026-07-01 06:56:40,USR048,Jeffrey Hines,HR,Google Drive,DOC-0005.txt,text_extractable,Branch1_Presidio,N/A,0,0,3,3,SAFE,3,SAFE,12.6,PERMIT,False,False
+PII-0006,2026-07-03 11:37:23,USR008,Stephanie Carpenter,Engineering,Google Drive,DOC-0006.txt,text_extractable,Branch1_Presidio,N/A,0,0,1,1,SAFE,1,SAFE,8.1,PERMIT,False,False
+PII-0007,2026-07-03 19:03:10,USR044,William Herman,Sales,Microsoft OneDrive,DOC-0007.txt,text_extractable,Branch1_Presidio,N/A,1,2,1,21,SENSITIVE,21,SENSITIVE,12.7,ALERT,True,False
+PII-0008,2026-06-19 11:06:00,USR013,Jennifer Larson,Sales,Google Drive,DOC-0008.txt,text_extractable,Branch1_Presidio,N/A,1,2,1,21,SENSITIVE,21,SENSITIVE,9.9,ALERT,True,False
+PII-0009,2026-07-08 16:50:26,USR037,Michael Perry,Finance,Google Drive,DOC-0009.txt,text_extractable,Branch1_Presidio,N/A,0,0,0,0,SAFE,0,SAFE,7.1,PERMIT,False,False
+PII-0010,2026-06-28 06:28:37,USR004,Jacqueline Graham,Finance,Google Drive,DOC-0010.txt,text_extractable,Branch1_Presidio,N/A,1,0,2,12,SAFE,12,SAFE,11.3,PERMIT,False,False
+PII-0011,2026-06-26 22:28:32,USR019,Zachary Wiley,Legal,Microsoft OneDrive,DOC-0011.txt,text_extractable,Branch1_Presidio,N/A,1,1,1,16,SAFE,16,SAFE,9.7,PERMIT,False,False
+PII-0012,2026-06-18 19:37:26,USR001,Patricia Mcgee,Sales,Microsoft OneDrive,DOC-0012.txt,text_extractable,Branch1_Presidio,N/A,1,2,1,21,SENSITIVE,21,SENSITIVE,9.7,ALERT,True,False
+PII-0013,2026-06-21 00:50:27,USR015,Amy Cobb,Sales,Google Drive,DOC-0013.txt,text_extractable,Branch1_Presidio,N/A,1,0,3,13,SAFE,13,SAFE,11.5,PERMIT,False,False
+PII-0014,2026-06-28 06:47:43,USR014,Matthew Cross,Sales,Google Drive,DOC-0014.txt,text_extractable,Branch1_Presidio,N/A,0,0,0,0,SAFE,0,SAFE,7.0,PERMIT,False,False
+PII-0015,2026-06-27 19:57:44,USR034,Laura Gray,Legal,Google Drive,DOC-0015.txt,text_extractable,Branch1_Presidio,N/A,0,0,0,0,SAFE,0,SAFE,6.9,PERMIT,False,False
+PII-0016,2026-07-02 15:07:05,USR030,Jonathan Bauer MD,Finance,Microsoft OneDrive,DOC-0016.txt,text_extractable,Branch1_Presidio,N/A,1,0,2,12,SAFE,12,SAFE,12.1,PERMIT,False,False
+PII-0017,2026-06-19 19:43:08,USR048,Joseph Smith,Sales,Microsoft OneDrive,DOC-0017.txt,text_extractable,Branch1_Presidio,N/A,0,0,0,0,SAFE,0,SAFE,7.9,PERMIT,False,False
+PII-0018,2026-06-24 09:10:49,USR046,Paul White,Legal,Google Drive,DOC-0018.txt,text_extractable,Branch1_Presidio,N/A,0,2,1,11,SAFE,11,SAFE,9.4,PERMIT,False,False
+PII-0019,2026-07-03 00:05:31,USR006,Shelley Hampton,Legal,Microsoft OneDrive,DOC-0019.txt,text_extractable,Branch1_Presidio,N/A,1,2,1,21,SENSITIVE,21,SENSITIVE,10.8,ALERT,True,False
+PII-0020,2026-06-25 09:35:18,USR004,Danielle Wheeler,Sales,Google Drive,DOC-0020.txt,text_extractable,Branch1_Presidio,N/A,0,0,0,0,SAFE,0,SAFE,6.7,PERMIT,False,False
+PII-0021,2026-07-03 12:29:43,USR039,Christopher Smith,Finance,Microsoft OneDrive,DOC-0021.txt,text_extractable,Branch1_Presidio,N/A,1,0,2,12,SAFE,12,SAFE,10.1,PERMIT,False,False
+PII-0022,2026-06-30 16:30:32,USR004,Diane Gonzales,Engineering,Microsoft OneDrive,DOC-0022.txt,text_extractable,Branch1_Presidio,N/A,0,2,1,11,SAFE,11,SAFE,9.0,PERMIT,False,False
+PII-0023,2026-06-26 08:52:24,USR014,Wendy Jensen,HR,Microsoft OneDrive,DOC-0023.txt,text_extractable,Branch1_Presidio,N/A,1,1,2,17,SAFE,17,SAFE,11.2,PERMIT,False,False
+PII-0024,2026-07-05 17:23:27,USR009,Brenda Perez,Engineering,Microsoft OneDrive,DOC-0024.txt,text_extractable,Branch1_Presidio,N/A,1,1,1,16,SAFE,16,SAFE,9.6,PERMIT,False,False
+PII-0025,2026-07-06 08:19:53,USR036,Heidi Garrett,HR,Google Drive,DOC-0025.txt,text_extractable,Branch1_Presidio,N/A,1,2,1,21,SENSITIVE,21,SENSITIVE,9.3,ALERT,True,False
+PII-0026,2026-06-28 12:47:10,USR026,Victoria Bryant,Sales,Google Drive,DOC-0026.txt,text_extractable,Branch1_Presidio,N/A,1,1,1,16,SAFE,16,SAFE,8.5,PERMIT,False,False
+PII-0027,2026-06-26 03:25:58,USR011,Shannon Davidson,Engineering,Microsoft OneDrive,DOC-0027.txt,text_extractable,Branch1_Presidio,N/A,1,2,1,21,SENSITIVE,21,SENSITIVE,11.9,ALERT,True,False
+PII-0028,2026-06-25 10:24:40,USR035,Felicia Wilson,Sales,Google Drive,DOC-0028.txt,text_extractable,Branch1_Presidio,N/A,1,2,2,22,SENSITIVE,22,SENSITIVE,14.1,ALERT,True,False
+PII-0029,2026-06-20 16:11:50,USR049,Jesse Ware,Sales,Microsoft OneDrive,DOC-0029.txt,text_extractable,Branch1_Presidio,N/A,1,0,3,13,SAFE,13,SAFE,11.4,PERMIT,False,False
+PII-0030,2026-06-24 09:06:42,USR015,Brenda Thompson,HR,Microsoft OneDrive,DOC-0030.txt,text_extractable,Branch1_Presidio,N/A,1,0,3,13,SAFE,13,SAFE,10.9,PERMIT,False,False
+PII-0031,2026-06-23 11:04:56,USR041,Justin Richmond,Engineering,Google Drive,DOC-0031.txt,text_extractable,Branch1_Presidio,N/A,1,2,1,21,SENSITIVE,21,SENSITIVE,10.0,ALERT,True,False
+PII-0032,2026-07-08 16:42:21,USR049,Daniel Wright,Legal,Microsoft OneDrive,DOC-0032.txt,text_extractable,Branch1_Presidio,N/A,1,1,2,17,SAFE,17,SAFE,9.7,PERMIT,False,False
+PII-0033,2026-07-07 12:15:07,USR045,Francisco Davis,Finance,Microsoft OneDrive,DOC-0033.txt,text_extractable,Branch1_Presidio,N/A,1,1,1,16,SAFE,16,SAFE,10.3,PERMIT,False,False
+PII-0034,2026-06-28 07:44:08,USR032,Jacob Smith,Sales,Microsoft OneDrive,DOC-0034.txt,text_extractable,Branch1_Presidio,N/A,2,1,1,26,SENSITIVE,26,SENSITIVE,10.2,ALERT,True,False
+PII-0035,2026-07-04 11:52:31,USR033,Clifford Hensley,Sales,Microsoft OneDrive,DOC-0035.txt,text_extractable,Branch1_Presidio,N/A,1,2,2,22,SENSITIVE,22,SENSITIVE,11.1,ALERT,True,False
+PII-0036,2026-06-21 01:50:00,USR008,Heather Ho,Legal,Microsoft OneDrive,DOC-0036.txt,text_extractable,Branch1_Presidio,N/A,1,1,1,16,SAFE,16,SAFE,9.3,PERMIT,False,False
+PII-0037,2026-06-19 16:25:00,USR046,Jasmine Taylor,Legal,Microsoft OneDrive,DOC-0037.txt,text_extractable,Branch1_Presidio,N/A,1,3,2,27,SENSITIVE,27,SENSITIVE,14.4,ALERT,True,False
+PII-0038,2026-06-25 15:22:27,USR018,Cynthia Dickerson,Sales,Google Drive,DOC-0038.txt,text_extractable,Branch1_Presidio,N/A,0,0,0,0,SAFE,0,SAFE,6.7,PERMIT,False,False
+PII-0039,2026-06-29 02:25:02,USR050,Jean Hodges,Sales,Google Drive,DOC-0039.txt,text_extractable,Branch1_Presidio,N/A,1,2,2,22,SENSITIVE,22,SENSITIVE,10.2,ALERT,True,False
+PII-0040,2026-07-05 10:58:12,USR019,Robert White,Finance,Google Drive,DOC-0040.txt,text_extractable,Branch1_Presidio,N/A,0,0,0,0,SAFE,0,SAFE,6.8,PERMIT,False,False
+PII-0041,2026-06-20 13:20:23,USR011,Christine Gibson,Legal,Google Drive,DOC-0041.jpg,scanned_pdf,Branch3_VLM+Presidio,0.82,1,3,1,26,SENSITIVE,0,SAFE (blind to image),8528.5,ALERT,True,False
+PII-0042,2026-06-22 17:17:04,USR011,Michelle Price,Finance,Google Drive,DOC-0042.jpg,scanned_pdf,Branch3_VLM+Presidio,0.81,1,3,2,27,SENSITIVE,0,SAFE (blind to image),7357.2,ALERT,True,False
+PII-0043,2026-06-20 09:20:14,USR004,Donald Tran,Engineering,Google Drive,DOC-0043.jpg,scanned_pdf,Branch2_OCR+Presidio,0.86,0,1,1,6,SAFE,0,SAFE (blind to image),2225.3,PERMIT,False,False
+PII-0044,2026-06-26 02:32:02,USR024,Martin Bryan,HR,Microsoft OneDrive,DOC-0044.jpg,scanned_pdf,Branch2_OCR+Presidio,0.87,1,0,2,12,SAFE,0,SAFE (blind to image),2323.8,PERMIT,False,False
+PII-0045,2026-07-07 11:40:38,USR034,Debra Carrillo,Sales,Microsoft OneDrive,DOC-0045.jpg,scanned_pdf,Branch3_VLM+Presidio,0.84,1,3,2,27,SENSITIVE,0,SAFE (blind to image),7622.1,ALERT,True,False
+PII-0046,2026-06-27 11:28:09,USR006,Brian Peters,Finance,Microsoft OneDrive,DOC-0046.jpg,scanned_pdf,Branch3_VLM+Presidio,0.85,1,3,1,26,SENSITIVE,0,SAFE (blind to image),6638.8,ALERT,True,False
+PII-0047,2026-07-06 07:47:16,USR005,Zachary Lopez,Engineering,Google Drive,DOC-0047.jpg,scanned_pdf,Branch2_OCR+Presidio,0.92,1,0,2,12,SAFE,0,SAFE (blind to image),2336.0,PERMIT,False,False
+PII-0048,2026-07-03 08:17:23,USR028,Troy Holloway,Finance,Microsoft OneDrive,DOC-0048.jpg,scanned_pdf,Branch2_OCR+Presidio,0.86,2,1,1,26,SENSITIVE,0,SAFE (blind to image),2415.5,ALERT,True,False
+PII-0049,2026-06-29 11:35:08,USR024,Megan Barnett,HR,Google Drive,DOC-0049.jpg,scanned_pdf,Branch2_OCR+Presidio,0.94,0,0,0,0,SAFE,0,SAFE (blind to image),1514.5,PERMIT,False,False
+PII-0050,2026-07-01 12:53:08,USR026,Phillip Blevins,Sales,Microsoft OneDrive,DOC-0050.jpg,scanned_pdf,Branch2_OCR+Presidio,0.89,0,0,1,1,SAFE,0,SAFE (blind to image),1766.5,PERMIT,False,False
+PII-0051,2026-06-19 18:33:06,USR039,James Barnett,Sales,Microsoft OneDrive,DOC-0051.jpg,scanned_pdf,Branch3_VLM+Presidio,0.73,1,3,2,27,SENSITIVE,0,SAFE (blind to image),8437.7,ALERT,True,False
+PII-0052,2026-06-26 21:39:51,USR003,Steven Cooper,Legal,Google Drive,DOC-0052.jpg,scanned_pdf,Branch3_VLM+Presidio,0.76,0,0,0,0,SAFE,0,SAFE (blind to image),2573.0,PERMIT,False,False
+PII-0053,2026-07-04 22:20:32,USR005,Kelly Scott,HR,Google Drive,DOC-0053.jpg,scanned_pdf,Branch3_VLM+Presidio,0.78,2,1,1,26,SENSITIVE,0,SAFE (blind to image),6210.4,ALERT,True,False
+PII-0054,2026-06-20 15:05:08,USR010,Brandi Burke,Finance,Google Drive,DOC-0054.jpg,scanned_pdf,Branch2_OCR+Presidio,0.88,1,2,1,21,SENSITIVE,0,SAFE (blind to image),2851.1,ALERT,True,False
+PII-0055,2026-07-07 12:02:32,USR043,Gabriela Ochoa,Finance,Microsoft OneDrive,DOC-0055.jpg,scanned_pdf,Branch3_VLM+Presidio,0.84,1,3,1,26,SENSITIVE,0,SAFE (blind to image),7041.2,ALERT,True,False
+PII-0056,2026-06-25 15:40:17,USR046,Emily Romero,Legal,Google Drive,DOC-0056.jpg,scanned_pdf,Branch3_VLM+Presidio,0.8,1,2,1,21,SENSITIVE,0,SAFE (blind to image),5678.6,ALERT,True,False
+PII-0057,2026-07-04 16:33:21,USR021,Jeremy Wells,HR,Google Drive,DOC-0057.jpg,scanned_pdf,Branch3_VLM+Presidio,0.84,1,1,1,16,SAFE,0,SAFE (blind to image),5118.1,PERMIT,False,False
+PII-0058,2026-07-06 01:10:27,USR028,Micheal Hayes,Engineering,Microsoft OneDrive,DOC-0058.jpg,scanned_pdf,Branch3_VLM+Presidio,0.76,0,0,0,0,SAFE,0,SAFE (blind to image),2553.8,PERMIT,False,False
+PII-0059,2026-07-04 11:06:53,USR045,Stephanie Hernandez,Sales,Microsoft OneDrive,DOC-0059.jpg,scanned_pdf,Branch3_VLM+Presidio,0.81,1,2,1,21,SENSITIVE,0,SAFE (blind to image),5331.5,ALERT,True,False
+PII-0060,2026-06-28 00:29:27,USR026,Kristine Snyder,Engineering,Microsoft OneDrive,DOC-0060.jpg,scanned_pdf,Branch2_OCR+Presidio,0.85,0,1,1,6,SAFE,0,SAFE (blind to image),2213.3,PERMIT,False,False
+PII-0061,2026-06-22 04:53:54,USR007,Michael Rodriguez,Sales,Google Drive,DOC-0061.jpg,scanned_pdf,Branch3_VLM+Presidio,0.79,1,3,1,26,SENSITIVE,0,SAFE (blind to image),6438.8,ALERT,True,False
+PII-0062,2026-07-05 01:51:47,USR043,Carl Wilson,Engineering,Google Drive,DOC-0062.jpg,scanned_pdf,Branch2_OCR+Presidio,0.86,1,2,1,21,SENSITIVE,0,SAFE (blind to image),2810.3,ALERT,True,False
+PII-0063,2026-06-19 18:06:42,USR050,Kimberly Thompson,Legal,Google Drive,DOC-0063.jpg,scanned_pdf,Branch2_OCR+Presidio,0.91,0,1,1,6,SAFE,0,SAFE (blind to image),2247.8,PERMIT,False,False
+PII-0064,2026-06-27 03:25:55,USR050,Eileen Phillips,Legal,Microsoft OneDrive,DOC-0064.jpg,scanned_pdf,Branch3_VLM+Presidio,0.82,2,1,1,26,SENSITIVE,0,SAFE (blind to image),6088.1,ALERT,True,False
+PII-0065,2026-06-25 08:32:46,USR046,Jeffrey Hoover,Legal,Google Drive,DOC-0065.jpg,scanned_pdf,Branch2_OCR+Presidio,0.91,1,0,1,11,SAFE,0,SAFE (blind to image),2291.4,PERMIT,False,False
+PII-0066,2026-07-07 14:43:59,USR001,Duane Graham,Sales,Google Drive,DOC-0066.jpg,scanned_pdf,Branch2_OCR+Presidio,0.88,0,0,0,0,SAFE,0,SAFE (blind to image),1430.8,PERMIT,False,False
+PII-0067,2026-07-08 12:57:52,USR021,Robert Elliott,Engineering,Google Drive,DOC-0067.jpg,scanned_pdf,Branch3_VLM+Presidio,0.81,1,1,2,17,SAFE,0,SAFE (blind to image),6317.2,PERMIT,False,False
+PII-0068,2026-06-22 08:40:38,USR033,Gary Perez,Sales,Microsoft OneDrive,DOC-0068.jpg,scanned_pdf,Branch2_OCR+Presidio,0.93,0,2,2,12,SAFE,0,SAFE (blind to image),2118.6,PERMIT,False,False
+PII-0069,2026-06-29 16:30:48,USR026,John Fuller,Sales,Google Drive,DOC-0069.jpg,scanned_pdf,Branch3_VLM+Presidio,0.74,1,2,1,21,SENSITIVE,0,SAFE (blind to image),5653.4,ALERT,True,False
+PII-0070,2026-06-28 10:31:33,USR035,Kathryn Leon,HR,Microsoft OneDrive,DOC-0070.jpg,scanned_pdf,Branch3_VLM+Presidio,0.83,1,1,1,16,SAFE,0,SAFE (blind to image),4486.1,PERMIT,False,False
+PII-0071,2026-06-29 17:26:16,USR022,Brent Flores,Finance,Google Drive,DOC-0071.jpg,scanned_pdf,Branch3_VLM+Presidio,0.84,0,0,0,0,SAFE,0,SAFE (blind to image),2466.6,PERMIT,False,False
+PII-0072,2026-06-29 09:04:26,USR005,Warren Nixon,Finance,Google Drive,DOC-0072.jpg,scanned_pdf,Branch3_VLM+Presidio,0.82,1,1,1,16,SAFE,0,SAFE (blind to image),5896.8,PERMIT,False,False
+PII-0073,2026-06-18 16:07:07,USR003,Christine Lawson,Finance,Google Drive,DOC-0073.jpg,scanned_pdf,Branch2_OCR+Presidio,0.91,1,1,1,16,SAFE,0,SAFE (blind to image),2309.8,PERMIT,False,False
+PII-0074,2026-06-20 16:01:39,USR034,Katelyn Douglas,HR,Google Drive,DOC-0074.jpg,scanned_pdf,Branch3_VLM+Presidio,0.85,1,1,1,16,SAFE,0,SAFE (blind to image),6856.2,PERMIT,False,False
+PII-0075,2026-07-03 19:44:10,USR019,Dawn Noble,Finance,Google Drive,DOC-0075.jpg,scanned_pdf,Branch2_OCR+Presidio,0.96,0,0,1,1,SAFE,0,SAFE (blind to image),1790.0,PERMIT,False,False
+PII-0076,2026-07-05 11:09:53,USR007,Connor Haney,Sales,Google Drive,DOC-0076.jpg,scanned_pdf,Branch3_VLM+Presidio,0.82,1,3,2,27,SENSITIVE,0,SAFE (blind to image),7638.0,ALERT,True,False
+PII-0077,2026-06-21 09:17:14,USR045,Sean Carter,Legal,Microsoft OneDrive,DOC-0077.jpg,scanned_pdf,Branch2_OCR+Presidio,0.92,0,0,1,1,SAFE,0,SAFE (blind to image),1705.8,PERMIT,False,False
+PII-0078,2026-07-08 05:00:00,USR021,Ryan Brewer,Sales,Microsoft OneDrive,DOC-0078.jpg,scanned_pdf,Branch2_OCR+Presidio,0.87,1,0,3,13,SAFE,0,SAFE (blind to image),2495.8,PERMIT,False,False
+PII-0079,2026-07-05 04:03:07,USR024,Eric White,Finance,Microsoft OneDrive,DOC-0079.jpg,scanned_pdf,Branch3_VLM+Presidio,0.77,1,1,2,17,SAFE,0,SAFE (blind to image),6738.9,PERMIT,False,False
+PII-0080,2026-06-19 21:32:00,USR018,Thomas Harrison,Engineering,Google Drive,DOC-0080.jpg,scanned_pdf,Branch3_VLM+Presidio,0.77,1,1,2,17,SAFE,0,SAFE (blind to image),6330.7,PERMIT,False,False
+PII-0081,2026-07-03 10:18:27,USR041,Phillip Gutierrez,Engineering,Microsoft OneDrive,DOC-0081.jpg,handwritten,Branch2_OCR+Presidio,0.98,0,1,0,5,SAFE,0,SAFE (blind to image),1946.2,PERMIT,False,False
+PII-0082,2026-06-23 01:48:42,USR043,Tyler Pham,Engineering,Google Drive,DOC-0082.jpg,handwritten,Branch3_VLM+Presidio,0.75,1,1,1,16,SAFE,0,SAFE (blind to image),5594.5,PERMIT,False,False
+PII-0083,2026-06-29 05:21:18,USR041,Melissa Hughes,Legal,Google Drive,DOC-0083.jpg,handwritten,Branch2_OCR+Presidio,0.91,0,2,1,11,SAFE,0,SAFE (blind to image),2911.4,PERMIT,False,False
+PII-0084,2026-06-25 15:55:12,USR014,Patrick Hurley,Legal,Google Drive,DOC-0084.jpg,handwritten,Branch3_VLM+Presidio,0.76,0,0,0,0,SAFE,0,SAFE (blind to image),3083.6,PERMIT,False,False
+PII-0085,2026-06-29 13:00:01,USR008,Elizabeth Martinez,Sales,Microsoft OneDrive,DOC-0085.jpg,handwritten,Branch3_VLM+Presidio,0.61,1,2,1,21,SENSITIVE,0,SAFE (blind to image),5937.1,ALERT,True,False
+PII-0086,2026-07-05 00:16:12,USR031,Nicole Webb,HR,Microsoft OneDrive,DOC-0086.jpg,handwritten,Branch2_OCR+Presidio,0.87,0,1,2,7,SAFE,0,SAFE (blind to image),2893.0,PERMIT,False,False
+PII-0087,2026-06-21 15:26:08,USR032,Travis Jensen,HR,Google Drive,DOC-0087.jpg,handwritten,Branch3_VLM+Presidio,0.76,0,0,0,0,SAFE,0,SAFE (blind to image),2794.7,PERMIT,False,False
+PII-0088,2026-06-20 23:13:05,USR006,Grant Barry,Finance,Google Drive,DOC-0088.jpg,handwritten,Branch2_OCR+Presidio,0.89,1,0,3,13,SAFE,0,SAFE (blind to image),3061.6,PERMIT,False,False
+PII-0089,2026-06-26 18:59:20,USR021,Wendy Morton,Engineering,Google Drive,DOC-0089.jpg,handwritten,Branch3_VLM+Presidio,0.84,1,1,2,17,SAFE,0,SAFE (blind to image),8611.7,PERMIT,False,False
+PII-0090,2026-07-06 12:21:45,USR033,Travis King,Engineering,Google Drive,DOC-0090.jpg,handwritten,Branch3_VLM+Presidio,0.85,1,2,1,21,SENSITIVE,0,SAFE (blind to image),6989.3,ALERT,True,False
+PII-0091,2026-06-27 12:01:29,USR032,Raymond Petersen,Engineering,Google Drive,DOC-0091.jpg,handwritten,Branch2_OCR+Presidio,0.87,0,0,0,0,SAFE,0,SAFE (blind to image),1802.2,PERMIT,False,False
+PII-0092,2026-06-27 05:35:04,USR015,Jacob Moore,HR,Google Drive,DOC-0092.jpg,handwritten,Branch2_OCR+Presidio,0.92,0,0,1,1,SAFE,0,SAFE (blind to image),2157.8,PERMIT,False,False
+PII-0093,2026-06-19 14:26:52,USR016,Laura Wallace,Engineering,Google Drive,DOC-0093.jpg,handwritten,Branch2_OCR+Presidio,0.88,0,0,0,0,SAFE,0,SAFE (blind to image),1980.4,PERMIT,False,False
+PII-0094,2026-07-04 06:28:14,USR016,Andrea Wagner,Engineering,Microsoft OneDrive,DOC-0094.jpg,handwritten,Branch3_VLM+Presidio,0.76,1,1,2,17,SAFE,0,SAFE (blind to image),7972.5,PERMIT,False,False
+PII-0095,2026-06-24 02:34:08,USR041,Scott King,Sales,Microsoft OneDrive,DOC-0095.jpg,handwritten,Branch2_OCR+Presidio,0.87,2,0,1,21,SENSITIVE,0,SAFE (blind to image),2910.5,ALERT,True,False
+PII-0096,2026-06-24 07:17:52,USR015,Tyler Miller,HR,Google Drive,DOC-0096.jpg,handwritten,Branch3_VLM+Presidio,0.83,1,3,1,26,SENSITIVE,0,SAFE (blind to image),8973.4,ALERT,True,False
+PII-0097,2026-06-19 02:01:01,USR017,Paul White,Engineering,Microsoft OneDrive,DOC-0097.jpg,handwritten,Branch2_OCR+Presidio,0.89,1,0,4,14,SAFE,0,SAFE (blind to image),3164.0,PERMIT,False,False
+PII-0098,2026-07-02 23:38:47,USR046,Cory Baker,HR,Google Drive,DOC-0098.jpg,handwritten,Branch2_OCR+Presidio,0.92,0,0,2,2,SAFE,0,SAFE (blind to image),2211.7,PERMIT,False,False
+PII-0099,2026-07-03 17:58:17,USR002,Jackie Owens,Sales,Microsoft OneDrive,DOC-0099.jpg,handwritten,Branch3_VLM+Presidio,0.45,1,1,1,16,SAFE,0,SAFE (blind to image),5312.7,PERMIT,False,False
+PII-0100,2026-06-19 23:18:50,USR018,Michael Martinez,HR,Google Drive,DOC-0100.jpg,handwritten,Branch3_VLM+Presidio,0.7,1,1,2,17,SAFE,0,SAFE (blind to image),6430.5,PERMIT,False,False
+PII-0101,2026-06-23 02:35:48,USR017,Amy Berry,HR,Microsoft OneDrive,DOC-0101.jpg,handwritten,Branch3_VLM+Presidio,0.76,1,1,2,17,SAFE,0,SAFE (blind to image),6544.3,PERMIT,False,False
+PII-0102,2026-07-06 14:42:49,USR028,Ariana Rhodes,Engineering,Google Drive,DOC-0102.jpg,handwritten,Branch2_OCR+Presidio,0.9,2,0,2,22,SENSITIVE,0,SAFE (blind to image),3494.4,ALERT,True,False
+PII-0103,2026-07-06 22:43:11,USR025,Charles Dennis,Legal,Microsoft OneDrive,DOC-0103.jpg,handwritten,Branch3_VLM+Presidio,0.61,0,0,0,0,SAFE,0,SAFE (blind to image),2927.2,PERMIT,False,False
+PII-0104,2026-07-04 00:33:20,USR021,Michelle Martin,Engineering,Google Drive,DOC-0104.jpg,handwritten,Branch2_OCR+Presidio,0.93,0,0,1,1,SAFE,0,SAFE (blind to image),2005.7,PERMIT,False,False
+PII-0105,2026-06-29 04:35:30,USR022,Dana Waller,Sales,Microsoft OneDrive,DOC-0105.jpg,handwritten,Branch2_OCR+Presidio,0.88,2,1,3,28,SENSITIVE,0,SAFE (blind to image),3609.2,ALERT,True,False
+PII-0106,2026-06-26 20:19:59,USR025,Diana Hunt,Legal,Google Drive,DOC-0106.jpg,handwritten,Branch3_VLM+Presidio,0.65,0,0,0,0,SAFE,0,SAFE (blind to image),3163.2,PERMIT,False,False
+PII-0107,2026-06-21 10:49:42,USR042,Mandy Allen,Sales,Microsoft OneDrive,DOC-0107.jpg,handwritten,Branch3_VLM+Presidio,0.79,0,0,1,1,SAFE,0,SAFE (blind to image),4814.5,PERMIT,False,False
+PII-0108,2026-06-25 20:52:05,USR015,James Anderson,Legal,Microsoft OneDrive,DOC-0108.jpg,handwritten,Branch3_VLM+Presidio,0.78,1,1,2,17,SAFE,0,SAFE (blind to image),6559.3,PERMIT,False,False
+PII-0109,2026-06-26 04:06:33,USR002,Kevin Reyes,Sales,Microsoft OneDrive,DOC-0109.jpg,handwritten,Branch3_VLM+Presidio,0.73,1,1,1,16,SAFE,0,SAFE (blind to image),5033.6,PERMIT,False,False
+PII-0110,2026-06-20 21:58:38,USR048,Jennifer Brown,HR,Microsoft OneDrive,DOC-0110.jpg,handwritten,Branch2_OCR+Presidio,0.88,0,1,1,6,SAFE,0,SAFE (blind to image),2597.6,PERMIT,False,False
+PII-0111,2026-06-27 09:13:22,USR033,Brent Williams,HR,Microsoft OneDrive,DOC-0111.jpg,handwritten,Branch2_OCR+Presidio,0.86,1,1,2,17,SAFE,0,SAFE (blind to image),3214.6,PERMIT,False,False
+PII-0112,2026-06-18 06:02:24,USR007,John Anderson,Legal,Microsoft OneDrive,DOC-0112.jpg,handwritten,Branch3_VLM+Presidio,0.71,1,2,1,21,SENSITIVE,0,SAFE (blind to image),6373.2,ALERT,True,False
+PII-0113,2026-06-19 21:08:44,USR001,Eric Swanson,HR,Microsoft OneDrive,DOC-0113.jpg,handwritten,Branch2_OCR+Presidio,0.91,1,2,1,21,SENSITIVE,0,SAFE (blind to image),3007.3,ALERT,True,False
+PII-0114,2026-07-08 20:27:48,USR010,Jessica Owens,Legal,Microsoft OneDrive,DOC-0114.jpg,handwritten,Branch2_OCR+Presidio,0.95,0,0,1,1,SAFE,0,SAFE (blind to image),2927.4,PERMIT,False,False
+PII-0115,2026-06-28 16:02:46,USR045,Barry Wagner,Engineering,Google Drive,DOC-0115.jpg,handwritten,Branch3_VLM+Presidio,0.84,0,2,1,11,SAFE,0,SAFE (blind to image),5392.4,PERMIT,False,False
+PII-0116,2026-07-05 16:36:52,USR044,Roberto Boyle,Finance,Google Drive,DOC-0116.jpg,handwritten,Branch3_VLM+Presidio,0.76,1,2,1,21,SENSITIVE,0,SAFE (blind to image),10382.6,ALERT,True,False
+PII-0117,2026-06-20 17:54:49,USR041,John Hurley,Engineering,Microsoft OneDrive,DOC-0117.jpg,handwritten,Branch2_OCR+Presidio,0.96,0,0,1,1,SAFE,0,SAFE (blind to image),2068.6,PERMIT,False,False
+PII-0118,2026-07-08 18:05:17,USR038,Jamie Floyd,HR,Microsoft OneDrive,DOC-0118.jpg,handwritten,Branch3_VLM+Presidio,0.82,0,0,0,0,SAFE,0,SAFE (blind to image),2713.6,PERMIT,False,False
+PII-0119,2026-06-30 15:48:56,USR028,Mr. Shane Leonard,HR,Google Drive,DOC-0119.jpg,handwritten,Branch3_VLM+Presidio,0.77,0,0,1,1,SAFE,0,SAFE (blind to image),3980.6,PERMIT,False,False
+PII-0120,2026-07-04 18:17:14,USR012,Kathleen Mcneil,Engineering,Google Drive,DOC-0120.jpg,handwritten,Branch2_OCR+Presidio,0.99,0,0,1,1,SAFE,0,SAFE (blind to image),2147.1,PERMIT,False,False

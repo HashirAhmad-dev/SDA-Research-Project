@@ -29,7 +29,9 @@ from . import __version__
 from .anomaly_engine import DEFAULT_ALPHA
 from .data_loader import load_all
 from .risk_orchestrator import DEFAULT_BETA, score_event
-from .schemas import FullScoringResult, PaperMetrics
+from .measured_metrics import (MEASURED_NOTE, NOT_MEASURED_NOTE,
+                               load_measured_metrics)
+from .schemas import FullScoringResult, MetricsResponse, PaperMetrics
 
 app = FastAPI(
     title="HybridSaaS-Sec API",
@@ -65,10 +67,21 @@ def root() -> Dict[str, Any]:
     }
 
 
-@app.get("/metrics", response_model=PaperMetrics)
-def metrics() -> PaperMetrics:
-    """Headline empirical metrics reported in Section V of the paper."""
-    return PaperMetrics()
+@app.get("/metrics", response_model=MetricsResponse)
+def metrics() -> MetricsResponse:
+    """Measured engine performance, alongside the numbers the paper claims.
+
+    The two disagree. `measured` is authoritative; `paper_claimed` is retained
+    only so the gap is visible rather than silently papered over. See
+    `evaluation/REAL_RESULTS.md`.
+    """
+    measured = load_measured_metrics()
+    return MetricsResponse(
+        measured=measured,
+        paper_claimed=PaperMetrics(),
+        reproduced=False,
+        note=MEASURED_NOTE if measured else NOT_MEASURED_NOTE,
+    )
 
 
 # ---------------------------------------------------------------------------

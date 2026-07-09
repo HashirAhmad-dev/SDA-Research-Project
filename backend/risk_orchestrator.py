@@ -7,17 +7,36 @@ Semantic-Behavioral Risk Score (SBRS) orchestration (Section IV of the paper).
 
   * S         : payload sensitivity in [0, 100]              (pii_pipeline.py)
   * A_hybrid  : fused behavioural anomaly score in [0, 1]    (anomaly_engine.py)
-  * beta      : tunable enterprise risk multiplier (paper-default 0.5).
+  * beta      : enterprise risk multiplier.
 
 A small S (benign data) keeps SBRS low regardless of anomaly magnitude -
 this is exactly what mathematically suppresses the false-positive cascade
 that plagues legacy EWMA-only DLP systems. Conversely, even modest anomaly
 on highly sensitive content amplifies SBRS into the BLOCK band.
 
-Enforcement bands (calibrated from the simulation dataset):
-    SBRS  < 0.20 -> SAFE      -> PERMIT
-    SBRS  < 0.60 -> SENSITIVE -> ALERT
-    SBRS >= 0.60 -> HIGH-RISK -> BLOCK
+beta and the band cut-points below are DATA-CALIBRATED, not hand-picked. They
+were re-derived on the validation split of the real anomaly evaluation and
+verified once on the held-out test split by `evaluation/calibrate_sbrs.py`:
+
+  * beta = 2.5  -- the knee of val AUC(SBRS vs true-threat); beta=0.5 let content
+                   sensitivity dominate so hard that 86% of sessions auto-ALERTed
+                   and 41% auto-BLOCKed almost regardless of behaviour.
+  * bands       -- the 95th / 99.5th percentile of the BENIGN val SBRS
+                   distribution: the SOC reviews ~5% of normal traffic, and
+                   auto-block fires on the ~0.5% tail normal traffic never reaches.
+
+Recalibration result on the held-out test split (see SBRS_RECALIBRATION.md):
+    enforcement F1         0.087 -> 0.479
+    benign ALERT+BLOCK     85.9% -> 3.9%
+    benign auto-BLOCK      38.9% -> 0.4%
+
+    SBRS  < 1.22 -> SAFE      -> PERMIT
+    SBRS  < 1.84 -> SENSITIVE -> ALERT
+    SBRS >= 1.84 -> HIGH-RISK -> BLOCK
+
+NOTE: Context/01-Research-Paper/SBRS.md still documents the old, ungrounded
+bands (0.5 / 1.0) and beta. This module is the authoritative source; that doc
+should be updated to match (exact text in SBRS_RECALIBRATION.md).
 """
 from __future__ import annotations
 
@@ -29,12 +48,13 @@ from .schemas import (AnomalyResult, EventSummary, FullScoringResult,
                       PIIResult, SBRSResult)
 
 
-DEFAULT_BETA: float = 0.5
+DEFAULT_BETA: float = 2.5           # calibrate_sbrs.py: knee of val AUC
 
-# Calibrated to anomaly_detection_comparison.csv (see EDA in repo README).
+# Data-calibrated on the validation split; verified once on test.
+# Cut-points = 95th / 99.5th percentile of the benign val SBRS distribution.
 SBRS_BANDS = [
-    (0.60, "HIGH-RISK", "BLOCK"),
-    (0.20, "SENSITIVE", "ALERT"),
+    (1.84, "HIGH-RISK", "BLOCK"),
+    (1.22, "SENSITIVE", "ALERT"),
     (0.00, "SAFE",      "PERMIT"),
 ]
 

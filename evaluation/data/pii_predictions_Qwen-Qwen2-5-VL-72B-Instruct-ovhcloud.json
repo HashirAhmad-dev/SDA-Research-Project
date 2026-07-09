@@ -1,0 +1,4339 @@
+{
+ "branch1": {
+  "DOC-0001": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Kim Diaz"
+    },
+    {
+     "type": "PERSON",
+     "value": "Email"
+    },
+    {
+     "type": "EMAIL",
+     "value": "kimberlycook@example.net"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "5CeuJom4hL"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 322 9173259"
+    }
+   ],
+   "elapsed_ms": 37.759500002721325
+  },
+  "DOC-0002": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Tracy Booker"
+    }
+   ],
+   "elapsed_ms": 9.327700012363493
+  },
+  "DOC-0003": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Alan Gonzalez"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4379509569380848"
+    },
+    {
+     "type": "DOB",
+     "value": "1997-03-06"
+    }
+   ],
+   "elapsed_ms": 29.24600000551436
+  },
+  "DOC-0004": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Katherine Goodwin"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "374120251378406"
+    },
+    {
+     "type": "DOB",
+     "value": "1967-04-29"
+    }
+   ],
+   "elapsed_ms": 13.62399999925401
+  },
+  "DOC-0005": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Maria Baker"
+    },
+    {
+     "type": "PERSON",
+     "value": "Williams Plains\nDate"
+    },
+    {
+     "type": "DOB",
+     "value": "2004-05-05"
+    }
+   ],
+   "elapsed_ms": 12.559099995996803
+  },
+  "DOC-0006": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "James Howard"
+    }
+   ],
+   "elapsed_ms": 8.101800005533732
+  },
+  "DOC-0007": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Marcus Hill"
+    },
+    {
+     "type": "EMAIL",
+     "value": "paulerickson@example.com"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 345 0514789"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "374912890874021"
+    }
+   ],
+   "elapsed_ms": 12.663599991356023
+  },
+  "DOC-0008": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Katherine Ellis"
+    },
+    {
+     "type": "EMAIL",
+     "value": "thompsonjames@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "3Ubnfk1Qn6"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 319 3231128"
+    }
+   ],
+   "elapsed_ms": 9.91049999720417
+  },
+  "DOC-0009": {
+   "entities": [],
+   "elapsed_ms": 7.131299993488938
+  },
+  "DOC-0010": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Kara Lee"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4254960030881643"
+    },
+    {
+     "type": "DOB",
+     "value": "1967-03-02"
+    }
+   ],
+   "elapsed_ms": 11.302700004307553
+  },
+  "DOC-0011": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Christopher Crawford"
+    },
+    {
+     "type": "EMAIL",
+     "value": "jakecoleman@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "m8DbUqB1xW"
+    }
+   ],
+   "elapsed_ms": 9.659899995313026
+  },
+  "DOC-0012": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Erika Waters"
+    },
+    {
+     "type": "EMAIL",
+     "value": "robin31@example.net"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "OWyn0bgy0W"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 340 7883179"
+    }
+   ],
+   "elapsed_ms": 9.686599994893186
+  },
+  "DOC-0013": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Brian Pham\nCard"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "6011234675159320"
+    },
+    {
+     "type": "PERSON",
+     "value": "8147 Hernandez Coves Apt"
+    },
+    {
+     "type": "DOB",
+     "value": "1966-06-29"
+    }
+   ],
+   "elapsed_ms": 11.455600004410371
+  },
+  "DOC-0014": {
+   "entities": [],
+   "elapsed_ms": 7.04799999948591
+  },
+  "DOC-0015": {
+   "entities": [],
+   "elapsed_ms": 6.916300000739284
+  },
+  "DOC-0016": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Robert Moran"
+    },
+    {
+     "type": "NID",
+     "value": "53803-1485454-0"
+    },
+    {
+     "type": "DOB",
+     "value": "1980-11-03"
+    }
+   ],
+   "elapsed_ms": 12.075500009814277
+  },
+  "DOC-0017": {
+   "entities": [],
+   "elapsed_ms": 7.897100003901869
+  },
+  "DOC-0018": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Sherry Herrera"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 348 4387996"
+    },
+    {
+     "type": "EMAIL",
+     "value": "lbraun@example.org"
+    }
+   ],
+   "elapsed_ms": 9.390600011101924
+  },
+  "DOC-0019": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "David Bradley"
+    },
+    {
+     "type": "EMAIL",
+     "value": "daniel92@example.org"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 322 6281286"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4093231009098907"
+    }
+   ],
+   "elapsed_ms": 10.767399988253601
+  },
+  "DOC-0020": {
+   "entities": [],
+   "elapsed_ms": 6.742600002326071
+  },
+  "DOC-0021": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Sylvia Hanna"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "6520896166637131"
+    },
+    {
+     "type": "DOB",
+     "value": "1986-09-10"
+    }
+   ],
+   "elapsed_ms": 10.107699999934994
+  },
+  "DOC-0022": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jeffrey Fowler"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 336 3876150"
+    },
+    {
+     "type": "EMAIL",
+     "value": "maxwellwilliam@example.com"
+    }
+   ],
+   "elapsed_ms": 9.003900006064214
+  },
+  "DOC-0023": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Terri Daniel\nCard"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "6598903782744924"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "Lawrence Plaza Suite"
+    },
+    {
+     "type": "DOB",
+     "value": "1986-08-26"
+    }
+   ],
+   "elapsed_ms": 11.155500003951602
+  },
+  "DOC-0024": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Shannon Hoffman"
+    },
+    {
+     "type": "EMAIL",
+     "value": "jeremybaker@example.net"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "7HdY6gkBma"
+    }
+   ],
+   "elapsed_ms": 9.575699994456954
+  },
+  "DOC-0025": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Justin Pittman\nEmail"
+    },
+    {
+     "type": "EMAIL",
+     "value": "gonzaleztiffany@example.com"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "8XyEkyF6Hw"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 348 4123221"
+    }
+   ],
+   "elapsed_ms": 9.347200000775047
+  },
+  "DOC-0026": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Mark Brandt"
+    },
+    {
+     "type": "EMAIL",
+     "value": "bking@example.com"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "JsGuNIrp3B"
+    }
+   ],
+   "elapsed_ms": 8.469699998386204
+  },
+  "DOC-0027": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jessica Banks"
+    },
+    {
+     "type": "EMAIL",
+     "value": "willierichardson@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "U4T8JkwA9N"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 315 5589057"
+    }
+   ],
+   "elapsed_ms": 11.92240000818856
+  },
+  "DOC-0028": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Karen Ortiz"
+    },
+    {
+     "type": "NID",
+     "value": "23543-2487604-4"
+    },
+    {
+     "type": "DOB",
+     "value": "1985-10-14"
+    },
+    {
+     "type": "EMAIL",
+     "value": "jacksonluis@example.org"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 320 0218373"
+    }
+   ],
+   "elapsed_ms": 14.138300000922754
+  },
+  "DOC-0029": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Kenneth Sanders"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4476543274968078"
+    },
+    {
+     "type": "PERSON",
+     "value": "Pruitt Greens Apt"
+    },
+    {
+     "type": "DOB",
+     "value": "1986-12-11"
+    }
+   ],
+   "elapsed_ms": 11.447900003986433
+  },
+  "DOC-0030": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Mary Miller"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4767535481573905"
+    },
+    {
+     "type": "DOB",
+     "value": "15394"
+    },
+    {
+     "type": "DOB",
+     "value": "1991-01-25"
+    }
+   ],
+   "elapsed_ms": 10.900699999183416
+  },
+  "DOC-0031": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Phillip Patel"
+    },
+    {
+     "type": "EMAIL",
+     "value": "andrew17@example.com"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "d3LYCjrK66"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 310 5033636"
+    }
+   ],
+   "elapsed_ms": 9.984000003896654
+  },
+  "DOC-0032": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Natalie Turner"
+    },
+    {
+     "type": "EMAIL",
+     "value": "fnguyen@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "RddV1cNwAR"
+    },
+    {
+     "type": "DOB",
+     "value": "300 0353590"
+    }
+   ],
+   "elapsed_ms": 9.741100002429448
+  },
+  "DOC-0033": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Samuel Boyer"
+    },
+    {
+     "type": "NID",
+     "value": "64675-0123036-0"
+    },
+    {
+     "type": "EMAIL",
+     "value": "mjohnson@example.com"
+    }
+   ],
+   "elapsed_ms": 10.34079999953974
+  },
+  "DOC-0034": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Marissa Jones"
+    },
+    {
+     "type": "NID",
+     "value": "74406-3833013-8"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "374523787212116"
+    },
+    {
+     "type": "EMAIL",
+     "value": "iowens@example.com"
+    }
+   ],
+   "elapsed_ms": 10.235599998850375
+  },
+  "DOC-0035": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Kevin Hughes"
+    },
+    {
+     "type": "EMAIL",
+     "value": "diamondmorris@example.net"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 316 8453702"
+    },
+    {
+     "type": "PERSON",
+     "value": "Amy Crest\nCard"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4265858193766949"
+    }
+   ],
+   "elapsed_ms": 11.064799997257069
+  },
+  "DOC-0036": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Theodore Haney\nEmail"
+    },
+    {
+     "type": "EMAIL",
+     "value": "laura34@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "jew5ExuEeH"
+    }
+   ],
+   "elapsed_ms": 9.299500001361594
+  },
+  "DOC-0037": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Claire Saunders"
+    },
+    {
+     "type": "NID",
+     "value": "37270-0099746-2"
+    },
+    {
+     "type": "DOB",
+     "value": "1981-11-23"
+    },
+    {
+     "type": "EMAIL",
+     "value": "ianlawrence@example.com"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 308 8954947"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "Wagner Village Suite"
+    }
+   ],
+   "elapsed_ms": 14.426099995034747
+  },
+  "DOC-0038": {
+   "entities": [],
+   "elapsed_ms": 6.655699995462783
+  },
+  "DOC-0039": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Laura Henderson"
+    },
+    {
+     "type": "EMAIL",
+     "value": "tina93@example.com"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 300 4547053"
+    },
+    {
+     "type": "PERSON",
+     "value": "John Glens\nCard"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "341981403619603"
+    }
+   ],
+   "elapsed_ms": 10.224699988611974
+  },
+  "DOC-0040": {
+   "entities": [],
+   "elapsed_ms": 6.773000000976026
+  },
+  "DOC-0041": {
+   "entities": [],
+   "elapsed_ms": 0.000400003045797348
+  },
+  "DOC-0042": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0043": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0044": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0045": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0046": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0047": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0048": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0049": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0050": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0051": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0052": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0053": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0054": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0055": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0056": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0057": {
+   "entities": [],
+   "elapsed_ms": 0.00019998697098344564
+  },
+  "DOC-0058": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0059": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0060": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0061": {
+   "entities": [],
+   "elapsed_ms": 9.998620953410864e-05
+  },
+  "DOC-0062": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0063": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0064": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0065": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0066": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0067": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0068": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0069": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0070": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0071": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0072": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0073": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0074": {
+   "entities": [],
+   "elapsed_ms": 0.0004999892553314567
+  },
+  "DOC-0075": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0076": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0077": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0078": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0079": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0080": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0081": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0082": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0083": {
+   "entities": [],
+   "elapsed_ms": 0.000400003045797348
+  },
+  "DOC-0084": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0085": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0086": {
+   "entities": [],
+   "elapsed_ms": 0.000600004568696022
+  },
+  "DOC-0087": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0088": {
+   "entities": [],
+   "elapsed_ms": 0.000300002284348011
+  },
+  "DOC-0089": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0090": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0091": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0092": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0093": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0094": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0095": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0096": {
+   "entities": [],
+   "elapsed_ms": 0.000300002284348011
+  },
+  "DOC-0097": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0098": {
+   "entities": [],
+   "elapsed_ms": 0.00019998697098344564
+  },
+  "DOC-0099": {
+   "entities": [],
+   "elapsed_ms": 0.000300002284348011
+  },
+  "DOC-0100": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0101": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0102": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0103": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0104": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0105": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0106": {
+   "entities": [],
+   "elapsed_ms": 0.000400003045797348
+  },
+  "DOC-0107": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0108": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0109": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0110": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0111": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0112": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0113": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0114": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0115": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0116": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0117": {
+   "entities": [],
+   "elapsed_ms": 0.000200001522898674
+  },
+  "DOC-0118": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0119": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  },
+  "DOC-0120": {
+   "entities": [],
+   "elapsed_ms": 0.000100000761449337
+  }
+ },
+ "branch2": {
+  "DOC-0041": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Guy Lewis\nEmail"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 333 2648517"
+    },
+    {
+     "type": "PERSON",
+     "value": "Flores Brooks\nCard"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "344611316591584"
+    }
+   ],
+   "confidence": 0.8213562347782084,
+   "transcript": "VENDOR ONBOARDING FORM\nName: Guy Lewis\nEmail: icarter@example net\nPhone: +92 333 2648517\nAddress: 8282 Flores Brooks\nCard No: 344611316591584\nDo not forward outside the department:",
+   "boxes": 7,
+   "elapsed_ms": 2819.25620000402
+  },
+  "DOC-0042": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "James Thompson"
+    },
+    {
+     "type": "NID",
+     "value": "31070-2042300-7"
+    },
+    {
+     "type": "DOB",
+     "value": "2001-12-12"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "matthew9g"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 334 3222013"
+    }
+   ],
+   "confidence": 0.8141922489256067,
+   "transcript": "EMPLOYEE RECORD\nCONFIDENTIAL\nName: James Thompson\nCNIC: 31070-2042300-7\nDate of Birth: 2001-12-12\nEmail: matthew9g @example net\nPhone: +92 334 3222013\nAddress: 89713 Erik Circles\nDo not forward outside the department.",
+   "boxes": 9,
+   "elapsed_ms": 2964.809700002661
+  },
+  "DOC-0043": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Emily Gross"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 336 2534962"
+    }
+   ],
+   "confidence": 0.8601253818816688,
+   "transcript": "CUSTOMER SUPPORT ESCALATION\nName: Emily Gross\nPhone: +92 336 2534962\nEmail: zboyd@example org\nCirculated to the reviewing manager only:",
+   "boxes": 5,
+   "elapsed_ms": 2225.3424000082305
+  },
+  "DOC-0044": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Paul Olson"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "6552101631109431"
+    },
+    {
+     "type": "DOB",
+     "value": "1986-12-25"
+    }
+   ],
+   "confidence": 0.8709362477996744,
+   "transcript": "EXPENSE REIMBURSEMENT CLAIM\nName: Paul Olson\nCard No: 6552101631109431\nAddress: 3103 Micheal Court Suite 070\nDate of Birth: 1986-12-25\nReference: ticket queue Q3 backlog:",
+   "boxes": 6,
+   "elapsed_ms": 2323.7928000016836
+  },
+  "DOC-0045": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Laura Padilla\nCNIC"
+    },
+    {
+     "type": "NID",
+     "value": "82296-0172442-2"
+    },
+    {
+     "type": "DOB",
+     "value": "1971-03-08"
+    },
+    {
+     "type": "EMAIL",
+     "value": "william42@example.com"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 334 8835877"
+    },
+    {
+     "type": "PERSON",
+     "value": "Rachel Spur"
+    }
+   ],
+   "confidence": 0.8438207841442766,
+   "transcript": "EMPLOYEE RECORD\nCONFIDENTIAL\nName: Laura Padilla\nCNIC: 82296-0172442-2\nDate of Birth: 1971-03-08\nEmail: william42@example.com\nPhone: +92 334 8835877\nAddress: 349 Rachel Spur\nPlease file this document per retention policy R-14.",
+   "boxes": 9,
+   "elapsed_ms": 2953.382799998508
+  },
+  "DOC-0046": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Amanda Gibbs"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 342 5885442"
+    },
+    {
+     "type": "PERSON",
+     "value": "Monique Knolls"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4759784309867947"
+    }
+   ],
+   "confidence": 0.84814680414506,
+   "transcript": "VENDOR ONBOARDING FORM\nName: Amanda Gibbs\nEmail: juan77 @example.net\nPhone: +92 342 5885442\nAddress: 211 Monique Knolls\nCard No: 4759784309867947\nPlease file this document per retention policy R-14.",
+   "boxes": 7,
+   "elapsed_ms": 2741.6474999918137
+  },
+  "DOC-0047": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Melissa Torres"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4386833375271665"
+    },
+    {
+     "type": "DOB",
+     "value": "1984-01-18"
+    }
+   ],
+   "confidence": 0.9173621739411192,
+   "transcript": "EXPENSE REIMBURSEMENT CLAIM\nName: Melissa Torres\nCard No: 4386833375271665\nAddress: 58439 Meza Radial\nDate of Birth: 1984-01-18\nSigned off by the compliance desk.",
+   "boxes": 6,
+   "elapsed_ms": 2336.0358999925666
+  },
+  "DOC-0048": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Eric Holt"
+    },
+    {
+     "type": "NID",
+     "value": "63735-0078654-0"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4066675184571232"
+    },
+    {
+     "type": "EMAIL",
+     "value": "patelmary@example.net"
+    }
+   ],
+   "confidence": 0.8638919073817033,
+   "transcript": "PAYROLL DISBURSEMENT SLIP\nName: Eric Holt\nCNIC: 63735-0078654-0\nCard No: 4066675184571232\nEmail: patelmary@example.net\nSigned off by the compliance desk",
+   "boxes": 6,
+   "elapsed_ms": 2415.5114000022877
+  },
+  "DOC-0049": {
+   "entities": [],
+   "confidence": 0.9449484838160022,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\nSigned off by the compliance desk",
+   "boxes": 2,
+   "elapsed_ms": 1514.4728999875952
+  },
+  "DOC-0050": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Anthony Green"
+    }
+   ],
+   "confidence": 0.8943049984758786,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\nName: Anthony Green\nSigned off by the\ncompliance desk;",
+   "boxes": 5,
+   "elapsed_ms": 1766.4516999939224
+  },
+  "DOC-0051": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Catherine Martinez"
+    },
+    {
+     "type": "NID",
+     "value": "12671-1683258-8"
+    },
+    {
+     "type": "DOB",
+     "value": "1968-10-03"
+    },
+    {
+     "type": "EMAIL",
+     "value": "xyoder@example.org"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 346 6441375"
+    }
+   ],
+   "confidence": 0.7273173734752736,
+   "transcript": "EMPLOYEE RECORD\nCONFIDENTIAL\nName: Catherine Martinez\nCNIC: 12671-1683258-8\nDate of Birth: 1968-10-03\nEmail: xyoder@example.org\nPhone: +92 346 6441375\nAddress: 663 Scott Junction Apt. 134\nDo not forward outside the department_",
+   "boxes": 9,
+   "elapsed_ms": 2939.4544000097085
+  },
+  "DOC-0052": {
+   "entities": [],
+   "confidence": 0.7632696926172043,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\nSigned off by the compliance desk",
+   "boxes": 2,
+   "elapsed_ms": 1380.3614000062225
+  },
+  "DOC-0053": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Melissa Boyd"
+    },
+    {
+     "type": "NID",
+     "value": "22112-7121751-7"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4916703592146405"
+    }
+   ],
+   "confidence": 0.7774781871657344,
+   "transcript": "PAYROLL DISBURSEMENT SLIP\nName: Melissa Boyd\nCNIC: 22112-7121751-7\nCard No: 4916703592146405\nEmail: curtismoran @example net\nCirculated to the reviewing manager only",
+   "boxes": 6,
+   "elapsed_ms": 2429.310199993779
+  },
+  "DOC-0054": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Tricia Mooney"
+    },
+    {
+     "type": "EMAIL",
+     "value": "johnsonveronica@example.org"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 331 2592177"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "347101554958049"
+    }
+   ],
+   "confidence": 0.8833317856259125,
+   "transcript": "VENDOR ONBOARDING FORM\nName: Tricia Mooney\nEmail: johnsonveronica@example.org\nPhone: +92 331 2592177\nAddress: 8904 Harmon\nValleys Suite 591\nCard No: 347101554958049\nSigned off by the\ncompliance desk",
+   "boxes": 9,
+   "elapsed_ms": 2851.057799998671
+  },
+  "DOC-0055": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "John West\nEmail"
+    },
+    {
+     "type": "EMAIL",
+     "value": "englishshawn@example.com"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 335 0602307"
+    },
+    {
+     "type": "PERSON",
+     "value": "Stephanie Burg"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4315701625235929"
+    }
+   ],
+   "confidence": 0.841186992353508,
+   "transcript": "VENDOR ONBOARDING FORM\nName: John West\nEmail: englishshawn@example.com\nPhone: +92 335 0602307\nAddress: 91623 Stephanie Burg Apt: 798\nCard No: 4315701625235929\nCirculated to the reviewing manager only:",
+   "boxes": 7,
+   "elapsed_ms": 2710.2727000019513
+  },
+  "DOC-0056": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Frank Graham"
+    },
+    {
+     "type": "EMAIL",
+     "value": "salazarsamantha@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "YjdzbolZ6M"
+    },
+    {
+     "type": "PHONE",
+     "value": "0398480"
+    }
+   ],
+   "confidence": 0.7981917014263581,
+   "transcript": "SECURITY INCIDENT REPORT\nName: Frank Graham\nEmail: salazarsamantha@example.org\nTemp Password: YjdzbolZ6M\nPhone: +92 300\n0398480\nSigned offby the compliance desk",
+   "boxes": 7,
+   "elapsed_ms": 2528.0746999924304
+  },
+  "DOC-0057": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Laurie Carson"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "4laeQYko08"
+    }
+   ],
+   "confidence": 0.8418414666198825,
+   "transcript": "IT ACCOUNT PROVISIONING TICKET\nName: Laurie Carson\nEmail: sarahchurch@example org\nTemp Password: 4laeQYko08\nPlease file this document per retention policy R-14.",
+   "boxes": 5,
+   "elapsed_ms": 2150.390900002094
+  },
+  "DOC-0058": {
+   "entities": [],
+   "confidence": 0.7587782641352637,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\nSigned off by the compliance desk",
+   "boxes": 2,
+   "elapsed_ms": 1534.8222999891732
+  },
+  "DOC-0059": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Thomas Wilson"
+    },
+    {
+     "type": "EMAIL",
+     "value": "chudson@example.com"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "eEwy9NUqQ5"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 309 5216858"
+    }
+   ],
+   "confidence": 0.8054611125645338,
+   "transcript": "SECURITY INCIDENT REPORT\nName: Thomas Wilson\nEmail: chudson@example.com\nTemp Password: eEwy9NUqQ5\nPhone: +92 309 5216858\nReference: ticket queue Q3 backlog:",
+   "boxes": 6,
+   "elapsed_ms": 2473.94379999605
+  },
+  "DOC-0060": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Patrick French"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 337 2590969"
+    }
+   ],
+   "confidence": 0.8535909234160088,
+   "transcript": "CUSTOMER SUPPORT ESCALATION\nName: Patrick French\nPhone: +92 337 2590969\nEmail: millerwilliam@example org\nCirculated to the reviewing manager only.",
+   "boxes": 5,
+   "elapsed_ms": 2213.30649999436
+  },
+  "DOC-0061": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Connor Brown"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 304 3872441"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "Christina Estates"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4600170858897389"
+    }
+   ],
+   "confidence": 0.7874846544035673,
+   "transcript": "VENDOR ONBOARDING FORM\nName: Connor Brown\nEmail:\nbenjaminhanson@example com\nPhone: +92 304 3872441\nAddress: 1124 Christina Estates\nCard No: 4600170858897389\nPlease file this document per retention policy R-14.",
+   "boxes": 8,
+   "elapsed_ms": 2649.064700002782
+  },
+  "DOC-0062": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jessica Wilson"
+    },
+    {
+     "type": "EMAIL",
+     "value": "johnstuart@example.org"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 330 2602917"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4869026491710742"
+    }
+   ],
+   "confidence": 0.8629103169846591,
+   "transcript": "VENDOR ONBOARDING FORM\nName: Jessica Wilson\nEmail: johnstuart@example.org\nPhone: +92 330 2602917\nAddress: 85974 Brandon Shores\nCard No: 4869026491710742\nReference: ticket queue Q3 backlog:",
+   "boxes": 7,
+   "elapsed_ms": 2810.3344999981346
+  },
+  "DOC-0063": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Larry Clark"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 313 8114485"
+    }
+   ],
+   "confidence": 0.9069727233696214,
+   "transcript": "CUSTOMER SUPPORT ESCALATION\nName: Larry Clark\nPhone: +92 313 8114485\nEmail: perkinsmelissa@example org\nPlease file this document per retention policy R-14:",
+   "boxes": 5,
+   "elapsed_ms": 2247.814300004393
+  },
+  "DOC-0064": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jeffrey Valentine"
+    },
+    {
+     "type": "NID",
+     "value": "17678-6280101-2"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "347701570285242"
+    },
+    {
+     "type": "EMAIL",
+     "value": "kylelo@example.com"
+    }
+   ],
+   "confidence": 0.8173155047258058,
+   "transcript": "PAYROLL DISBURSEMENT SLIP\nName: Jeffrey Valentine\nCNIC: 17678-6280101-2\nCard No: 347701570285242\nEmail: kylelo@example.com\nPlease file this document per retention policy R-14.",
+   "boxes": 6,
+   "elapsed_ms": 2635.997400007909
+  },
+  "DOC-0065": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Marissa Scott"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "KERnU6zilJ"
+    }
+   ],
+   "confidence": 0.9093297590859001,
+   "transcript": "ITACCOUNT PROVISIONING TICKET\nName: Marissa Scott\nEmail: olsonkelsey@example net\nTemp Password: KERnU6zilJ\nReference: ticket queue Q3 backlog:",
+   "boxes": 5,
+   "elapsed_ms": 2291.4323000004515
+  },
+  "DOC-0066": {
+   "entities": [],
+   "confidence": 0.883443096334945,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\nSigned off by the compliance desk:",
+   "boxes": 2,
+   "elapsed_ms": 1430.7684999948833
+  },
+  "DOC-0067": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Daniel Pittman"
+    },
+    {
+     "type": "DOB",
+     "value": "1989-05-24"
+    }
+   ],
+   "confidence": 0.8114913567554515,
+   "transcript": "EXPENSE REIMBURSEMENT CLAIM\nSF5=\nName: Daniel Pittman\nCard No: 2720025008696207\nAddress: 565 Smith Motorway Suite 631\nDate of Birth: 1989-05-24\nReference: ticket queue Q3 backlog:",
+   "boxes": 7,
+   "elapsed_ms": 2750.554900005227
+  },
+  "DOC-0068": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Smith"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 349 2289896"
+    },
+    {
+     "type": "EMAIL",
+     "value": "brittanyperez@example.com"
+    },
+    {
+     "type": "PERSON",
+     "value": "Amy"
+    }
+   ],
+   "confidence": 0.9314890269575166,
+   "transcript": "CUSTOMER SUPPORT ESCALATION\nName:\nSmith\nPhone: +92 349 2289896\nEmail: brittanyperez@example.com\nSigned off by the compliance desk:\nAmy",
+   "boxes": 7,
+   "elapsed_ms": 2118.588900004397
+  },
+  "DOC-0069": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Adrian Reese"
+    },
+    {
+     "type": "EMAIL",
+     "value": "Iscott@example.org"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 304 0250724"
+    }
+   ],
+   "confidence": 0.7401242028913052,
+   "transcript": "SECURITY INCIDENT REPORT\nAdrian Reese\nEmail: Iscott@example.org\nPassword: hzaMGdpbgf\nPhone: +92 304 0250724\nDo not forward outside the department:\nName:\nTemp",
+   "boxes": 8,
+   "elapsed_ms": 2553.9504999906057
+  },
+  "DOC-0070": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Tyler Miller"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "OoPAgrcGR2"
+    }
+   ],
+   "confidence": 0.8278743854362619,
+   "transcript": "IT ACCOUNT PROVISIONING TICKET\nName: Tyler Miller\nEmail: kevinO5 @example org\nTemp Password: OoPAgrcGR2\nDo not forward outside the department_",
+   "boxes": 5,
+   "elapsed_ms": 2164.1221000027144
+  },
+  "DOC-0071": {
+   "entities": [],
+   "confidence": 0.8409211554643794,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\nEEE=\nDo not forward outside the department:",
+   "boxes": 3,
+   "elapsed_ms": 1472.7393999928609
+  },
+  "DOC-0072": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Mark Washington"
+    },
+    {
+     "type": "EMAIL",
+     "value": "feliciachambers@example.com"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "LE62Ptvcal"
+    }
+   ],
+   "confidence": 0.8206567492025958,
+   "transcript": "IT ACCOUNT PROVISIONING TICKET\nName: Mark Washington\nEmail: feliciachambers@example.com\nTemp Password: LE62Ptvcal\nReference: ticket queue 03 backlog:",
+   "boxes": 5,
+   "elapsed_ms": 2203.6965000006603
+  },
+  "DOC-0073": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Matthew Hall"
+    },
+    {
+     "type": "EMAIL",
+     "value": "danielcindy@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "3gSzdsdiUU"
+    }
+   ],
+   "confidence": 0.9052169714484053,
+   "transcript": "IT ACCOUNT PROVISIONING TICKET\nName: Matthew Hall\nEmail: danielcindy@example.org\nTemp Password: 3gSzdsdiUU\nCirculated to the reviewing manager only:",
+   "boxes": 5,
+   "elapsed_ms": 2309.8026999941794
+  },
+  "DOC-0074": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jesus Phillips"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "AVTh8Cdzog"
+    }
+   ],
+   "confidence": 0.8458674686421217,
+   "transcript": "IT ACCOUNT PROVISIONING TICKET\nName: Jesus Phillips\nEmail: maurices 7@example com\nPassword:\nAVTh8Cdzog\nSigned off by the compliance desk:\nTemp",
+   "boxes": 7,
+   "elapsed_ms": 2168.705799995223
+  },
+  "DOC-0075": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Sarah Williams"
+    }
+   ],
+   "confidence": 0.963168095061314,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\nName: Sarah Williams\nSigned off by the compliance desk",
+   "boxes": 4,
+   "elapsed_ms": 1789.981899986742
+  },
+  "DOC-0076": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Bradley Buchanan"
+    },
+    {
+     "type": "NID",
+     "value": "20468-5585990-2"
+    },
+    {
+     "type": "DOB",
+     "value": "2002-04-18"
+    },
+    {
+     "type": "EMAIL",
+     "value": "wmiller@example.net"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 336 4706741"
+    },
+    {
+     "type": "PERSON",
+     "value": "Anthony Stravenue"
+    }
+   ],
+   "confidence": 0.8232861442781632,
+   "transcript": "EMPLOYEE RECORD\nCONFIDENTIAL\nName: Bradley Buchanan\nCNIC: 20468-5585990-2\nDate of Birth: 2002-04-18\nEmail: wmiller@example.net\nPhone: +92 336 4706741\nAddress: 39139 Anthony Stravenue Apt: 450\nCirculated to the reviewing manager only:",
+   "boxes": 9,
+   "elapsed_ms": 3100.8782999997493
+  },
+  "DOC-0077": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Randy Guzman"
+    }
+   ],
+   "confidence": 0.9248752749674335,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\nName: Randy Guzman\nReference: ticket queue 03 backlog:",
+   "boxes": 4,
+   "elapsed_ms": 1705.841100003454
+  },
+  "DOC-0078": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Sutton"
+    },
+    {
+     "type": "NID",
+     "value": "56197-6349783-4"
+    },
+    {
+     "type": "DOB",
+     "value": "2001-04-06"
+    },
+    {
+     "type": "PERSON",
+     "value": "Spencer"
+    }
+   ],
+   "confidence": 0.8708306364052592,
+   "transcript": "BENEFITS ENROLMENT CONFIRMATION\nName:\nSutton\nCNIC: 56197-6349783-4\nDate of Birth: 2001-04-06\nAddress: 588 Cheryl Roads Suite 440\nReference: ticket queue Q3 backlog:\nSpencer",
+   "boxes": 8,
+   "elapsed_ms": 2495.7946999929845
+  },
+  "DOC-0079": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Emily Whitaker"
+    },
+    {
+     "type": "NID",
+     "value": "42952-5176326-1"
+    },
+    {
+     "type": "DOB",
+     "value": "1990-12-20"
+    },
+    {
+     "type": "PERSON",
+     "value": "Gomez Parks"
+    }
+   ],
+   "confidence": 0.767832075710215,
+   "transcript": "BENEFITS ENROLMENT CONFIRMATION\nName: Emily Whitaker\nCNIC: 42952-5176326-1\nDate of Birth: 1990-12-20\nAddress: 4984 Gomez Parks\nDo not forward outside the department.",
+   "boxes": 6,
+   "elapsed_ms": 2602.940900003887
+  },
+  "DOC-0080": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jonathan Burton"
+    },
+    {
+     "type": "NID",
+     "value": "35791-0027901-3"
+    },
+    {
+     "type": "DOB",
+     "value": "1970-05-21"
+    },
+    {
+     "type": "PERSON",
+     "value": "James Passage Apt"
+    }
+   ],
+   "confidence": 0.7712383800761208,
+   "transcript": "BENEFITS ENROLMENT CONFIRMATION\nName: Jonathan Burton\nCNIC: 35791-0027901-3\nDate of Birth: 1970-05-21\nAddress: 602 James Passage Apt. 707\nPlease file this document per retention policy R-14.",
+   "boxes": 6,
+   "elapsed_ms": 2714.6543999988353
+  },
+  "DOC-0081": {
+   "entities": [
+    {
+     "type": "ADDRESS",
+     "value": "Bryce Black"
+    }
+   ],
+   "confidence": 0.9784001067432162,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\nName: Bryce Black\nCirculated to the reviewing manager only:",
+   "boxes": 4,
+   "elapsed_ms": 1946.237399999518
+  },
+  "DOC-0082": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Daniel Phillips"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "8D1bUGAaCP"
+    }
+   ],
+   "confidence": 0.7515743446907066,
+   "transcript": "ACCOUNT PROVISIONING TICKET\nIT\n222222=\n222\n232=\nName: Daniel Phillips\nEmail:\nkjosepheexample 5\norg\nTemp Password: 8D1bUGAaCP\nto the reviewing manager only:\nCirculated",
+   "boxes": 12,
+   "elapsed_ms": 2880.2766999870073
+  },
+  "DOC-0083": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Joseph Alexander"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 342 8667137"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "Q3"
+    }
+   ],
+   "confidence": 0.9106702214006607,
+   "transcript": "CUSTOMER SUPPORT ESCALATION\n3333333\n==223\nName: Joseph Alexander\nPhone: +92 342 8667137\nEmail:\nmarieflemingeexample\nnet\nReference: ticket queue Q3\nbacklog:",
+   "boxes": 10,
+   "elapsed_ms": 2911.386499996297
+  },
+  "DOC-0084": {
+   "entities": [],
+   "confidence": 0.7602047671648603,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\n22262262\nCirculated t the reviewing manager only:",
+   "boxes": 3,
+   "elapsed_ms": 1936.0547000105726
+  },
+  "DOC-0085": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Joshua Mccoy"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "HwEs2rlOA"
+    }
+   ],
+   "confidence": 0.6096554921307415,
+   "transcript": "SECURITY INCIDENT REPORT\nName: Joshua Mccoy\nEmail: scottdavid@example net\nTemp Passwora: HwEs2rlOA\nPhone;\n92 346 2233729\nSigned off\nte\ncompliance desk:\nby",
+   "boxes": 10,
+   "elapsed_ms": 2748.009600007208
+  },
+  "DOC-0086": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Sheila Gardner"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "Timothy Harbor\nDate"
+    },
+    {
+     "type": "DOB",
+     "value": "1998-08-26"
+    }
+   ],
+   "confidence": 0.8729277533791987,
+   "transcript": "EXPENSE REIMBURSEMENT CLAIM\nName: Sheila Gardner\nCard No: 2293418087865859\nAddress: 559\nTimothy Harbor\nDate of Birth: 1998-08-26\nPlease file this document per retention policy R-14.",
+   "boxes": 7,
+   "elapsed_ms": 2893.0284999951255
+  },
+  "DOC-0087": {
+   "entities": [],
+   "confidence": 0.757875229594843,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\n22522\nfile this document per retention policy R-14:\nPlease",
+   "boxes": 4,
+   "elapsed_ms": 2057.290299999295
+  },
+  "DOC-0088": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Suzanne Soto"
+    },
+    {
+     "type": "NID",
+     "value": "88203-0217266-6"
+    },
+    {
+     "type": "DOB",
+     "value": "1990-05-26"
+    },
+    {
+     "type": "PERSON",
+     "value": "Devin"
+    }
+   ],
+   "confidence": 0.8914773758758407,
+   "transcript": "BENEFITS ENROLMENT\nCONFIRMATION\nName: Suzanne Soto\nCNIC: 88203-0217266-6\nDate of Birth: 1990-05-26\nAddress: 092 Devin\nReference: ticket queue Q3\nAvenue\nbacklog",
+   "boxes": 9,
+   "elapsed_ms": 3061.6167999978643
+  },
+  "DOC-0089": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Andrew Long"
+    },
+    {
+     "type": "NID",
+     "value": "63197-2319443-2"
+    },
+    {
+     "type": "DOB",
+     "value": "1993-09-08"
+    },
+    {
+     "type": "DOB",
+     "value": "86037"
+    },
+    {
+     "type": "PERSON",
+     "value": "Adams Trafficway"
+    }
+   ],
+   "confidence": 0.8384299464297039,
+   "transcript": "BENEFITS ENROLMENT CONFIRMATION\n===\n2222232\nName: Andrew Long\nCNIC: 63197-2319443-2\nDate of Birth: 1993-09-08\nAddress: 86037 Adams Trafficway\nDo not forward outside the department:",
+   "boxes": 8,
+   "elapsed_ms": 3070.2885999926366
+  },
+  "DOC-0090": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Joanne Greene"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "p8RORaZUXR"
+    },
+    {
+     "type": "DOB",
+     "value": "1214081"
+    }
+   ],
+   "confidence": 0.8460808392658469,
+   "transcript": "SECURITY INCIDENT REPORT\nName: Joanne Greene\nEmail:\nwelchpatriciaeexample.\nnet\nPassword: p8RORaZUXR\nPhone: +92 329 1214081\nPlease file\ndocument\nper retention policy R-14\nTemp\nthis",
+   "boxes": 12,
+   "elapsed_ms": 3231.024599997909
+  },
+  "DOC-0091": {
+   "entities": [],
+   "confidence": 0.8728960515288454,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\nCirculated t the\nreviewing manager only:",
+   "boxes": 3,
+   "elapsed_ms": 1802.180300001055
+  },
+  "DOC-0092": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jason Brown"
+    }
+   ],
+   "confidence": 0.9158485377821286,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\nName: Jason Brown\nSigned off by the compliance desk",
+   "boxes": 4,
+   "elapsed_ms": 2157.805199996801
+  },
+  "DOC-0093": {
+   "entities": [],
+   "confidence": 0.8800253910523335,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\ndocument per retention policy R-14:\nPlease file this",
+   "boxes": 3,
+   "elapsed_ms": 1980.409799987683
+  },
+  "DOC-0094": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Mark Hester"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "Sparks Avenue"
+    },
+    {
+     "type": "DOB",
+     "value": "2004-07-22"
+    }
+   ],
+   "confidence": 0.755265319101936,
+   "transcript": "EXPENSE REIMBURSEMENT CLAIM\n67\nName: Mark Hester\nCard No: 2263872095237541\nAddress: 4107 Sparks Avenue\nDate of Birth: 2004-07-22\nPlease file this document per retention\npolicy R-14",
+   "boxes": 8,
+   "elapsed_ms": 2932.185900004697
+  },
+  "DOC-0095": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Holly Sanders"
+    },
+    {
+     "type": "NID",
+     "value": "65428-9677602-2"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4555227164100109"
+    }
+   ],
+   "confidence": 0.873696989596852,
+   "transcript": "PAYROLL DISBURSEMENT SLIP\nName: Holly Sanders\nCNIC: 65428-9677602-2\nCard No: 4555227164100109\nEmail: laurag4@exampleorg\nPlease file this document per retention policy R-14.",
+   "boxes": 6,
+   "elapsed_ms": 2910.5213999864645
+  },
+  "DOC-0096": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Leonard\nEmail"
+    },
+    {
+     "type": "PERSON",
+     "value": "Hayes Cliff"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "5358892040271477"
+    },
+    {
+     "type": "PERSON",
+     "value": "Jeffrey"
+    }
+   ],
+   "confidence": 0.826427711005241,
+   "transcript": "VENDOR ONBOARDING FORM\n222222323\nName:\nLeonard\nEmail: jgreen@examplecom\nPhone: +92\n300 7350612\nAddress: 4660 Hayes Cliff\nCard No: 5358892040271477\nDo not forward outside the department:\nJeffrey",
+   "boxes": 11,
+   "elapsed_ms": 3308.045300000231
+  },
+  "DOC-0097": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Michelle\nCNIC"
+    },
+    {
+     "type": "NID",
+     "value": "17688-1888177-8"
+    },
+    {
+     "type": "DOB",
+     "value": "1980-07-24"
+    },
+    {
+     "type": "PERSON",
+     "value": "Thomas Knoll\nCirculated"
+    },
+    {
+     "type": "PERSON",
+     "value": "Mcgee"
+    }
+   ],
+   "confidence": 0.8902441380972228,
+   "transcript": "BENEFITS ENROLMENT CONFIRMATION\nName: Michelle\nCNIC: 17688-1888177-8\nDate of Birth: 1980-07-24\nAddress: 26680 Thomas Knoll\nCirculated to the\nmanager only:\nMcgee\nreviewing",
+   "boxes": 9,
+   "elapsed_ms": 3164.042399992468
+  },
+  "DOC-0098": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Michelle\nPlease"
+    },
+    {
+     "type": "PERSON",
+     "value": "Ramos"
+    }
+   ],
+   "confidence": 0.9179935374265804,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\nMichelle\nPlease file this document\nper retention policy R-14.\nName:\nRamos",
+   "boxes": 7,
+   "elapsed_ms": 2211.7299000092316
+  },
+  "DOC-0099": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jeffery Martinez"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "14Ztfbpkkk"
+    }
+   ],
+   "confidence": 0.4519291859417668,
+   "transcript": "IT ACCOUNT PROVISIONING TICKET\n22833\n322222222\nName Jeffery Martinez\nEmail: ifreemandexample org\nTenp Password: 14Ztfbpkkk\nReference: ticket quue Q3 backlog;",
+   "boxes": 7,
+   "elapsed_ms": 2804.571400003624
+  },
+  "DOC-0100": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "David Daniel\nCNIC"
+    },
+    {
+     "type": "NID",
+     "value": "27777-2122323-2"
+    },
+    {
+     "type": "DOB",
+     "value": "1987-09-11"
+    },
+    {
+     "type": "DOB",
+     "value": "4396"
+    },
+    {
+     "type": "PERSON",
+     "value": "Nash Brook"
+    }
+   ],
+   "confidence": 0.6999025834753213,
+   "transcript": "BENEFITS ENROLMENT CONFIRMATION\n22222223\nName: David Daniel\nCNIC: 27777-2122323-2\nDate of Birth: 1987-09-11\nAddress: 4396 Nash Brook Apt: 377\nReference: ticket queue Q3 backlog:",
+   "boxes": 7,
+   "elapsed_ms": 2916.2547000014456
+  },
+  "DOC-0101": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Dustin Atkins"
+    },
+    {
+     "type": "DOB",
+     "value": "1994-01-30"
+    }
+   ],
+   "confidence": 0.7554059518902008,
+   "transcript": "EXPENSE REIMBURSEMENT CLAIM\n688223228\n3262\nName: Dustin Atkins\nCard No: 2236736430042615\nAddress: 4860 Mack Shoals Apt: 609\nDate of Birth: 1994-01-30\nCirculated to the reviewing\nmanager only:",
+   "boxes": 9,
+   "elapsed_ms": 3194.9501000053715
+  },
+  "DOC-0102": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Carlos Todd\nEmail"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "justin26"
+    },
+    {
+     "type": "PERSON",
+     "value": "King Falls"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "6563905948856725"
+    }
+   ],
+   "confidence": 0.8995622849107596,
+   "transcript": "VENDOR ONBOARDING FORM\nName: Carlos Todd\nEmail:\njustin26@example org\nPhone\n92 330 6311874\nAddress: 74522 King Falls\nCard No:\n6563905948856725\nCirculated to the reviewing manager only:",
+   "boxes": 10,
+   "elapsed_ms": 3494.369399995776
+  },
+  "DOC-0103": {
+   "entities": [],
+   "confidence": 0.6108010019050919,
+   "transcript": "PubLIC PRESS RELEASE DRAFT\nDo not forward Outside the department",
+   "boxes": 2,
+   "elapsed_ms": 1715.1932999986457
+  },
+  "DOC-0104": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Amanda Perez"
+    }
+   ],
+   "confidence": 0.9301666050147392,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\nName: Amanda Perez\nSigned off by the compliance desk",
+   "boxes": 4,
+   "elapsed_ms": 2005.701299989596
+  },
+  "DOC-0105": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Sara Maxwell"
+    },
+    {
+     "type": "NID",
+     "value": "47015-6037540-3"
+    },
+    {
+     "type": "DOB",
+     "value": "2001-05-18"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "stephanie9s"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 325 6542807"
+    },
+    {
+     "type": "PERSON",
+     "value": "Michael Mountain\nPlease"
+    }
+   ],
+   "confidence": 0.877651616605625,
+   "transcript": "EMPLOYEE RECORD\nCONFIDENTIAL\nName: Sara Maxwell\nCNIC:\n47015-6037540-3\nDate of Birth: 2001-05-18\nEmail:\nstephanie9s@example:r\nnet\nPhone: +92 325 6542807\nAddress: 1227 Michael Mountain\nPlease file this document\nper retention policy R-14",
+   "boxes": 13,
+   "elapsed_ms": 3609.167600006913
+  },
+  "DOC-0106": {
+   "entities": [
+    {
+     "type": "DOB",
+     "value": "6338322\n82232283"
+    }
+   ],
+   "confidence": 0.6520712346190759,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\n6338322\n82232283\nPlease file #is document\nretention policu R-14\nper",
+   "boxes": 6,
+   "elapsed_ms": 2002.0769999973709
+  },
+  "DOC-0107": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Daniet Bates"
+    }
+   ],
+   "confidence": 0.7941793557262457,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\n465223\nName: Daniet Bates\nSigned off by the compliance desk",
+   "boxes": 5,
+   "elapsed_ms": 2141.2221000064164
+  },
+  "DOC-0108": {
+   "entities": [
+    {
+     "type": "PHONE",
+     "value": "2377223352"
+    },
+    {
+     "type": "PERSON",
+     "value": "Michael Richardson"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "6547309417595883"
+    },
+    {
+     "type": "PERSON",
+     "value": "Burth"
+    },
+    {
+     "type": "DOB",
+     "value": "1996-09-24"
+    }
+   ],
+   "confidence": 0.7752335057346268,
+   "transcript": "EXPENSE REIMBURSEMENT CLAIM\n2377223352\n232233\nNamne: Michael Richardson\nCard No: 6547309417595883\nAddress: 7303 Sherri Gardens\nDate of Burth: 1996-09-24\nPlease file this document per retention\npolicy R-14",
+   "boxes": 9,
+   "elapsed_ms": 3280.484900009469
+  },
+  "DOC-0109": {
+   "entities": [
+    {
+     "type": "ADDRESS",
+     "value": "Emait"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "ceLFjjqFp3"
+    },
+    {
+     "type": "PERSON",
+     "value": "Brittany"
+    }
+   ],
+   "confidence": 0.7337817496319798,
+   "transcript": "IT ACCOUNT PROVISIONING TICKET\nName:\nJosepk\nEmait\nortegaveronicaeexample com\nPassword: ceLFjjqFp3\nDo not forward outside the department\nBrittany\nTemap",
+   "boxes": 9,
+   "elapsed_ms": 2698.117000007187
+  },
+  "DOC-0110": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Samantha Myers"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 348 7842723"
+    }
+   ],
+   "confidence": 0.8794448286845384,
+   "transcript": "CUSTOMER SUPPORT ESCALATION\nName: Samantha Myers\nPhone: +92 348 7842723\nEmail:\nvictoriasilvaeexample.\nCom\nDo not forward outside the department",
+   "boxes": 7,
+   "elapsed_ms": 2597.5892999995267
+  },
+  "DOC-0111": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Maxwell Cooper"
+    },
+    {
+     "type": "NID",
+     "value": "13495-5758697-3"
+    },
+    {
+     "type": "DOB",
+     "value": "2002-09-21\nDate"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "Watts Shoal"
+    }
+   ],
+   "confidence": 0.8596071010158557,
+   "transcript": "BENEFITS ENROLMENT CONFIRMATION\nName:\nMaxwell Cooper\nCNIC: 13495-5758697-3\nof Birth: 2002-09-21\nDate\nWatts Shoal Apt: 678\nAddress: 27624\ndesk:\nSigned off by the\ncompliance",
+   "boxes": 11,
+   "elapsed_ms": 3214.555999991717
+  },
+  "DOC-0112": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Erin Silva"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "matthew27"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "NWSATOQf94"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 319 7793466"
+    }
+   ],
+   "confidence": 0.7118553600274015,
+   "transcript": "SECURITY INCIDENT REPORT\nZII2\nName: Erin Silva\nEmail: matthew27@example org\nTemp Password: NWSATOQf94\nPhone: +92 319 7793466\nSigned off by the compliance desk.",
+   "boxes": 7,
+   "elapsed_ms": 3018.977600004291
+  },
+  "DOC-0113": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Scott Coleman"
+    },
+    {
+     "type": "EMAIL",
+     "value": "nnguyen@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "J491ILuT8c"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 303 7729222"
+    }
+   ],
+   "confidence": 0.9130189244091396,
+   "transcript": "SECURITY INCIDENT REPORT\nName: Scott Coleman\nEmail: nnguyen@example.org\nPassword: J491ILuT8c\nPhone: +92 303 7729222\nReference: ticket queue Q3\nTemp\nbacklog:",
+   "boxes": 8,
+   "elapsed_ms": 3007.2987000021385
+  },
+  "DOC-0114": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Paul Martinez"
+    }
+   ],
+   "confidence": 0.945681176959324,
+   "transcript": "CUSTOMER SUPPORT ESCALATION\nName: Paul Martinez\nPhone: +92\n506\n8772069\nEmail:\njeffreyhudsoneexampleorg\nforward outside the department:\nDo\nnot",
+   "boxes": 10,
+   "elapsed_ms": 2927.3899999971036
+  },
+  "DOC-0115": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Crystal Williams"
+    }
+   ],
+   "confidence": 0.8424509890518871,
+   "transcript": "CUSTOMER SUPPORT ESCALATION\nName: Crystal Williams\nPhone:\n92 313 6920327\nEmail;\nthomastyler@example,\nerg\nCirculated to the\nmanager only.\nreviewing",
+   "boxes": 10,
+   "elapsed_ms": 2767.104800004745
+  },
+  "DOC-0116": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Steven Montgomery"
+    }
+   ],
+   "confidence": 0.7634701762372582,
+   "transcript": "SECURITY INCIDENT REPORT\nName Steven Montgomery\nEmail: chasebailey@example org\nTemp Password: TiF4SVZ+7O\nPhone: -92 310 5340616\nDo not forward outside the department",
+   "boxes": 6,
+   "elapsed_ms": 2753.1225999991875
+  },
+  "DOC-0117": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Richard Ford"
+    }
+   ],
+   "confidence": 0.9553722993693098,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\nName: Richard Ford\nCirculated t the reviewing manager only",
+   "boxes": 4,
+   "elapsed_ms": 2068.587000001571
+  },
+  "DOC-0118": {
+   "entities": [
+    {
+     "type": "ADDRESS",
+     "value": "Q3"
+    }
+   ],
+   "confidence": 0.821234538597868,
+   "transcript": "PUBLIC PRESS RELEASE DRAFT\nReference: ticket queue Q3\nbacklog:",
+   "boxes": 3,
+   "elapsed_ms": 1824.485499993898
+  },
+  "DOC-0119": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Anthony Mccullough"
+    },
+    {
+     "type": "PERSON",
+     "value": "Plecse"
+    }
+   ],
+   "confidence": 0.7733650067717087,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\n322\nName: Anthony Mccullough\nfile this document per retention policy R-14\nPlecse",
+   "boxes": 6,
+   "elapsed_ms": 2240.4872000042815
+  },
+  "DOC-0120": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Nathaniel"
+    }
+   ],
+   "confidence": 0.9939201689279686,
+   "transcript": "INTERNAL MEMO\nTEAM OFFSITE\nName: Nathaniel\nSigned off by the compliance desk\nParsons",
+   "boxes": 5,
+   "elapsed_ms": 2147.0817000081297
+  }
+ },
+ "branch3": {
+  "DOC-0041": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Guy Lewis"
+    },
+    {
+     "type": "EMAIL",
+     "value": "icarter@example.net"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 333 2648517"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "8282 Flores Brooks"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "344611316591584"
+    }
+   ],
+   "elapsed_ms": 5709.266899997601,
+   "status": "ok+cached",
+   "usage": {},
+   "billed_now": false
+  },
+  "DOC-0081": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Bryce Black"
+    }
+   ],
+   "elapsed_ms": 3330.405899992911,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 745,
+    "completion_tokens": 18,
+    "total_tokens": 763
+   },
+   "billed_now": false
+  },
+  "DOC-0042": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "James Thompson"
+    },
+    {
+     "type": "NID",
+     "value": "31070-2042300-7"
+    },
+    {
+     "type": "DOB",
+     "value": "2001-12-12"
+    },
+    {
+     "type": "EMAIL",
+     "value": "matthew99@example.net"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 334 3222013"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "89713 Erik Circles"
+    }
+   ],
+   "elapsed_ms": 4392.40769999742,
+   "status": "ok+cached",
+   "usage": {},
+   "billed_now": false
+  },
+  "DOC-0082": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Daniel Phillips"
+    },
+    {
+     "type": "EMAIL",
+     "value": "kjoseph@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "8D1bUGAaCP"
+    }
+   ],
+   "elapsed_ms": 2714.1893000080017,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 959,
+    "completion_tokens": 51,
+    "total_tokens": 1010
+   },
+   "billed_now": false
+  },
+  "DOC-0043": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Emily Gross"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 336 2534962"
+    },
+    {
+     "type": "EMAIL",
+     "value": "zboyd@example.org"
+    }
+   ],
+   "elapsed_ms": 2329.7342999867396,
+   "status": "ok+cached",
+   "usage": {},
+   "billed_now": false
+  },
+  "DOC-0083": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Joseph Alexander"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 342 8667137"
+    },
+    {
+     "type": "EMAIL",
+     "value": "mariefleming@example.net"
+    }
+   ],
+   "elapsed_ms": 3068.4548999997787,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 959,
+    "completion_tokens": 58,
+    "total_tokens": 1017
+   },
+   "billed_now": false
+  },
+  "DOC-0044": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Paul Olson"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "6552101631109431"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "3103 Micheal Court Suite 070"
+    },
+    {
+     "type": "DOB",
+     "value": "1986-12-25"
+    }
+   ],
+   "elapsed_ms": 3246.9688999990467,
+   "status": "ok+cached",
+   "usage": {},
+   "billed_now": false
+  },
+  "DOC-0084": {
+   "entities": [],
+   "elapsed_ms": 1147.5294000119902,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 719,
+    "completion_tokens": 2,
+    "total_tokens": 721
+   },
+   "billed_now": false
+  },
+  "DOC-0045": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Laura Padilla"
+    },
+    {
+     "type": "NID",
+     "value": "82296-0172442-2"
+    },
+    {
+     "type": "DOB",
+     "value": "1971-03-08"
+    },
+    {
+     "type": "EMAIL",
+     "value": "william42@example.com"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 334 8835877"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "349 Rachel Spur"
+    }
+   ],
+   "elapsed_ms": 4668.73889999988,
+   "status": "ok+cached",
+   "usage": {},
+   "billed_now": false
+  },
+  "DOC-0085": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Joshua Mccoy"
+    },
+    {
+     "type": "EMAIL",
+     "value": "scottdavid@example.net"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "HwEsl2rlOA"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 346 2233729"
+    }
+   ],
+   "elapsed_ms": 3189.0712000022177,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 959,
+    "completion_tokens": 79,
+    "total_tokens": 1038
+   },
+   "billed_now": false
+  },
+  "DOC-0046": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Amanda Gibbs"
+    },
+    {
+     "type": "EMAIL",
+     "value": "juan77@example.net"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 342 5885442"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "211 Monique Knolls"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4759784309867947"
+    }
+   ],
+   "elapsed_ms": 3897.169300005771,
+   "status": "ok+cached",
+   "usage": {},
+   "billed_now": false
+  },
+  "DOC-0086": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Sheila Gardner"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "2293418087865859"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "559 Timothy Harbor"
+    },
+    {
+     "type": "DOB",
+     "value": "1998-08-26"
+    }
+   ],
+   "elapsed_ms": 3161.90259999712,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 940,
+    "completion_tokens": 83,
+    "total_tokens": 1023
+   },
+   "billed_now": false
+  },
+  "DOC-0047": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Melissa Torres"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4386833375271665"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "58439 Meza Radial"
+    },
+    {
+     "type": "DOB",
+     "value": "1984-01-18"
+    }
+   ],
+   "elapsed_ms": 3122.2762999968836,
+   "status": "ok+cached",
+   "usage": {},
+   "billed_now": false
+  },
+  "DOC-0087": {
+   "entities": [],
+   "elapsed_ms": 737.4394999933429,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 759,
+    "completion_tokens": 2,
+    "total_tokens": 761
+   },
+   "billed_now": false
+  },
+  "DOC-0048": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Eric Holt"
+    },
+    {
+     "type": "NID",
+     "value": "63735-0078654-0"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4066675184571232"
+    },
+    {
+     "type": "EMAIL",
+     "value": "patelmary@example.net"
+    }
+   ],
+   "elapsed_ms": 3988.299899996491,
+   "status": "ok+cached",
+   "usage": {},
+   "billed_now": false
+  },
+  "DOC-0088": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Suzanne Soto"
+    },
+    {
+     "type": "NID",
+     "value": "88203-0217266-6"
+    },
+    {
+     "type": "DOB",
+     "value": "1990-05-26"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "092 Devin Avenue"
+    }
+   ],
+   "elapsed_ms": 3920.7641999964835,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 1039,
+    "completion_tokens": 83,
+    "total_tokens": 1122
+   },
+   "billed_now": false
+  },
+  "DOC-0049": {
+   "entities": [],
+   "elapsed_ms": 1039.2638000048464,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 628,
+    "completion_tokens": 2,
+    "total_tokens": 630
+   },
+   "billed_now": false
+  },
+  "DOC-0089": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Andrew Long"
+    },
+    {
+     "type": "NID",
+     "value": "63197-2319443-2"
+    },
+    {
+     "type": "DOB",
+     "value": "1993-09-08"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "86037 Adams Trafficway"
+    }
+   ],
+   "elapsed_ms": 5541.36629999266,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 999,
+    "completion_tokens": 83,
+    "total_tokens": 1082
+   },
+   "billed_now": false
+  },
+  "DOC-0050": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Anthony Green"
+    }
+   ],
+   "elapsed_ms": 1542.1184000006178,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 679,
+    "completion_tokens": 16,
+    "total_tokens": 695
+   },
+   "billed_now": false
+  },
+  "DOC-0090": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Joanne Greene"
+    },
+    {
+     "type": "EMAIL",
+     "value": "welchpatricia@example.net"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "p8RORaZUXR"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 329 1214081"
+    }
+   ],
+   "elapsed_ms": 3758.267400000477,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 1039,
+    "completion_tokens": 78,
+    "total_tokens": 1117
+   },
+   "billed_now": false
+  },
+  "DOC-0051": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Catherine Martinez"
+    },
+    {
+     "type": "NID",
+     "value": "12671-1683258-8"
+    },
+    {
+     "type": "DOB",
+     "value": "1968-10-03"
+    },
+    {
+     "type": "EMAIL",
+     "value": "xyoder@example.org"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 346 6441375"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "663 Scott Junction Apt. 134"
+    }
+   ],
+   "elapsed_ms": 5498.258999999962,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 959,
+    "completion_tokens": 127,
+    "total_tokens": 1086
+   },
+   "billed_now": false
+  },
+  "DOC-0091": {
+   "entities": [],
+   "elapsed_ms": 1142.335100012133,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 719,
+    "completion_tokens": 2,
+    "total_tokens": 721
+   },
+   "billed_now": false
+  },
+  "DOC-0052": {
+   "entities": [],
+   "elapsed_ms": 1192.6651000103448,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 589,
+    "completion_tokens": 2,
+    "total_tokens": 591
+   },
+   "billed_now": false
+  },
+  "DOC-0092": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jason Brown"
+    }
+   ],
+   "elapsed_ms": 1425.1694999984466,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 759,
+    "completion_tokens": 16,
+    "total_tokens": 775
+   },
+   "billed_now": false
+  },
+  "DOC-0053": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Melissa Boyd"
+    },
+    {
+     "type": "NID",
+     "value": "22112-7121751-7"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4916703592146405"
+    },
+    {
+     "type": "EMAIL",
+     "value": "curtismoran@example.net"
+    }
+   ],
+   "elapsed_ms": 3781.112700002268,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 879,
+    "completion_tokens": 90,
+    "total_tokens": 969
+   },
+   "billed_now": false
+  },
+  "DOC-0093": {
+   "entities": [],
+   "elapsed_ms": 1086.0850999888498,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 759,
+    "completion_tokens": 2,
+    "total_tokens": 761
+   },
+   "billed_now": false
+  },
+  "DOC-0054": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Tricia Mooney"
+    },
+    {
+     "type": "EMAIL",
+     "value": "johnsonveronica@example.org"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 331 2592177"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "8904 Harmon Valleys Suite 591"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "347101554958049"
+    }
+   ],
+   "elapsed_ms": 6248.98759998905,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 919,
+    "completion_tokens": 111,
+    "total_tokens": 1030
+   },
+   "billed_now": false
+  },
+  "DOC-0094": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Mark Hester"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "2263872095237541"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "4107 Sparks Avenue"
+    },
+    {
+     "type": "DOB",
+     "value": "2004-07-22"
+    }
+   ],
+   "elapsed_ms": 5040.305899994564,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 999,
+    "completion_tokens": 84,
+    "total_tokens": 1083
+   },
+   "billed_now": false
+  },
+  "DOC-0055": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "John West"
+    },
+    {
+     "type": "EMAIL",
+     "value": "englishshawn@example.com"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 335 0602307"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "91623 Stephanie Burg Apt. 798"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4315701625235929"
+    }
+   ],
+   "elapsed_ms": 4330.885799994576,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 919,
+    "completion_tokens": 110,
+    "total_tokens": 1029
+   },
+   "billed_now": false
+  },
+  "DOC-0095": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Holly Sanders"
+    },
+    {
+     "type": "NID",
+     "value": "65428-9677602-2"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4555227164100109"
+    },
+    {
+     "type": "EMAIL",
+     "value": "laura84@example.org"
+    }
+   ],
+   "elapsed_ms": 4016.5309000003617,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 999,
+    "completion_tokens": 90,
+    "total_tokens": 1089
+   },
+   "billed_now": false
+  },
+  "DOC-0056": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Frank Graham"
+    },
+    {
+     "type": "EMAIL",
+     "value": "salazarsamantha@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "YjdzbolZ6M"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 300 0398480"
+    }
+   ],
+   "elapsed_ms": 3150.546100005158,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 839,
+    "completion_tokens": 77,
+    "total_tokens": 916
+   },
+   "billed_now": false
+  },
+  "DOC-0096": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jeffrey Leonard"
+    },
+    {
+     "type": "EMAIL",
+     "value": "jgreen@example.com"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 300 7350612"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "4660 Hayes Cliff"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "5358892040271477"
+    }
+   ],
+   "elapsed_ms": 5665.355700009968,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 1039,
+    "completion_tokens": 108,
+    "total_tokens": 1147
+   },
+   "billed_now": false
+  },
+  "DOC-0057": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Laurie Carson"
+    },
+    {
+     "type": "EMAIL",
+     "value": "sarahchurch@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "4IaeQYko08"
+    }
+   ],
+   "elapsed_ms": 2967.6729000057094,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 784,
+    "completion_tokens": 53,
+    "total_tokens": 837
+   },
+   "billed_now": false
+  },
+  "DOC-0097": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Michelle Mcgee"
+    },
+    {
+     "type": "NID",
+     "value": "17688-1888177-8"
+    },
+    {
+     "type": "DOB",
+     "value": "1980-07-24"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "26680 Thomas Knoll"
+    }
+   ],
+   "elapsed_ms": 3693.6322999972617,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 1039,
+    "completion_tokens": 84,
+    "total_tokens": 1123
+   },
+   "billed_now": false
+  },
+  "DOC-0058": {
+   "entities": [],
+   "elapsed_ms": 1018.9737000036985,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 628,
+    "completion_tokens": 2,
+    "total_tokens": 630
+   },
+   "billed_now": false
+  },
+  "DOC-0098": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Michelle Ramos"
+    }
+   ],
+   "elapsed_ms": 3213.4077999944566,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 799,
+    "completion_tokens": 16,
+    "total_tokens": 815
+   },
+   "billed_now": false
+  },
+  "DOC-0059": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Thomas Wilson"
+    },
+    {
+     "type": "EMAIL",
+     "value": "chudson@example.com"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "eEwy9NUqQ5"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 309 5216858"
+    }
+   ],
+   "elapsed_ms": 2857.5851999921724,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 75,
+    "total_tokens": 898
+   },
+   "billed_now": false
+  },
+  "DOC-0099": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jeffery Martinez"
+    },
+    {
+     "type": "EMAIL",
+     "value": "jfreeman@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "14ZtfbphhK"
+    }
+   ],
+   "elapsed_ms": 2508.1165000010515,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 862,
+    "completion_tokens": 52,
+    "total_tokens": 914
+   },
+   "billed_now": false
+  },
+  "DOC-0060": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Patrick French"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 337 2590969"
+    },
+    {
+     "type": "EMAIL",
+     "value": "millerwilliam@example.org"
+    }
+   ],
+   "elapsed_ms": 2370.488500004285,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 784,
+    "completion_tokens": 58,
+    "total_tokens": 842
+   },
+   "billed_now": false
+  },
+  "DOC-0100": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "David Daniel"
+    },
+    {
+     "type": "NID",
+     "value": "27777-2122323-2"
+    },
+    {
+     "type": "DOB",
+     "value": "1987-09-11"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "4396 Nash Brook Apt. 377"
+    }
+   ],
+   "elapsed_ms": 3514.2831999983173,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 999,
+    "completion_tokens": 87,
+    "total_tokens": 1086
+   },
+   "billed_now": false
+  },
+  "DOC-0061": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Connor Brown"
+    },
+    {
+     "type": "EMAIL",
+     "value": "benjaminhanson@example.com"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 304 3872441"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "1124 Christina Estates"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4600170858897389"
+    }
+   ],
+   "elapsed_ms": 3789.688799995929,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 919,
+    "completion_tokens": 104,
+    "total_tokens": 1023
+   },
+   "billed_now": false
+  },
+  "DOC-0101": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Dustin Atkins"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "2236736430042615"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "4860 Mack Shoals Apt. 609"
+    },
+    {
+     "type": "DOB",
+     "value": "1994-01-30"
+    }
+   ],
+   "elapsed_ms": 3349.338700005319,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 999,
+    "completion_tokens": 91,
+    "total_tokens": 1090
+   },
+   "billed_now": false
+  },
+  "DOC-0062": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jessica Wilson"
+    },
+    {
+     "type": "EMAIL",
+     "value": "johnstuart@example.org"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 330 2602917"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "85974 Brandon Shores"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "4869026491710742"
+    }
+   ],
+   "elapsed_ms": 4054.0576000057627,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 862,
+    "completion_tokens": 105,
+    "total_tokens": 967
+   },
+   "billed_now": false
+  },
+  "DOC-0102": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Carlos Todd"
+    },
+    {
+     "type": "EMAIL",
+     "value": "justin26@example.org"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 330 6311874"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "74522 King Falls"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "6563905948856725"
+    }
+   ],
+   "elapsed_ms": 3735.551999998279,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 1079,
+    "completion_tokens": 105,
+    "total_tokens": 1184
+   },
+   "billed_now": false
+  },
+  "DOC-0063": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Larry Clark"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 313 8114485"
+    },
+    {
+     "type": "EMAIL",
+     "value": "perkinsmelissa@example.org"
+    }
+   ],
+   "elapsed_ms": 4173.17959999491,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 784,
+    "completion_tokens": 58,
+    "total_tokens": 842
+   },
+   "billed_now": false
+  },
+  "DOC-0103": {
+   "entities": [],
+   "elapsed_ms": 1211.9585999898845,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 667,
+    "completion_tokens": 2,
+    "total_tokens": 669
+   },
+   "billed_now": false
+  },
+  "DOC-0064": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jeffrey Valentine"
+    },
+    {
+     "type": "NID",
+     "value": "17678-6280101-2"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "347701570285242"
+    },
+    {
+     "type": "EMAIL",
+     "value": "kyle10@example.com"
+    }
+   ],
+   "elapsed_ms": 3452.1028000017395,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 879,
+    "completion_tokens": 89,
+    "total_tokens": 968
+   },
+   "billed_now": false
+  },
+  "DOC-0104": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Amanda Perez"
+    }
+   ],
+   "elapsed_ms": 1483.5740999988047,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 799,
+    "completion_tokens": 17,
+    "total_tokens": 816
+   },
+   "billed_now": false
+  },
+  "DOC-0065": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Marissa Scott"
+    },
+    {
+     "type": "EMAIL",
+     "value": "olsonkelsey@example.net"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "KERnU6zi1J"
+    }
+   ],
+   "elapsed_ms": 2164.2900000006193,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 799,
+    "completion_tokens": 51,
+    "total_tokens": 850
+   },
+   "billed_now": false
+  },
+  "DOC-0105": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Sara Maxwell"
+    },
+    {
+     "type": "NID",
+     "value": "47015-6037540-3"
+    },
+    {
+     "type": "DOB",
+     "value": "2001-05-18"
+    },
+    {
+     "type": "EMAIL",
+     "value": "stephanie95@example.net"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 325 6542807"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "1227 Michael Mountain"
+    }
+   ],
+   "elapsed_ms": 4749.995300007868,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 1159,
+    "completion_tokens": 125,
+    "total_tokens": 1284
+   },
+   "billed_now": false
+  },
+  "DOC-0066": {
+   "entities": [],
+   "elapsed_ms": 875.1211000053445,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 589,
+    "completion_tokens": 2,
+    "total_tokens": 591
+   },
+   "billed_now": false
+  },
+  "DOC-0106": {
+   "entities": [],
+   "elapsed_ms": 1161.0867000126746,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 719,
+    "completion_tokens": 2,
+    "total_tokens": 721
+   },
+   "billed_now": false
+  },
+  "DOC-0067": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Daniel Pittman"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "2720025008696207"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "565 Smith Motorway Suite 631"
+    },
+    {
+     "type": "DOB",
+     "value": "1989-05-24"
+    }
+   ],
+   "elapsed_ms": 3566.613500006497,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 89,
+    "total_tokens": 912
+   },
+   "billed_now": false
+  },
+  "DOC-0107": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Daniel Bates"
+    }
+   ],
+   "elapsed_ms": 2673.295300002792,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 799,
+    "completion_tokens": 16,
+    "total_tokens": 815
+   },
+   "billed_now": false
+  },
+  "DOC-0068": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Amy Smith"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 349 2289896"
+    },
+    {
+     "type": "EMAIL",
+     "value": "brittanyperez@example.com"
+    }
+   ],
+   "elapsed_ms": 2521.4814000064507,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 745,
+    "completion_tokens": 58,
+    "total_tokens": 803
+   },
+   "billed_now": false
+  },
+  "DOC-0108": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Michael Richardson"
+    },
+    {
+     "type": "CREDIT_CARD",
+     "value": "6547309417595883"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "7303 Sherri Gardens"
+    },
+    {
+     "type": "DOB",
+     "value": "1996-09-24"
+    }
+   ],
+   "elapsed_ms": 3278.789999996661,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 999,
+    "completion_tokens": 84,
+    "total_tokens": 1083
+   },
+   "billed_now": false
+  },
+  "DOC-0069": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Adrian Reese"
+    },
+    {
+     "type": "EMAIL",
+     "value": "lscott@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "h7aMGdpb9f"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 304 0250724"
+    }
+   ],
+   "elapsed_ms": 3099.4939999945927,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 879,
+    "completion_tokens": 77,
+    "total_tokens": 956
+   },
+   "billed_now": false
+  },
+  "DOC-0109": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Brittany Joseph"
+    },
+    {
+     "type": "EMAIL",
+     "value": "ortegaveronica@example.com"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "ceLFjjqFp3"
+    }
+   ],
+   "elapsed_ms": 2335.5097999883583,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 919,
+    "completion_tokens": 53,
+    "total_tokens": 972
+   },
+   "billed_now": false
+  },
+  "DOC-0070": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Tyler Miller"
+    },
+    {
+     "type": "EMAIL",
+     "value": "kevin05@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "OoP4grcGR2"
+    }
+   ],
+   "elapsed_ms": 2322.0159000047715,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 745,
+    "completion_tokens": 52,
+    "total_tokens": 797
+   },
+   "billed_now": false
+  },
+  "DOC-0110": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Samantha Myers"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 348 7842723"
+    },
+    {
+     "type": "EMAIL",
+     "value": "victoriasilva@example.com"
+    }
+   ],
+   "elapsed_ms": 6906.4045999984955,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 919,
+    "completion_tokens": 61,
+    "total_tokens": 980
+   },
+   "billed_now": false
+  },
+  "DOC-0071": {
+   "entities": [],
+   "elapsed_ms": 993.8517999980832,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 589,
+    "completion_tokens": 2,
+    "total_tokens": 591
+   },
+   "billed_now": false
+  },
+  "DOC-0111": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Maxwell Cooper"
+    },
+    {
+     "type": "NID",
+     "value": "13495-5758697-3"
+    },
+    {
+     "type": "DOB",
+     "value": "2002-09-21"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "27624 Watts Shoal Apt. 678"
+    }
+   ],
+   "elapsed_ms": 4283.807799991337,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 1039,
+    "completion_tokens": 90,
+    "total_tokens": 1129
+   },
+   "billed_now": false
+  },
+  "DOC-0072": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Mark Washington"
+    },
+    {
+     "type": "EMAIL",
+     "value": "feliciachambers@example.com"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "LE62Ptvcal"
+    }
+   ],
+   "elapsed_ms": 3693.1207000016,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 784,
+    "completion_tokens": 51,
+    "total_tokens": 835
+   },
+   "billed_now": false
+  },
+  "DOC-0112": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Erin Silva"
+    },
+    {
+     "type": "EMAIL",
+     "value": "matthew27@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "NWSgTOQf94"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 319 7793466"
+    }
+   ],
+   "elapsed_ms": 3354.250399992452,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 959,
+    "completion_tokens": 78,
+    "total_tokens": 1037
+   },
+   "billed_now": false
+  },
+  "DOC-0073": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Matthew Hall"
+    },
+    {
+     "type": "EMAIL",
+     "value": "danielcindy@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "3gSzdsdiUU"
+    }
+   ],
+   "elapsed_ms": 2435.7055999862496,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 799,
+    "completion_tokens": 50,
+    "total_tokens": 849
+   },
+   "billed_now": false
+  },
+  "DOC-0113": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Scott Coleman"
+    },
+    {
+     "type": "EMAIL",
+     "value": "nnguyen@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "J491ILuT8c"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 303 7729222"
+    }
+   ],
+   "elapsed_ms": 2782.9941999953007,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 959,
+    "completion_tokens": 77,
+    "total_tokens": 1036
+   },
+   "billed_now": false
+  },
+  "DOC-0074": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jesus Phillips"
+    },
+    {
+     "type": "EMAIL",
+     "value": "maurice57@example.com"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "AVTh8Cdz6g"
+    }
+   ],
+   "elapsed_ms": 4687.5130999978865,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 784,
+    "completion_tokens": 52,
+    "total_tokens": 836
+   },
+   "billed_now": false
+  },
+  "DOC-0114": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Paul Martinez"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 306 8772069"
+    },
+    {
+     "type": "EMAIL",
+     "value": "jeffreyhudson@example.org"
+    }
+   ],
+   "elapsed_ms": 2725.465700001223,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 959,
+    "completion_tokens": 59,
+    "total_tokens": 1018
+   },
+   "billed_now": false
+  },
+  "DOC-0075": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Sarah Williams"
+    }
+   ],
+   "elapsed_ms": 1336.7721999966307,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 667,
+    "completion_tokens": 16,
+    "total_tokens": 683
+   },
+   "billed_now": false
+  },
+  "DOC-0115": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Crystal Williams"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 313 6920327"
+    },
+    {
+     "type": "EMAIL",
+     "value": "thomastyler@example.org"
+    }
+   ],
+   "elapsed_ms": 2625.264700007392,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 959,
+    "completion_tokens": 58,
+    "total_tokens": 1017
+   },
+   "billed_now": false
+  },
+  "DOC-0076": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Bradley Buchanan"
+    },
+    {
+     "type": "NID",
+     "value": "20468-5585990-2"
+    },
+    {
+     "type": "DOB",
+     "value": "2002-04-18"
+    },
+    {
+     "type": "EMAIL",
+     "value": "wmiller@example.net"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 336 4706741"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "39139 Anthony Stravenue Apt. 450"
+    }
+   ],
+   "elapsed_ms": 4537.1405000041705,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 999,
+    "completion_tokens": 131,
+    "total_tokens": 1130
+   },
+   "billed_now": false
+  },
+  "DOC-0116": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Steven Montgomery"
+    },
+    {
+     "type": "EMAIL",
+     "value": "chasebailey@example.org"
+    },
+    {
+     "type": "PASSWORD",
+     "value": "TiF4SVZt70"
+    },
+    {
+     "type": "PHONE",
+     "value": "+92 310 5340616"
+    }
+   ],
+   "elapsed_ms": 7629.503999996814,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 959,
+    "completion_tokens": 77,
+    "total_tokens": 1036
+   },
+   "billed_now": false
+  },
+  "DOC-0077": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Randy Guzman"
+    }
+   ],
+   "elapsed_ms": 1383.0377999984194,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 667,
+    "completion_tokens": 18,
+    "total_tokens": 685
+   },
+   "billed_now": false
+  },
+  "DOC-0117": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Richard Ford"
+    }
+   ],
+   "elapsed_ms": 1435.246900000493,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 759,
+    "completion_tokens": 16,
+    "total_tokens": 775
+   },
+   "billed_now": false
+  },
+  "DOC-0078": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Spencer Sutton"
+    },
+    {
+     "type": "NID",
+     "value": "56197-6349783-4"
+    },
+    {
+     "type": "DOB",
+     "value": "2001-04-06"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "588 Cheryl Roads Suite 440"
+    }
+   ],
+   "elapsed_ms": 3721.6909999988275,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 879,
+    "completion_tokens": 86,
+    "total_tokens": 965
+   },
+   "billed_now": false
+  },
+  "DOC-0118": {
+   "entities": [],
+   "elapsed_ms": 889.1102000052342,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 719,
+    "completion_tokens": 2,
+    "total_tokens": 721
+   },
+   "billed_now": false
+  },
+  "DOC-0079": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Emily Whitaker"
+    },
+    {
+     "type": "NID",
+     "value": "42952-5176326-1"
+    },
+    {
+     "type": "DOB",
+     "value": "1990-12-20"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "4984 Gomez Parks"
+    }
+   ],
+   "elapsed_ms": 4135.988599999109,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 839,
+    "completion_tokens": 82,
+    "total_tokens": 921
+   },
+   "billed_now": false
+  },
+  "DOC-0119": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Anthony Mccullough"
+    }
+   ],
+   "elapsed_ms": 1740.1246999943396,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 799,
+    "completion_tokens": 19,
+    "total_tokens": 818
+   },
+   "billed_now": false
+  },
+  "DOC-0080": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Jonathan Burton"
+    },
+    {
+     "type": "NID",
+     "value": "35791-0027901-3"
+    },
+    {
+     "type": "DOB",
+     "value": "1970-05-21"
+    },
+    {
+     "type": "ADDRESS",
+     "value": "602 James Passage Apt. 707"
+    }
+   ],
+   "elapsed_ms": 3616.0167999914847,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 823,
+    "completion_tokens": 86,
+    "total_tokens": 909
+   },
+   "billed_now": false
+  },
+  "DOC-0120": {
+   "entities": [
+    {
+     "type": "PERSON",
+     "value": "Nathaniel Parsons"
+    }
+   ],
+   "elapsed_ms": 1218.5083000076702,
+   "status": "ok+cached",
+   "usage": {
+    "prompt_tokens": 799,
+    "completion_tokens": 18,
+    "total_tokens": 817
+   },
+   "billed_now": false
+  }
+ }
+}

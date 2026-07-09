@@ -1,0 +1,75 @@
+{
+  "args": {
+    "n_users": 50,
+    "days": 21,
+    "seed": 42,
+    "start": "2026-04-01 00:00:00",
+    "n_malicious": 38,
+    "n_compromised": 60,
+    "n_negligent": 72,
+    "n_overscoped": 34,
+    "n_benign_burst": 96
+  },
+  "episode_plan": {
+    "malicious_insider": 38,
+    "compromised_account": 60,
+    "negligent_insider": 72,
+    "overscoped_thirdparty": 34,
+    "benign_burst": 96
+  },
+  "realised": {
+    "grid_rows": 25200,
+    "active_sessions": 16297,
+    "positive_sessions": 641,
+    "positive_rate": 0.03933239246487084,
+    "benign_burst_sessions": 185,
+    "by_threat_class": {
+      "malicious_insider": 310,
+      "compromised_account": 120,
+      "negligent_insider": 110,
+      "overscoped_thirdparty": 101
+    },
+    "episodes": {
+      "malicious_insider": 39,
+      "compromised_account": 60,
+      "negligent_insider": 72,
+      "overscoped_thirdparty": 34,
+      "benign_burst": 95
+    },
+    "per_split": {
+      "train": {
+        "sessions": 11429,
+        "positives": 450,
+        "benign_bursts": 128,
+        "by_class": {
+          "malicious_insider": 213,
+          "compromised_account": 92,
+          "overscoped_thirdparty": 73,
+          "negligent_insider": 72
+        }
+      },
+      "val": {
+        "sessions": 2516,
+        "positives": 95,
+        "benign_bursts": 30,
+        "by_class": {
+          "malicious_insider": 46,
+          "negligent_insider": 20,
+          "compromised_account": 15,
+          "overscoped_thirdparty": 14
+        }
+      },
+      "test": {
+        "sessions": 2352,
+        "positives": 96,
+        "benign_bursts": 27,
+        "by_class": {
+          "malicious_insider": 51,
+          "negligent_insider": 18,
+          "overscoped_thirdparty": 14,
+          "compromised_account": 13
+        }
+      }
+    }
+  }
+}
