@@ -884,6 +884,92 @@ with tab_live:
 # ===========================================================================
 # Tab 3 - Comparative Metrics
 # ===========================================================================
+@st.cache_resource(show_spinner=False)
+def _compare_stats() -> tuple[dict, dict, pd.DataFrame]:
+    """EWMA vs hybrid confusion stats over the whole test split.
+
+    Cached: these depend only on the stored CSV, never on alpha/beta, so
+    recomputing them on every slider tick was pure waste.
+    """
+    df = DATASET.anomaly_comparison
+
+    def rates(prefix: str) -> dict:
+        truth = df["is_true_threat"].astype(bool)
+        flagged = df[f"{prefix}_anomaly_flagged"].astype(bool)
+        tp = int((flagged & truth).sum())
+        fp = int((flagged & ~truth).sum())
+        fn = int((~flagged & truth).sum())
+        tn = int((~flagged & ~truth).sum())
+        precision = tp / (tp + fp) if (tp + fp) else 0.0
+        recall = tp / (tp + fn) if (tp + fn) else 0.0
+        f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0
+        return {"TP": tp, "FP": fp, "FN": fn, "TN": tn,
+                "Precision": precision, "Recall": recall, "F1": f1,
+                "FPR": fp / (fp + tn) if (fp + tn) else 0.0,
+                "Accuracy": float(df[f"{prefix}_correct"].astype(bool).mean())}
+
+    ewma, hybrid = rates("ewma"), rates("hybrid")
+    summary = pd.DataFrame([
+        {"Model": "EWMA (legacy)",    **ewma},
+        {"Model": "Hybrid LSTM + IF", **hybrid},
+    ]).round({"Precision": 3, "Recall": 3, "F1": 3, "FPR": 3, "Accuracy": 3})
+    return ewma, hybrid, summary
+
+
+@st.cache_resource(show_spinner=False)
+def _compare_figs(t_alert: float, t_block: float):
+    """The two comparison charts. Built once, not once per slider tick."""
+    df = DATASET.anomaly_comparison.sort_values("timestamp")
+    ts = pd.to_datetime(df["timestamp"])
+    ewma_norm = df["ewma_new"] / df["ewma_new"].max()
+
+    # Lines, not lines+markers: 2,352 sessions x 3 series is ~7k marker glyphs
+    # for the browser to lay out on every rerun, and the markers add nothing at
+    # this density. The true-threat crosses stay - they are the point of the plot.
+    fig_ts = go.Figure()
+    fig_ts.add_trace(go.Scattergl(
+        x=ts, y=ewma_norm, mode="lines", name="EWMA (normalised)",
+        line=dict(color="#c0392b", dash="dot", width=1)))
+    fig_ts.add_trace(go.Scattergl(
+        x=ts, y=df["hybrid_anomaly_score"], mode="lines",
+        name="A_hybrid (LSTM + IF)", line=dict(color="#1f77b4", width=1)))
+    fig_ts.add_trace(go.Scattergl(
+        x=ts, y=df["sbrs_value"], mode="lines", name="SBRS",
+        line=dict(color="#27ae60", width=2)))
+    truths = df[df["is_true_threat"].astype(bool)]
+    fig_ts.add_trace(go.Scattergl(
+        x=pd.to_datetime(truths["timestamp"]), y=truths["sbrs_value"],
+        mode="markers", name="True threat",
+        marker=dict(color="#ecf0f1", size=8, symbol="x")))
+    fig_ts.add_hline(y=t_block, line=dict(color="white", dash="dash"),
+                     annotation_text=f"SBRS BLOCK threshold ({t_block})",
+                     annotation_position="top left")
+    fig_ts.add_hline(y=t_alert, line=dict(color="#f1c40f", dash="dot"),
+                     annotation_text=f"ALERT threshold ({t_alert})",
+                     annotation_position="bottom left")
+    fig_ts.update_layout(
+        height=460, hovermode="x unified",
+        xaxis_title="Session time", yaxis_title="Score (normalised)",
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#ecf0f1"),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02))
+
+    fig_box = go.Figure()
+    for label, sub in df.groupby(df["is_true_threat"].astype(bool)):
+        name = "True threat" if label else "Benign"
+        fig_box.add_trace(go.Box(y=sub["ewma_new"] / df["ewma_new"].max(),
+                                 name=f"EWMA ({name})", boxmean=True, boxpoints=False))
+        fig_box.add_trace(go.Box(y=sub["hybrid_anomaly_score"],
+                                 name=f"Hybrid ({name})", boxmean=True, boxpoints=False))
+        fig_box.add_trace(go.Box(y=sub["sbrs_value"],
+                                 name=f"SBRS ({name})", boxmean=True, boxpoints=False))
+    fig_box.update_layout(
+        height=420, yaxis_title="Score (normalised / [0,1+])", showlegend=True,
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#ecf0f1"))
+    return fig_ts, fig_box
+
+
 with tab_compare:
     st.subheader("Legacy EWMA vs Hybrid LSTM + Isolation Forest")
     st.caption(
@@ -893,34 +979,8 @@ with tab_compare:
         "on validation and the test split was scored once. Section V.B of the paper."
     )
 
-    df = DATASET.anomaly_comparison.copy().sort_values("timestamp").reset_index(drop=True)
-
-    # ---- Confusion-style summary -------------------------------------------
-    def _rates(prefix: str):
-        flagged_col = f"{prefix}_anomaly_flagged"
-        correct_col = f"{prefix}_correct"
-        truth = df["is_true_threat"].astype(bool)
-        flagged = df[flagged_col].astype(bool)
-        tp = int(((flagged) & truth).sum())
-        fp = int(((flagged) & ~truth).sum())
-        fn = int((~flagged & truth).sum())
-        tn = int((~flagged & ~truth).sum())
-        precision = tp / (tp + fp) if (tp + fp) else 0.0
-        recall = tp / (tp + fn) if (tp + fn) else 0.0
-        f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0
-        fpr = fp / (fp + tn) if (fp + tn) else 0.0
-        acc = float(df[correct_col].astype(bool).mean())
-        return {"TP": tp, "FP": fp, "FN": fn, "TN": tn,
-                "Precision": precision, "Recall": recall,
-                "F1": f1, "FPR": fpr, "Accuracy": acc}
-
-    ewma_stats = _rates("ewma")
-    hybrid_stats = _rates("hybrid")
-
-    summary = pd.DataFrame([
-        {"Model": "EWMA (legacy)",      **ewma_stats},
-        {"Model": "Hybrid LSTM + IF",   **hybrid_stats},
-    ]).round({"Precision": 3, "Recall": 3, "F1": 3, "FPR": 3, "Accuracy": 3})
+    df = DATASET.anomaly_comparison
+    ewma_stats, hybrid_stats, summary = _compare_stats()
     st.dataframe(summary, hide_index=True, use_container_width=True)
 
     cA, cB, cC = st.columns(3)
@@ -932,48 +992,13 @@ with tab_compare:
     cC.metric("Hybrid F1 (anomaly flag)", f"{hybrid_stats['F1']:.3f}",
               delta=f"+{hybrid_stats['F1']-ewma_stats['F1']:.3f} vs EWMA")
 
-    # ---- Time-series view ---------------------------------------------------
-    st.markdown("#### Per-event anomaly trace")
-    df_plot = df[[
-        "timestamp", "ewma_new", "hybrid_anomaly_score",
-        "sbrs_value", "is_true_threat"
-    ]].copy()
-    df_plot["timestamp"] = pd.to_datetime(df_plot["timestamp"])
-    df_plot["ewma_normalised"] = df_plot["ewma_new"] / df_plot["ewma_new"].max()
+    fig_ts, fig_box = _compare_figs(T_ALERT, T_BLOCK)
 
-    fig_ts = go.Figure()
-    fig_ts.add_trace(go.Scatter(
-        x=df_plot["timestamp"], y=df_plot["ewma_normalised"],
-        mode="lines+markers", name="EWMA (normalised)",
-        line=dict(color="#c0392b", dash="dot"),
-    ))
-    fig_ts.add_trace(go.Scatter(
-        x=df_plot["timestamp"], y=df_plot["hybrid_anomaly_score"],
-        mode="lines+markers", name="A_hybrid (LSTM + IF)",
-        line=dict(color="#1f77b4"),
-    ))
-    fig_ts.add_trace(go.Scatter(
-        x=df_plot["timestamp"], y=df_plot["sbrs_value"],
-        mode="lines+markers", name="SBRS",
-        line=dict(color="#27ae60", width=3),
-    ))
-    fig_ts.add_hline(y=T_BLOCK, line=dict(color="white", dash="dash"),
-                     annotation_text=f"SBRS BLOCK threshold ({T_BLOCK})",
-                     annotation_position="top left")
-    fig_ts.add_hline(y=T_ALERT, line=dict(color="#f1c40f", dash="dot"),
-                     annotation_text=f"ALERT threshold ({T_ALERT})",
-                     annotation_position="bottom left")
-    truths = df_plot[df_plot["is_true_threat"] == True]  # noqa: E712
-    fig_ts.add_trace(go.Scatter(
-        x=truths["timestamp"], y=truths["sbrs_value"],
-        mode="markers", name="True threat",
-        marker=dict(color="black", size=11, symbol="x"),
-    ))
-    fig_ts.update_layout(
-        height=460, hovermode="x unified",
-        xaxis_title="Event time",
-        yaxis_title="Score (normalised)",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02),
+    st.markdown("#### Per-session anomaly trace")
+    st.caption(
+        f"All {len(df):,} held-out sessions. The sidebar's alpha/beta do not move "
+        f"these curves - they are the scores the engine actually produced at the "
+        f"tuned alpha, stored in the CSV."
     )
     ts_n = _zoom_reset_button("compare_ts")
     st.plotly_chart(
@@ -983,20 +1008,7 @@ with tab_compare:
     st.caption("Drag to zoom in, then click 'Reset zoom' (or double-click the chart) "
                "to restore the original axes.")
 
-    # ---- Distribution view --------------------------------------------------
-    st.markdown("#### Score distributions on benign vs. true-threat events")
-    fig_box = go.Figure()
-    for label, sub in df.groupby("is_true_threat"):
-        name = "True threat" if label else "Benign"
-        fig_box.add_trace(go.Box(y=sub["ewma_new"]/df["ewma_new"].max(),
-                                 name=f"EWMA ({name})", boxmean=True))
-        fig_box.add_trace(go.Box(y=sub["hybrid_anomaly_score"],
-                                 name=f"Hybrid ({name})", boxmean=True))
-        fig_box.add_trace(go.Box(y=sub["sbrs_value"],
-                                 name=f"SBRS ({name})", boxmean=True))
-    fig_box.update_layout(height=420,
-                          yaxis_title="Score (normalised / [0,1+])",
-                          showlegend=True)
+    st.markdown("#### Score distributions on benign vs. true-threat sessions")
     box_n = _zoom_reset_button("compare_box")
     st.plotly_chart(
         fig_box, use_container_width=True, config=PLOTLY_CONFIG,
@@ -1004,8 +1016,13 @@ with tab_compare:
     )
 
     # ---- Raw table ---------------------------------------------------------
-    with st.expander("Raw per-event comparison table"):
-        st.dataframe(df, use_container_width=True, height=400)
+    # Only a page of it: Streamlit serialises the whole frame on every rerun,
+    # and 2,352 x 25 cells is a lot to ship each time a slider moves.
+    with st.expander(f"Raw per-session comparison table (first 200 of {len(df):,})"):
+        st.dataframe(df.head(200), use_container_width=True, height=400)
+        st.caption(
+            "Full table: `anomaly_detection_comparison_v2_real.csv` in the repo root."
+        )
 
 
 # ===========================================================================
