@@ -187,24 +187,32 @@ ranking quality for precision at the operating point.
 | EWMA `base_action` = BLOCK | 0.1162 | 0.0581 | 0.1458 | tp 14, fp 131, fn 82, tn 2125 |
 | paper-doc bands (0.5 / 1.0), ALERT+BLOCK | 0.1327 | 0.4772 | 0.8681 | tp 84, fp 1077, fn 12, tn 1179 |
 
-**The enforcement bands are miscalibrated, and this is a bug in the design, not
+> **SUPERSEDED — this section diagnosed a bug that has since been fixed.** The
+> table above is the *old* enforcement layer (β = 0.5, bands 0.20 / 0.60). It was
+> recalibrated on the validation split; see **`SBRS_RECALIBRATION.md`** for the
+> derivation and **`refresh_sbrs_columns.py`** for the re-derived artefacts. The
+> models below are unchanged — only the enforcement thresholds moved.
+>
+> | | old (β=0.5, 0.20/0.60) | **new (β=2.5, 1.22/1.84)** |
+> |---|---|---|
+> | enforcement F1 (ALERT or BLOCK) | 0.087 | **0.475** |
+> | benign sessions escalated | 85.9 % | **4.0 %** |
+> | benign sessions auto-BLOCKed | 38.9 % | **0.4 %** |
+
+**The enforcement bands were miscalibrated, and it was a bug in the design, not
 in the models.** `A_hybrid ∈ [0,1]` with `β = 0.5` can only move SBRS by ±50 %.
-So band membership is decided almost entirely by content sensitivity `S`:
+So band membership was decided almost entirely by content sensitivity `S`:
 
 - 85.6 % of test sessions have `S ≥ 20` → at least SENSITIVE → **ALERT even at
   `A_hybrid = 0`**.
 - 38.1 % have `S ≥ 60` → **BLOCK even at `A_hybrid = 0`**.
 
-The behavioural engine is nearly decorative at the enforcement layer. Flag-level
-F1 is 0.621; enforcement-band F1 is 0.087. The paper's own documented bands
-(0.5 / 1.0) are also bad (F1 0.133, FPR 47.7 %). Any honest enforcement F1
-requires re-deriving the bands — either raise β substantially or set the
-thresholds from the joint (S, A) distribution rather than by hand.
-
-Also: `Context/01-Research-Paper/SBRS.md` specifies bands **0.5 / 1.0** while
-`backend/risk_orchestrator.py` implements **0.20 / 0.60**. These are different
-systems. The code's bands are used above as primary because the CSV's
-`sbrs_category` values depend on them.
+The behavioural engine was nearly decorative at the enforcement layer: flag-level
+F1 0.621 against enforcement-band F1 0.087. The bands originally documented in
+`SBRS.md` (0.5 / 1.0) were no better (F1 0.133, FPR 47.7 %), and they disagreed
+with what the code implemented (0.20 / 0.60) — two different systems. Both are
+now replaced by cut-points derived from the joint (S, A) distribution on
+validation, and code and docs agree.
 
 ### Latency (measured, not estimated)
 
@@ -300,16 +308,18 @@ limitation of the paper's architecture, not of this dataset.
 
 ---
 
-## 7. How these compare to the numbers in the paper
+## 7. How these compare to the numbers in the paper's earlier draft
 
-Blunt version: **the paper's behavioural numbers do not reproduce, and the CSV
-they were taken from does not reproduce them either.**
+**The paper has since been updated to report the measured numbers below, so this
+section is a record of what changed and why, not an open discrepancy.** The
+original draft's behavioural figures did not reproduce, and the CSV they were
+taken from did not reproduce them either.
 
-| Metric | Paper (`Evaluation.md`) | Measured (this harness) | Verdict |
+| Metric | Earlier draft | Measured (this harness) | What happened |
 |---|---|---|---|
-| EWMA false positive rate | 42.7 % | **5.81 %** (legacy τ: 7.54 %) | Paper overstates ~7× |
-| Hybrid false positive rate | 11.2 % | **0.04 %** | Paper overstates ~280× |
-| F1 (enforcement) | 0.93 | **0.087** (ALERT+BLOCK) / 0.154 (BLOCK) | Not reproduced |
+| EWMA false positive rate | 42.7 % | **5.81 %** (legacy τ: 7.54 %) | Draft overstated ~7× |
+| Hybrid false positive rate | 11.2 % | **0.04 %** | Draft overstated ~280× |
+| F1 (enforcement) | 0.93 | **0.475** (after recalibration; 0.087 before) | Bands were re-derived from data |
 | F1 (anomaly flag level) | — | 0.621 ± 0.006 | Best honest F1 available |
 | "100 % of permission escalations" | 100 % | 100 % (`overscoped_thirdparty`, 14 windows / 5 episodes) | **Holds** (small n) |
 | "dangerous mass downloads" caught | 100 % | 97.4 % (`compromised_account`) | Approximately holds |

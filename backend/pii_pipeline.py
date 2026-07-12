@@ -4,9 +4,14 @@ pii_pipeline.py
 Simulated Multimodal PII Detection pipeline (Section III.B of the paper).
 
 Three branches:
-  Branch 1 - Microsoft Presidio v2.2  (text-extractable payloads)
-  Branch 2 - PaddleOCR -> Presidio    (scanned PDF / image, OCR conf >= 0.85)
-  Branch 3 - PaliGemma-3B VLM (INT8)  (OCR conf < 0.85, e.g. handwriting)
+  Branch 1 - Microsoft Presidio       (text-extractable payloads)
+  Branch 2 - OCR -> Presidio          (scanned PDF / image, OCR conf >= 0.85)
+  Branch 3 - VLM fallback             (OCR conf < 0.85, e.g. handwriting)
+
+The `Branch2_PaddleOCR` literal below is the label recorded in the legacy demo
+events, kept so replayed events keep matching. The real cascade that produced the
+measured numbers lives in `evaluation/run_pipeline.py` (EasyOCR + gemma-3-4b-it);
+see `evaluation/REAL_RESULTS_PII.md` for why those substitutions were forced.
 
 Sensitivity score formula (from the simulated events JSON, faithful to the
 paper's weighted entity model):

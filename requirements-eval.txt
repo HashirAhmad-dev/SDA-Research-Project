@@ -1,0 +1,18 @@
+# Extra dependencies for RE-RUNNING the evaluation harness. Not needed to run
+# the dashboard or the API -- those serve the trained artefacts in
+# evaluation/artifacts/ and never import torch.
+#
+#   pip install -r requirements.txt -r requirements-eval.txt
+#   python -m evaluation.generate_sessions
+#   python -m evaluation.train_and_evaluate
+-r requirements.txt
+
+torch>=2.2          # trains the LSTM (evaluation/train_and_evaluate.py)
+faker>=25.0         # synthesises the sessions + the PII corpus
+
+# PII track (evaluation/build_pii_testset.py, evaluation/run_pipeline.py) only.
+presidio-analyzer>=2.2
+easyocr>=1.7
+pillow>=10.0
+openai>=1.40        # HF Inference Providers router, for the Branch 3 VLM
+python-dotenv>=1.0

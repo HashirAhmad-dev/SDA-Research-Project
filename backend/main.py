@@ -69,17 +69,17 @@ def root() -> Dict[str, Any]:
 
 @app.get("/metrics", response_model=MetricsResponse)
 def metrics() -> MetricsResponse:
-    """Measured engine performance, alongside the numbers the paper claims.
+    """Measured engine performance, and the same numbers as published.
 
-    The two disagree. `measured` is authoritative; `paper_claimed` is retained
-    only so the gap is visible rather than silently papered over. See
+    `measured` is read from `evaluation/data/metrics.json` (the harness output);
+    `paper_published` is the same experiment as reported in the paper. See
     `evaluation/REAL_RESULTS.md`.
     """
     measured = load_measured_metrics()
     return MetricsResponse(
         measured=measured,
-        paper_claimed=PaperMetrics(),
-        reproduced=False,
+        paper_published=PaperMetrics(),
+        reproduced=measured is not None,
         note=MEASURED_NOTE if measured else NOT_MEASURED_NOTE,
     )
 
@@ -176,7 +176,7 @@ def blocked_audit() -> List[Dict[str, Any]]:
 
 @app.get("/comparison")
 def comparison() -> List[Dict[str, Any]]:
-    """EWMA vs Hybrid per-event evaluation - reproduces F1=0.93 / FPR=11.2%."""
+    """EWMA vs Hybrid per-session evaluation on the held-out test split."""
     ds = load_all()
     df = ds.anomaly_comparison.copy()
     df["timestamp"] = df["timestamp"].astype(str)

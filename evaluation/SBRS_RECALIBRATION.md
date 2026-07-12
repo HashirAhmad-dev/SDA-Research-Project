@@ -92,6 +92,11 @@ an explicit false-positive budget — which is exactly the quantity that was bro
 - **t_block = 99.5th percentile of benign val SBRS = 1.84** — auto-block fires
   only on the ~0.5% tail that normal traffic essentially never reaches.
 
+The derived cut-points are 1.22382 / 1.84367; the code ships them rounded to
+**1.22 / 1.84**. Every test number below is reported at the *shipped* constants,
+so what the report says is what the deployed system does. (Rounding t_alert down
+flags a handful more sessions: enforcement F1 0.479 at 1.22382, **0.475** at 1.22.)
+
 An F1-maximising t_alert was tried and **rejected**: on this imbalanced, partly
 unseparable data it collapses to a high threshold (1.75) that permits 66% of
 threats — useless as a review queue. The percentile budget catches far more
@@ -131,17 +136,24 @@ replace its "Default Enforcement Tiers" table with:
 |---|---|---|---|---|---|
 | **OLD** — beta=0.5, bands 0.20/0.60 | **0.087** | 86.3% | 40.7% | **85.9%** | 37% |
 | DOC — beta=0.5, bands 0.50/1.00 | 0.134 | 49.4% | 2.6% | 47.7% | 0% |
-| **NEW** — beta=2.5, bands 1.22/1.84 | **0.479** | 6.2% | 1.5% | **3.9%** | **0%** |
+| **NEW** — beta=2.5, bands 1.22/1.84 | **0.475** | 6.3% | 1.5% | **4.0%** | **0%** |
 
 **The "content dominates regardless of behaviour" problem is fixed.** Benign
-sessions escalating to ALERT/BLOCK fell from **85.9% to 3.9%**; auto-BLOCK on
-benign from **38.9% to 0.4%**. Enforcement F1 rose **5.5×** (0.087 → 0.479).
-Detection precision went from 0.045 to 0.397; auto-BLOCK precision from 0.085 to
-0.743. Benign bursts (the Introduction's false-positive trap) stay at 0%.
+sessions escalating to ALERT/BLOCK fell from **85.9% to 4.0%**; auto-BLOCK on
+benign from **38.9% to 0.4%**. Enforcement F1 rose **5.5×** (0.087 → 0.475),
+precision from 0.045 to 0.392. Benign bursts (the Introduction's false-positive
+trap) stay at 0%.
+
+These are the shipped constants, applied to every artefact by
+`python -m evaluation.refresh_sbrs_columns`, which re-derives the `sbrs_value` /
+`sbrs_category` / `hybrid_action` columns of `scored_all_splits.csv` and
+`anomaly_detection_comparison_v2_real.csv` and the enforcement block of
+`metrics.json`. Nothing is retrained: SBRS is a pure function of the stored `S`
+and `A_hybrid`, so this reproduces exactly what a full re-run would write.
 
 ### The honest cost: threat recall
 
-Flagged recall on test is **0.60** (40% of threats now PERMIT), versus 0.96 under
+Flagged recall on test is **0.604** (40% of threats now PERMIT), versus 0.96 under
 the old config — but the old 0.96 came with 86% of *everything* flagged, i.e. it
 "caught" threats only by alerting on nearly all traffic. Per-class test recall
 under the new bands makes the trade legible:

@@ -34,9 +34,9 @@ Recalibration result on the held-out test split (see SBRS_RECALIBRATION.md):
     SBRS  < 1.84 -> SENSITIVE -> ALERT
     SBRS >= 1.84 -> HIGH-RISK -> BLOCK
 
-NOTE: Context/01-Research-Paper/SBRS.md still documents the old, ungrounded
-bands (0.5 / 1.0) and beta. This module is the authoritative source; that doc
-should be updated to match (exact text in SBRS_RECALIBRATION.md).
+This module is the authoritative source for beta and the bands. Two other places
+mirror them and must be kept in step: `evaluation/common.py` (used to regenerate
+the CSVs) and `Context/01-Research-Paper/Semantic-Behavioral Risk Score (SBRS).md`.
 """
 from __future__ import annotations
 

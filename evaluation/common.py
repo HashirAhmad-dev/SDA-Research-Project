@@ -86,17 +86,20 @@ SEQ_LEN = 24
 EWMA_LAMBDA = 0.3          # ewma_user_baselines.csv, 1h window
 LEGACY_EWMA_TAU = 2.0      # ewma_user_baselines.csv, anomaly_threshold
 HYBRID_FLAG_THRESHOLD = 0.5
-SBRS_BETA = 0.5
+# beta and the band cut-points are data-calibrated on the validation split by
+# evaluation/calibrate_sbrs.py; see evaluation/SBRS_RECALIBRATION.md. They must
+# stay in step with backend/risk_orchestrator.py, which serves them at runtime.
+SBRS_BETA = 2.5
 
 # backend/risk_orchestrator.py::SBRS_BANDS  (threshold, category, action)
 SBRS_BANDS = [
-    (0.60, "HIGH-RISK", "BLOCK"),
-    (0.20, "SENSITIVE", "ALERT"),
+    (1.84, "HIGH-RISK", "BLOCK"),
+    (1.22, "SENSITIVE", "ALERT"),
     (0.00, "SAFE", "PERMIT"),
 ]
 
-# The bands written in Context/01-Research-Paper/SBRS.md disagree with the code.
-# Reported as a sensitivity check in REAL_RESULTS.md.
+# The pre-calibration bands (beta=0.5, cut-points 0.50/1.00). Kept only as the
+# sensitivity check reported in REAL_RESULTS.md / SBRS_RECALIBRATION.md.
 PAPER_DOC_BANDS = [
     (1.00, "HIGH-RISK", "BLOCK"),
     (0.50, "SENSITIVE", "ALERT"),

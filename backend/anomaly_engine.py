@@ -70,6 +70,7 @@ from typing import Any, Dict, Optional, Tuple
 import numpy as np
 
 from .data_loader import HybridSaaSDataset
+from .lstm_infer import NumpyLSTMEncoder
 from .schemas import AnomalyResult
 
 logger = logging.getLogger(__name__)
@@ -107,11 +108,36 @@ class EngineUnavailable(RuntimeError):
     """Raised when the trained artefacts are missing."""
 
 
+def _load_encoder() -> "NumpyLSTMEncoder":
+    """The trained LSTM encoder, served without torch.
+
+    `lstm_weights.npz` is the exported form of `lstm.pt` - identical weights,
+    identical arithmetic (verified to 2.4e-7, float32 noise, by
+    `evaluation.train_and_evaluate.verify_numpy_lstm`). Keeping torch out of the
+    serving path is what lets the dashboard run in a 1 GB container. The .pt
+    checkpoint is still read if only it is present, for artefacts trained before
+    the npz export existed.
+    """
+    npz, pt = ARTIFACTS_DIR / "lstm_weights.npz", ARTIFACTS_DIR / "lstm.pt"
+    if npz.exists():
+        return NumpyLSTMEncoder.from_npz(npz)
+    if pt.exists():
+        import torch  # legacy artefacts only
+
+        ckpt = torch.load(pt, map_location="cpu", weights_only=False)
+        return NumpyLSTMEncoder.from_state_dict(
+            ckpt["state_dict"], n_features=ckpt["n_features"],
+            hidden=ckpt["hidden"], seq_len=ckpt.get("seq_len", SEQ_LEN))
+    raise FileNotFoundError(npz)
+
+
 @lru_cache(maxsize=1)
 def load_engine() -> Dict[str, Any]:
     """Load the trained LSTM + IsolationForest + calibrators (cached)."""
-    pkl, pt = ARTIFACTS_DIR / "engine.pkl", ARTIFACTS_DIR / "lstm.pt"
-    if not pkl.exists() or not pt.exists():
+    pkl = ARTIFACTS_DIR / "engine.pkl"
+    have_lstm = (ARTIFACTS_DIR / "lstm_weights.npz").exists() or \
+                (ARTIFACTS_DIR / "lstm.pt").exists()
+    if not pkl.exists() or not have_lstm:
         raise EngineUnavailable(
             f"Trained anomaly artefacts not found in {ARTIFACTS_DIR}. "
             "Build them with:\n"
@@ -119,19 +145,9 @@ def load_engine() -> Dict[str, Any]:
             "    python -m evaluation.train_and_evaluate\n"
             "This module refuses to emit simulated scores."
         )
-    import torch  # deferred: keeps `import backend` cheap when unused
-
-    from evaluation.train_and_evaluate import BehaviouralLSTM
-
     with open(pkl, "rb") as f:
         art = pickle.load(f)
-    ckpt = torch.load(pt, map_location="cpu", weights_only=False)
-
-    model = BehaviouralLSTM(n_features=ckpt["n_features"], hidden=ckpt["hidden"])
-    model.load_state_dict(ckpt["state_dict"])
-    model.eval()
-    art["model"] = model
-    art["torch"] = torch
+    art["model"] = _load_encoder()
 
     # Fallback baseline / memory bank for users the engine has never seen.
     mus = np.stack([m for m, _ in art["user_stats"].values()])
@@ -290,7 +306,6 @@ def score_features(x: np.ndarray, user_id: Optional[str],
     feature vectors in natural units. Absent -> padded with that user's baseline.
     """
     art = load_engine()
-    torch = art["torch"]
 
     mu, sd = art["user_stats"].get(user_id, art["global_stats"])
     bank = art["banks"].get(user_id, art["global_bank"])
@@ -303,8 +318,7 @@ def score_features(x: np.ndarray, user_id: Optional[str],
         win[-1 - len(hz):-1] = hz[-(SEQ_LEN - 1):]
     win[-1] = np.clip((x - mu) / sd, -art["z_clip"], art["z_clip"])
 
-    with torch.no_grad():
-        h = art["model"].encode(torch.from_numpy(win[None])).numpy()[0]
+    h = art["model"].encode(win)
     h = h / max(float(np.linalg.norm(h)), 1e-9)
 
     raw_lstm = _memory_bank_distance(h, bank, int(art["topk"]))

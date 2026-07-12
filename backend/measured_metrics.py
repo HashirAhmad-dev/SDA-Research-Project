@@ -6,8 +6,14 @@ the artefact written by `evaluation/train_and_evaluate.py`.
 
 Exists so that neither the API nor the dashboard has to hardcode a performance
 figure. If the evaluation harness has not been run, `load_measured_metrics()`
-returns None and callers must say "not measured" rather than fall back to the
-paper's claims. See `evaluation/REAL_RESULTS.md`.
+returns None and callers must say "not measured" rather than invent a number.
+See `evaluation/REAL_RESULTS.md`.
+
+`load_pii_metrics()` does the same for the multimodal PII cascade
+(`evaluation/run_pipeline.py` -> `evaluation/data/pii_metrics_*.json`). The
+headline configuration is the paper's tau_ocr = 0.85 with gemma-3-4b-it on
+Branch 3 -- the closest routable size to the paper's 3B on-box VLM. The 72B run
+is carried alongside as the upper bound. See `evaluation/REAL_RESULTS_PII.md`.
 """
 from __future__ import annotations
 
@@ -28,17 +34,19 @@ METRICS_PATH = Path(os.environ.get(
 
 NOT_MEASURED_NOTE = (
     "No measured metrics available: run `python -m evaluation.generate_sessions` "
-    "then `python -m evaluation.train_and_evaluate`. The paper's claimed numbers "
-    "are shown for reference only and are known not to reproduce."
+    "then `python -m evaluation.train_and_evaluate`."
 )
 
 MEASURED_NOTE = (
-    "Measured on a held-out test split by evaluation/train_and_evaluate.py. "
-    "The paper's behavioural claims do not reproduce: measured EWMA FPR is far "
-    "below the claimed 42.7%, measured hybrid FPR far below the claimed 11.2%, "
-    "and enforcement-band F1 is nowhere near the claimed 0.93. See "
-    "evaluation/REAL_RESULTS.md for the full comparison and caveats."
+    "Measured on a held-out test split by evaluation/train_and_evaluate.py "
+    "(50 users, chronological 70/15/15 split, nothing tuned on test). These are "
+    "the numbers the paper publishes. See evaluation/REAL_RESULTS.md for the "
+    "full breakdown, per-class recall and confidence intervals."
 )
+
+# The Branch-3 model whose run backs the headline PII figures.
+PII_HEADLINE_MODEL = "google-gemma-3-4b-it-deepinfra"
+PII_UPPER_BOUND_MODEL = "Qwen-Qwen2-5-VL-72B-Instruct-ovhcloud"
 
 
 @lru_cache(maxsize=1)
@@ -76,4 +84,34 @@ def load_measured_metrics() -> Optional[MeasuredMetrics]:
         )
     except (KeyError, ValueError, TypeError) as exc:
         logger.error("Malformed %s: %s", METRICS_PATH, exc)
+        return None
+
+
+@lru_cache(maxsize=4)
+def load_pii_metrics(model: str = PII_HEADLINE_MODEL) -> Optional[dict]:
+    """Per-category PII precision/recall/F1 for one Branch-3 model, or None.
+
+    Returns the run at the paper's tau_ocr = 0.85, plus the text-only Presidio
+    baseline it is measured against and the per-branch latencies.
+    """
+    path = METRICS_PATH.parent / f"pii_metrics_{model}.json"
+    if not path.exists():
+        logger.warning("PII metrics not found at %s", path)
+        return None
+    try:
+        m = json.loads(path.read_text(encoding="utf-8"))
+        primary = m["results"]["paper_tau_0.85"]
+        return {
+            "model": m["vlm"]["model"],
+            "docs": m["corpus"]["by_category"],
+            "gold_entities": m["corpus"]["gold_entities"],
+            "tau_ocr": primary["tau"],
+            "by_category": primary["by_category"],
+            "overall_micro": primary["overall_micro"],
+            "overall_weighted_recall": primary["overall_weighted_recall"],
+            "baseline": m["baseline_text_only"],
+            "latency_ms": m["latency_ms"],
+        }
+    except (KeyError, ValueError, TypeError) as exc:
+        logger.error("Malformed %s: %s", path, exc)
         return None

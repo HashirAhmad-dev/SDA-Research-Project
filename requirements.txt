@@ -7,11 +7,13 @@ plotly>=5.24
 pydantic>=2.9
 requests>=2.32
 
-# Hybrid anomaly engine (backend/anomaly_engine.py) and the evaluation harness.
-# torch is required at inference time: the LSTM is a real trained model, not a
-# replayed table. See evaluation/REAL_RESULTS.md.
-torch>=2.2
+# Hybrid anomaly engine (backend/anomaly_engine.py). The LSTM is a real trained
+# model, not a replayed table -- but serving it does not need torch: the encoder
+# weights are exported to evaluation/artifacts/lstm_weights.npz and the forward
+# pass runs in numpy (backend/lstm_infer.py), verified against torch to 2.4e-7.
+# That keeps the deployed container small enough to actually boot.
+# scikit-learn loads the trained IsolationForest + scaler out of engine.pkl.
 scikit-learn>=1.4
 
-# evaluation/generate_sessions.py only.
-faker>=25.0
+# TRAINING ONLY -- not needed to run the app. See requirements-eval.txt:
+#   torch, faker  (evaluation/train_and_evaluate.py, evaluation/generate_sessions.py)

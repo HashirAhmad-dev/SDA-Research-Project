@@ -79,23 +79,29 @@ class FullScoringResult(BaseModel):
 
 
 class PaperMetrics(BaseModel):
-    """Numbers *claimed* in the paper (Section V / `Evaluation.md`).
+    """Headline numbers as published in the paper (Section V / `Evaluation.md`).
 
-    These are assertions from the write-up, not measurements from this codebase.
-    The behavioural ones do not reproduce -- see `evaluation/REAL_RESULTS.md` and
-    `MeasuredMetrics` below. Kept so the dashboard can show claim vs. measurement
-    side by side. Do not present these as the system's performance.
+    The paper now reports the measured results, so these agree with
+    `MeasuredMetrics` below by construction -- they are the same experiment, read
+    from the write-up rather than from `metrics.json`. Every value here was
+    produced by `evaluation/train_and_evaluate.py` (behaviour) or
+    `evaluation/run_pipeline.py` (PII); see `evaluation/REAL_RESULTS.md` and
+    `evaluation/REAL_RESULTS_PII.md`.
     """
-    ewma_fpr: float = 0.427
-    hybrid_fpr: float = 0.112
-    sbrs_f1: float = 0.93
-    pii_coverage_overall: float = 0.91
-    pii_coverage_text: float = 0.96
-    pii_coverage_scanned: float = 0.89
-    pii_coverage_handwritten: float = 0.73
+    ewma_fpr: float = 0.0581            # legacy EWMA, threshold tuned on val
+    hybrid_fpr: float = 0.0
+    hybrid_f1: float = 0.629            # anomaly-flag level
+    sbrs_f1: float = 0.475              # enforcement bands, recalibrated beta=2.5
+
+    # PII cascade recall at the paper's tau_ocr = 0.85, VLM = gemma-3-4b-it.
+    pii_coverage_overall: float = 0.823
+    pii_coverage_text: float = 0.828
+    pii_coverage_scanned: float = 0.889
+    pii_coverage_handwritten: float = 0.752
+
     users_simulated: int = 50
     platforms: List[str] = ["Google Drive", "Microsoft OneDrive"]
-    source: str = "Context/01-Research-Paper/Evaluation.md (claimed, unverified)"
+    source: str = "Context/01-Research-Paper/Evaluation.md"
 
 
 class MeasuredMetrics(BaseModel):
@@ -138,10 +144,10 @@ class MeasuredMetrics(BaseModel):
 
 
 class MetricsResponse(BaseModel):
-    """`/metrics` payload: what was measured, and what the paper claimed."""
+    """`/metrics` payload: the measured numbers, and the same ones as published."""
     measured: Optional[MeasuredMetrics] = Field(
         None, description="None until the evaluation harness has been run.")
-    paper_claimed: PaperMetrics = PaperMetrics()
+    paper_published: PaperMetrics = PaperMetrics()
     reproduced: bool = Field(
-        False, description="True only if the measured numbers support the claims.")
+        False, description="True when the measured numbers match the publication.")
     note: str

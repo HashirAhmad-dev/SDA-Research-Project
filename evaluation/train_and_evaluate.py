@@ -114,6 +114,43 @@ class BehaviouralLSTM(nn.Module):
         return self.head(self.encode(x))      # predicted next-hour feature vector
 
 
+def export_lstm_npz(model: "BehaviouralLSTM", path) -> None:
+    """Dump the encoder weights so inference can run without torch.
+
+    The backend serves the LSTM through `backend/lstm_infer.NumpyLSTMEncoder`:
+    the deployed dashboard runs in a container that cannot hold a torch install.
+    Same weights, same arithmetic - `verify_numpy_lstm()` asserts it below.
+    """
+    sd = model.state_dict()
+    np.savez(
+        path,
+        weight_ih_l0=sd["encoder.weight_ih_l0"].detach().cpu().numpy(),
+        weight_hh_l0=sd["encoder.weight_hh_l0"].detach().cpu().numpy(),
+        bias_ih_l0=sd["encoder.bias_ih_l0"].detach().cpu().numpy(),
+        bias_hh_l0=sd["encoder.bias_hh_l0"].detach().cpu().numpy(),
+        n_features=np.int64(model.encoder.input_size),
+        hidden=np.int64(model.encoder.hidden_size),
+        seq_len=np.int64(SEQ_LEN),
+    )
+
+
+def verify_numpy_lstm(model: "BehaviouralLSTM", n: int = 64,
+                      seed: int = 0) -> float:
+    """Max |torch.encode - numpy.encode| over random windows. Should be ~1e-6."""
+    from backend.lstm_infer import NumpyLSTMEncoder
+
+    enc = NumpyLSTMEncoder.from_state_dict(
+        model.state_dict(), n_features=model.encoder.input_size,
+        hidden=model.encoder.hidden_size, seq_len=SEQ_LEN)
+    rng = np.random.default_rng(seed)
+    w = rng.normal(size=(n, SEQ_LEN, model.encoder.input_size)).astype(np.float32)
+    model.eval()
+    with torch.no_grad():
+        ref = model.encode(torch.from_numpy(w)).numpy()
+    got = np.stack([enc.encode(w[i]) for i in range(n)])
+    return float(np.abs(ref - got).max())
+
+
 # ---------------------------------------------------------------------------
 # Windowing
 # ---------------------------------------------------------------------------
@@ -644,6 +681,7 @@ def main() -> None:
     with open(ARTIFACTS / "lstm.pt", "wb") as f:
         torch.save({"state_dict": model.state_dict(), "hidden": HIDDEN_DIM,
                     "n_features": len(FEATURES), "seq_len": SEQ_LEN}, f)
+    export_lstm_npz(model, ARTIFACTS / "lstm_weights.npz")
     with open(ARTIFACTS / "engine.pkl", "wb") as f:
         pickle.dump({"scaler": scaler, "iforest": iforest, "cal_lstm": cal_lstm,
                      "cal_if": cal_if, "banks": banks, "user_stats": user_stats,

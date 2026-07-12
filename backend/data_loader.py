@@ -59,8 +59,21 @@ FILES = {
     "system_log": "hybridSaaS_system.log",
 }
 
+# Real measured results, written by the evaluation harness with the identical
+# column schema. Preferred when present; the originals are kept as a fallback so
+# the loader still works on a checkout that has not run the harness.
+#     pii_scan_results_v2_real.csv            <- evaluation/run_pipeline.py
+#     anomaly_detection_comparison_v2_real.csv <- evaluation/train_and_evaluate.py
+REAL_FILES = {
+    "pii_scans": "pii_scan_results_v2_real.csv",
+    "anomaly_comparison": "anomaly_detection_comparison_v2_real.csv",
+}
+
 
 def _path(key: str) -> Path:
+    real = REAL_FILES.get(key)
+    if real and (DATA_DIR / real).exists():
+        return DATA_DIR / real
     p = DATA_DIR / FILES[key]
     if not p.exists():
         raise FileNotFoundError(
@@ -131,10 +144,10 @@ def load_pii_scans() -> pd.DataFrame:
 
 
 def load_anomaly_comparison() -> pd.DataFrame:
-    """Per-event EWMA vs LSTM+IsolationForest evaluation.
+    """Per-session EWMA vs LSTM+IsolationForest evaluation on the test split.
 
-    Contains the ground-truth columns used to reproduce the paper's
-    EWMA FPR=42.7% vs Hybrid FPR=11.2% / F1=0.93 numbers.
+    Carries the ground-truth columns (`is_true_threat`, `*_correct`) the
+    dashboard uses to recompute FPR / F1 from scratch.
     """
     df = pd.read_csv(_path("anomaly_comparison"))
     df["timestamp"] = pd.to_datetime(df["timestamp"], errors="coerce")

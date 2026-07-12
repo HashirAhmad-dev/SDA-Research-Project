@@ -234,24 +234,24 @@
   },
   "test_enforcement_bands": {
     "hybrid_alert_or_block": {
-      "tp": 92,
-      "fp": 1937,
-      "fn": 4,
-      "tn": 319,
-      "precision": 0.045342533267619514,
-      "recall": 0.9583333333333334,
-      "f1": 0.08658823529411765,
-      "fpr": 0.8585992907801419
+      "tp": 58,
+      "fp": 90,
+      "fn": 38,
+      "tn": 2166,
+      "precision": 0.3918918918918919,
+      "recall": 0.6041666666666666,
+      "f1": 0.47540983606557374,
+      "fpr": 0.0398936170212766
     },
     "hybrid_block_only": {
-      "tp": 81,
-      "fp": 877,
-      "fn": 15,
-      "tn": 1379,
-      "precision": 0.08455114822546973,
-      "recall": 0.84375,
-      "f1": 0.15370018975332067,
-      "fpr": 0.3887411347517731
+      "tp": 26,
+      "fp": 9,
+      "fn": 70,
+      "tn": 2247,
+      "precision": 0.7428571428571429,
+      "recall": 0.2708333333333333,
+      "f1": 0.39694656488549623,
+      "fpr": 0.003989361702127659
     },
     "ewma_base_action_block": {
       "tp": 14,
@@ -264,14 +264,14 @@
       "fpr": 0.05806737588652482
     },
     "paper_doc_bands_alert_or_block": {
-      "tp": 84,
-      "fp": 1077,
-      "fn": 12,
-      "tn": 1179,
-      "precision": 0.07235142118863049,
-      "recall": 0.875,
-      "f1": 0.13365155131264916,
-      "fpr": 0.4773936170212766
+      "tp": 86,
+      "fp": 1131,
+      "fn": 10,
+      "tn": 1125,
+      "precision": 0.07066557107641742,
+      "recall": 0.8958333333333334,
+      "f1": 0.130997715156131,
+      "fpr": 0.5013297872340425
     }
   },
   "test_auc_overall": {
@@ -382,14 +382,13 @@
     "hybrid_flag_rate": 0.0,
     "ewma_legacy_tau_flag_rate": 0.6666666666666666,
     "hybrid_action_counts": {
-      "PERMIT": 17,
-      "ALERT": 10
+      "PERMIT": 27
     },
     "mean_a_lstm": 0.33413865571066065,
     "mean_a_if": 0.3178075409934081,
     "mean_a_hybrid": 0.32189031967272114,
     "mean_sensitivity": 16.48148148148148,
-    "mean_sbrs": 0.1895934668694912,
+    "mean_sbrs": 0.2887074074074074,
     "fpr_on_ordinary_negatives_ewma": 0.0515926424405563,
     "fpr_on_ordinary_negatives_hybrid": 0.0,
     "mean_activity_rate_ratio": 7.573218219281681
@@ -404,5 +403,26 @@
     "note": "anomaly scoring only (LSTM + memory bank + IF + fusion + SBRS band). Excludes the PII/OCR pipeline, so NOT comparable to the paper's 279 ms end-to-end figure.",
     "device": "cpu",
     "torch_threads": 4
+  },
+  "sbrs_enforcement_config": {
+    "beta": 2.5,
+    "bands": [
+      [
+        1.84,
+        "HIGH-RISK",
+        "BLOCK"
+      ],
+      [
+        1.22,
+        "SENSITIVE",
+        "ALERT"
+      ],
+      [
+        0.0,
+        "SAFE",
+        "PERMIT"
+      ]
+    ],
+    "source": "evaluation/calibrate_sbrs.py (validation-calibrated); see evaluation/SBRS_RECALIBRATION.md"
   }
 }

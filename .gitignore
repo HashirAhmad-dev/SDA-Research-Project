@@ -10,8 +10,14 @@ __pycache__/
 .venv/
 venv/
 
-# Generated evaluation artefacts (rebuild with the scripts in evaluation/)
-evaluation/artifacts/
+# Generated evaluation artefacts (rebuild with the scripts in evaluation/).
+# The trained anomaly engine is NOT ignored: backend/anomaly_engine.py needs it
+# at inference time, so the deployed dashboard needs it in the repo. Without it
+# every page raises EngineUnavailable.
+evaluation/artifacts/*
+!evaluation/artifacts/engine.pkl
+!evaluation/artifacts/lstm.pt
+!evaluation/artifacts/lstm_weights.npz
 evaluation/pii_testset/
 evaluation/data/*.csv
 evaluation/data/vlm_cache/
